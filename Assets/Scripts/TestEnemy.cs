@@ -5,27 +5,14 @@ using UnityEngine;
 
 namespace Spellect
 {
-    public class TestPlayer : MonoBehaviour
+    public class TestEnemy : MonoBehaviour
     {
         public float moveSpeed = 5f;
         private Rigidbody2D rb;
         private Vector2 moveInput;
         public HealthBarController healthBarController;
         public HealthController healthController;
-        private void Awake()
-        {
-            if (GameManager.Instance.playerObject != null)
-            {
-                Destroy(this.gameObject);
-                Destroy(this);
-            }
-            else
-            {
-                GameManager.Instance.playerObject = this.gameObject;
-                DontDestroyOnLoad(this.gameObject);
-            }
-
-        }
+        
         void Start()
         {
             rb = GetComponent<Rigidbody2D>();
@@ -52,12 +39,10 @@ namespace Spellect
             {
                 healthController.Heal(30);
             }
-
             if (Input.GetKeyDown(KeyCode.I))
             {
                 healthController.AddMaxHealth(10);
             }
-
 
             if (Input.GetKeyDown(KeyCode.O))
             {
@@ -78,4 +63,5 @@ namespace Spellect
             rb.velocity = moveInput * moveSpeed;
         }
     }
+
 }
