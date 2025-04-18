@@ -1,3 +1,4 @@
+using Spellect;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -23,11 +24,19 @@ public class EnemyLogic : MonoBehaviour
     private float attackCooldown = 2f;
     private float lastAttackTime;
 
+    public HealthBarController healthBarController;
+    public HealthController healthController;
     // Start is called before the first frame update
     void Start()
     {
         targetPoint = 0;
         originalSpeed = moveSpeed;
+        healthController.Init(50);
+        healthBarController.Init(healthController.GetMaxHealth());
+        healthController.OnDamageTaken += healthBarController.UpdateHealth;
+        healthController.OnHealed += healthBarController.UpdateHealth;
+        healthController.OnMaxHealthChanged += healthBarController.UpdateMaxHealth;
+
     }
 
     // Update is called once per frame
@@ -59,7 +68,11 @@ public class EnemyLogic : MonoBehaviour
             lastAttackTime = Time.time;
             onDamagePlayer();
         }
-            
+
+        if (Input.GetKeyDown(KeyCode.O))
+        {
+            healthController.TakeDamage(10);
+        }
     }
 
     void increaseTargetInt()
@@ -113,4 +126,10 @@ public class EnemyLogic : MonoBehaviour
     }
 
 
+    private void OnDestroy()
+    {
+        healthController.OnDamageTaken -= healthBarController.UpdateHealth;
+        healthController.OnHealed -= healthBarController.UpdateHealth;
+        healthController.OnMaxHealthChanged -= healthBarController.UpdateMaxHealth;
+    }
 }
