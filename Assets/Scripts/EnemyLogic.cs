@@ -8,18 +8,26 @@ public class EnemyLogic : MonoBehaviour
     public int targetPoint;
 
     public float moveSpeed = 2f;
+    private float originalSpeed;
+
     private float waitTime = 2f;
     private bool isWaiting = false;
 
     public Transform player;
     public float chaseRange = 2f;
+    public float attackRange = 2f;
 
-    private bool isChasing;
+    private bool isChasing = false;
+    private bool isSlowed = false;
+
+    private float attackCooldown = 2f;
+    private float lastAttackTime;
 
     // Start is called before the first frame update
     void Start()
     {
         targetPoint = 0;
+        originalSpeed = moveSpeed;
     }
 
     // Update is called once per frame
@@ -44,6 +52,14 @@ public class EnemyLogic : MonoBehaviour
         {
             patrol();
         }
+
+        if (distanceToPlayer <= attackRange && Time.time >= lastAttackTime + attackCooldown)
+        {
+            // PLAYER TAKES DAMAGE
+            lastAttackTime = Time.time;
+            onDamagePlayer();
+        }
+            
     }
 
     void increaseTargetInt()
@@ -79,4 +95,22 @@ public class EnemyLogic : MonoBehaviour
             StartCoroutine(WaitAtPoint());
         }
     }
+
+    public void onDamagePlayer()
+    {
+        if (!isSlowed)
+        {
+            StartCoroutine(slowAfterHit());
+        }
+    }
+    IEnumerator slowAfterHit()
+    {
+        isSlowed = true;
+        moveSpeed = originalSpeed * 0.25f;
+        yield return new WaitForSeconds(2f);
+        moveSpeed = originalSpeed;
+        isSlowed = false;
+    }
+
+
 }
