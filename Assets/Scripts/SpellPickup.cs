@@ -29,7 +29,6 @@ public class SpellPickup : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D other)
     {
-        Debug.Log("entered");
         if (other.tag == "Player")
         {
             playerInRange = true;
