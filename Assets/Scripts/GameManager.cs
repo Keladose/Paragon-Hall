@@ -9,13 +9,16 @@ namespace Spellect
     {
 
         public static GameManager Instance;
+        public GameObject playerPrefab;
         public GameObject playerObject;
         private RoomController currentRoom;
         public bool switchingRooms = false; // used to give invuln on room switching?
 
+        
         // Start is called before the first frame update
         void Awake()
         {
+            Debug.Log("Awoke GM");
             if (Instance != null)
             {
                 Destroy(this.gameObject);
@@ -23,11 +26,11 @@ namespace Spellect
             }
             else
             {
-
                 Instance = this;
                 DontDestroyOnLoad(this.gameObject);
             }
         }
+
 
         // Update is called once per frame
         void Update()
