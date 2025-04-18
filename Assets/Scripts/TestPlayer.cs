@@ -1,3 +1,4 @@
+using DG.Tweening.Core.Easing;
 using Spellect;
 using System.Collections;
 using System.Collections.Generic;
@@ -12,16 +13,21 @@ namespace Spellect
         private Vector2 moveInput;
         public HealthBarController healthBarController;
         public HealthController healthController;
-        private void Awake()
+        void Awake()
         {
-            if (GameManager.Instance.playerObject != null)
+            
+            if (GameManager.Instance != null )
             {
                 Destroy(this.gameObject);
                 Destroy(this);
             }
             else
             {
-                GameManager.Instance.playerObject = this.gameObject;
+                if (GameManager.Instance != null)
+                    {
+                    
+                    GameManager.Instance.playerObject = this.gameObject;
+                }
                 DontDestroyOnLoad(this.gameObject);
             }
 
