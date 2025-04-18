@@ -799,6 +799,10 @@ PrefabInstance:
       value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 6402061785637974318, guid: 34876f631c0285546be70564be4ed22c, type: 3}
+      propertyPath: attackRange
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6402061785637974318, guid: 34876f631c0285546be70564be4ed22c, type: 3}
       propertyPath: patrolPoints.Array.size
       value: 3
       objectReference: {fileID: 0}
