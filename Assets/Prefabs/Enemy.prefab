@@ -70,6 +70,9 @@ MonoBehaviour:
   patrolPoints: []
   targetPoint: 0
   moveSpeed: 2
+  player: {fileID: 0}
+  chaseRange: 2
+  attackRange: 2.04
 --- !u!212 &8642550295606822395
 SpriteRenderer:
   m_ObjectHideFlags: 0
