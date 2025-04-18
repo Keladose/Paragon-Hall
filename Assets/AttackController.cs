@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using Unity.Mathematics;
 using UnityEngine;
 
 public class AttackController : MonoBehaviour
@@ -9,12 +10,7 @@ public class AttackController : MonoBehaviour
     private SpellData equippedSpell;
     public Transform shootInitialPos;
     public GameObject test;
-
-    private void Start()
-    {
-        Instantiate(test);
-    }
-
+    
     void Update()
     {
         
@@ -27,18 +23,20 @@ public class AttackController : MonoBehaviour
 
     public void FireProjectile()
     {
-        GameObject projectile = Instantiate(equippedSpell.projectilePrefab, shootInitialPos.position, Quaternion.identity);
+        Vector2 direction = MouseInput();
+        float angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
+        GameObject projectile = Instantiate(equippedSpell.projectilePrefab, shootInitialPos.position,
+            Quaternion.Euler(0f, 0f, angle));
         Rigidbody2D rb = projectile.GetComponent<Rigidbody2D>();
-        rb.velocity = MouseInput() * equippedSpell.speed;
-
+        rb.velocity = direction * equippedSpell.speed;
     }
 
     public Vector2 MouseInput()
     {
-        Vector3 mouseWorldPos = Camera.main.ScreenToWorldPoint(Input.mousePosition).normalized;
+        Vector3 mouseWorldPos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
         mouseWorldPos.z = 0f;
         
-        test.transform.position = Camera.main.ScreenToWorldPoint(mouseWorldPos);
+        test.transform.position = Camera.main.ScreenToWorldPoint(Input.mousePosition);
         Vector2 direction = (mouseWorldPos - transform.position).normalized;
         return direction;
     }

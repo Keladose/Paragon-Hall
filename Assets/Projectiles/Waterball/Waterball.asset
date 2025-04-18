@@ -15,4 +15,4 @@ MonoBehaviour:
   spellName: Waterball
   projectilePrefab: {fileID: 1517434027207930093, guid: e119b6a8214e0cc44a5e0767a7d1bdef, type: 3}
   range: 5
-  speed: 5
+  speed: 15
