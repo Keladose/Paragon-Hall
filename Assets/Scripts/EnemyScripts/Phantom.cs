@@ -51,6 +51,7 @@ public class Phantom : BaseEnemy
     private void SetPhasedState(bool phased)
     {
         isMaterialized = !phased;
+        Debug.Log("Phantom is now " + (isMaterialized ? "Materialized" : "Phased"));
 
         // Set collider behavior (if using collision)
         if (phantomCollider != null)
@@ -96,6 +97,18 @@ public class Phantom : BaseEnemy
         yield return new WaitForSeconds(waitTime);
         targetPoint = (targetPoint + 1) % patrolPoints.Length;
         isWaiting = false;
+    }
+
+    public override void TakeDamage(float amount)
+    {
+        if (isMaterialized == false)
+        {
+            return;
+        }
+        else
+        {
+            base.TakeDamage(amount); // Only take damage when materialized
+        }
     }
 
 }

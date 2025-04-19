@@ -13,9 +13,10 @@ GameObject:
   - component: {fileID: 8760606495869061492}
   - component: {fileID: 628939944640599696}
   - component: {fileID: 5136300330555553434}
+  - component: {fileID: 1406822408802657864}
   m_Layer: 0
   m_Name: Phantom
-  m_TagString: Untagged
+  m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -130,7 +131,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 0.11, y: 0.1}
+  m_Size: {x: 1.2, y: 1.2}
   m_EdgeRadius: 0
 --- !u!114 &628939944640599696
 MonoBehaviour:
@@ -144,6 +145,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a76e18d75a1f8854b983222969035702, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  patrolPoints:
+  - {fileID: 0}
+  - {fileID: 0}
   player: {fileID: 0}
   moveSpeed: 2
   chaseRange: 4
@@ -176,3 +180,15 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
+--- !u!114 &1406822408802657864
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2869728579600964126}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6ee831eceaa35d340951a31d99aa2bbf, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

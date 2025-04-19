@@ -4,8 +4,6 @@ using UnityEngine;
 
 public class Ghoul : BaseEnemy
 {
-    public Transform[] patrolPoints;
-    private int targetPoint;
     private bool isWaiting;
     private float waitTime = 1.5f;
 
@@ -13,13 +11,12 @@ public class Ghoul : BaseEnemy
     private bool isSprinting;
     public float sprintMultiplier = 2f;
     public float slowMultiplier = 0.25f;
-    private float sprintDuration = 1f;
+    private float sprintDuration = 0.75f;
     public float slowDuration = 2f;
 
     private Coroutine speedCycleCoroutine;
 
-    // 👇 NEW: Animator + position tracking
-    private Animator animator;
+    // Animator + position tracking
     private Vector3 lastPosition;
 
     protected override void Start()
@@ -27,7 +24,7 @@ public class Ghoul : BaseEnemy
         base.Start();
         targetPoint = 0;
 
-        // 👇 Initialize Animator and lastPosition
+        // Initialize Animator and lastPosition
         animator = GetComponent<Animator>();
         lastPosition = transform.position;
     }
@@ -51,7 +48,7 @@ public class Ghoul : BaseEnemy
             moveSpeed = originalSpeed;
         }
 
-        // 👇 Check if ghoul is walking
+        // Check if ghoul is walking
         bool isWalking = (transform.position != lastPosition);
         animator.SetBool("isWalking", isWalking);
         lastPosition = transform.position;
@@ -79,6 +76,7 @@ public class Ghoul : BaseEnemy
     protected override void Patrol()
     {
         if (patrolPoints.Length == 0 || isWaiting) return;
+        UpdateSpriteDirection(patrolPoints[targetPoint].position); 
 
         transform.position = Vector3.MoveTowards(transform.position, patrolPoints[targetPoint].position, moveSpeed * Time.deltaTime);
         if (Vector3.Distance(transform.position, patrolPoints[targetPoint].position) < 0.1f)
@@ -98,5 +96,16 @@ public class Ghoul : BaseEnemy
     protected override void AttackPlayer()
     {
         // Add damage logic here
+    }
+
+    protected override void UpdateSpriteDirection(Vector3 Target)
+    {
+        if (spriteRenderer == null) return;
+
+        Vector3 direction = Target - transform.position;
+        if (direction.x != 0)
+        {
+            spriteRenderer.flipX = direction.x > 0;
+        }
     }
 }

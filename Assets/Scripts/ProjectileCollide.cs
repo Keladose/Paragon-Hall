@@ -22,27 +22,22 @@ public class ProjectileCollide : MonoBehaviour
         {
             Rigidbody2D rb = GetComponent<Rigidbody2D>();
             rb.velocity = Vector2.zero;
-            
-            var health = other.GetComponent<HealthController>();
-            if (health != null)
+
+            var enemy = other.GetComponent<BaseEnemy>();
+            if (enemy != null)
             {
-                health.TakeDamage(spellData.damage);
-                if (health.GetHealth() <= 0)
-                {
-                    Destroy(other.gameObject);
-                }
+                enemy.TakeDamage(spellData.damage); // Uses Phantom’s override
             }
-            
-            animator.Play("Magic Missile Hit"); 
+
+            animator.Play("Magic Missile Hit");
             StartCoroutine(WaitBeforeDestroy());
-            
         }
 
         if (other.CompareTag("Map Bounds"))
         {
             Rigidbody2D rb = GetComponent<Rigidbody2D>();
             rb.velocity = Vector2.zero;
-            animator.Play("Magic Missile Hit"); 
+            animator.Play("Magic Missile Hit");
             StartCoroutine(WaitBeforeDestroy());
         }
     }

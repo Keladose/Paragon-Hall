@@ -5,7 +5,9 @@ using UnityEngine;
 
 public abstract class BaseEnemy : MonoBehaviour
 {
-    // Start is called before the first frame update
+    public Transform[] patrolPoints;
+    protected int targetPoint;
+
     public Transform player;
     public float moveSpeed = 2f;
     protected float originalSpeed;
@@ -20,10 +22,17 @@ public abstract class BaseEnemy : MonoBehaviour
     public HealthBarController healthBarController;
     public HealthController healthController;
 
+    protected Animator animator;
+    protected bool isDead = false;
+
+    protected SpriteRenderer spriteRenderer;    
+
     protected virtual void Start()
     {
         originalSpeed = moveSpeed;
         enemyCollider = GetComponent<Collider>();
+        animator = GetComponent<Animator>();
+        spriteRenderer = GetComponentInChildren<SpriteRenderer>();
 
         if (healthController != null)
         {
@@ -63,12 +72,28 @@ public abstract class BaseEnemy : MonoBehaviour
 
     protected virtual void ChasePlayer()
     {
+        UpdateSpriteDirection(player.position);
         transform.position = Vector3.MoveTowards(transform.position, player.position, moveSpeed * Time.deltaTime);
     }
 
-    protected abstract void Patrol();
-    protected abstract void AttackPlayer();
+    protected virtual void Patrol() {
 
+        Vector3 targetPos = patrolPoints[targetPoint].position;
+        UpdateSpriteDirection(targetPos);
+        transform.position = Vector3.MoveTowards(transform.position, targetPos, moveSpeed * Time.deltaTime);
+    }
+    protected abstract void AttackPlayer();
+    public virtual void TakeDamage(float amount)
+    {
+        if (isDead || healthController == null) return;
+
+        healthController.TakeDamage(amount);
+
+        if (healthController.GetHealth() <= 0)
+        {
+            Die();
+        }
+    }
     protected virtual void OnDestroy()
     {
         if (healthController != null)
@@ -78,4 +103,36 @@ public abstract class BaseEnemy : MonoBehaviour
             healthController.OnMaxHealthChanged -= healthBarController.UpdateMaxHealth;
         }
     }
+    protected virtual void Die()
+    {
+        isDead = true;
+
+        if (animator != null)
+        {
+            animator.SetTrigger("Die"); // Or animator.SetBool("isDead", true);
+        }
+
+        // Disable collider & movement if needed
+        if (enemyCollider != null) enemyCollider.enabled = false;
+        moveSpeed = 0f;
+
+        Destroy(gameObject, 0.25f); // Adjust time based on animation length
+    }
+
+    private IEnumerator DeathCleanup()
+    {
+        yield return new WaitForSeconds(0.25f); // Adjust to your animation length
+        Destroy(gameObject);
+    }
+
+    protected virtual void UpdateSpriteDirection(Vector3 Target)
+    {
+        if (spriteRenderer == null) return;
+
+        Vector3 direction = Target - transform.position;
+        if (direction.x != 0) { 
+            spriteRenderer.flipX = direction.x < 0;
+        }
+    }
+
 }

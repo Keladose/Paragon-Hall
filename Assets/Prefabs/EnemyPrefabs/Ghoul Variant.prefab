@@ -10,11 +10,11 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: -8548228418293898616, guid: 34876f631c0285546be70564be4ed22c, type: 3}
       propertyPath: m_Size.x
-      value: 0.121988565
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: -8548228418293898616, guid: 34876f631c0285546be70564be4ed22c, type: 3}
       propertyPath: m_Size.y
-      value: 0.07351352
+      value: 1.25
       objectReference: {fileID: 0}
     - target: {fileID: -8548228418293898616, guid: 34876f631c0285546be70564be4ed22c, type: 3}
       propertyPath: m_Enabled
@@ -82,7 +82,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3958594293590940095, guid: 34876f631c0285546be70564be4ed22c, type: 3}
       propertyPath: m_Name
-      value: Ghoul Variant 1
+      value: Ghoul Variant
+      objectReference: {fileID: 0}
+    - target: {fileID: 3958594293590940095, guid: 34876f631c0285546be70564be4ed22c, type: 3}
+      propertyPath: m_TagString
+      value: Enemy
       objectReference: {fileID: 0}
     - target: {fileID: 8642550295606822395, guid: 34876f631c0285546be70564be4ed22c, type: 3}
       propertyPath: m_Color.a
@@ -107,40 +111,19 @@ PrefabInstance:
     m_AddedComponents:
     - targetCorrespondingSourceObject: {fileID: 3958594293590940095, guid: 34876f631c0285546be70564be4ed22c, type: 3}
       insertIndex: -1
-      addedObject: {fileID: 2548728128534591336}
+      addedObject: {fileID: 8001008359080894546}
     - targetCorrespondingSourceObject: {fileID: 3958594293590940095, guid: 34876f631c0285546be70564be4ed22c, type: 3}
       insertIndex: -1
-      addedObject: {fileID: 8001008359080894546}
+      addedObject: {fileID: 8859962349207303841}
+    - targetCorrespondingSourceObject: {fileID: 3958594293590940095, guid: 34876f631c0285546be70564be4ed22c, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 2548728128534591336}
   m_SourcePrefab: {fileID: 100100000, guid: 34876f631c0285546be70564be4ed22c, type: 3}
 --- !u!1 &9016838301585816441 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 3958594293590940095, guid: 34876f631c0285546be70564be4ed22c, type: 3}
   m_PrefabInstance: {fileID: 5462301337205662406}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &2548728128534591336
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 9016838301585816441}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 50d854b1b0c8e7b47bb67daf3dbe6e9c, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  player: {fileID: 0}
-  moveSpeed: 2
-  chaseRange: 4
-  attackRange: 2
-  healthBarController: {fileID: 0}
-  healthController: {fileID: 0}
-  patrolPoints:
-  - {fileID: 0}
-  - {fileID: 0}
-  sprintMultiplier: 3
-  slowMultiplier: 1
-  slowDuration: 2
 --- !u!95 &8001008359080894546
 Animator:
   serializedVersion: 5
@@ -162,3 +145,39 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
+--- !u!114 &8859962349207303841
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9016838301585816441}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6ee831eceaa35d340951a31d99aa2bbf, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &2548728128534591336
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9016838301585816441}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 50d854b1b0c8e7b47bb67daf3dbe6e9c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  patrolPoints:
+  - {fileID: 0}
+  - {fileID: 0}
+  player: {fileID: 0}
+  moveSpeed: 2
+  chaseRange: 4
+  attackRange: 2
+  healthBarController: {fileID: 0}
+  healthController: {fileID: 0}
+  sprintMultiplier: 3
+  slowMultiplier: 1
+  slowDuration: 2
