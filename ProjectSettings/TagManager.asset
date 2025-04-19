@@ -6,6 +6,7 @@ TagManager:
   tags:
   - Spellbook
   - Enemy
+  - Map Bounds
   layers:
   - Default
   - TransparentFX

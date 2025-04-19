@@ -9,16 +9,28 @@ using UnityEngine.UIElements;
 public class AttackController : MonoBehaviour
 {
     public List<SpellData> spells = new List<SpellData>();
-    private SpellData equippedSpell;
+    public SpellData equippedSpell;
     public TextMeshProUGUI text;
     
+    private int selectedSpellIndex = 0;
+    public GameObject currentBook;
+    public Animator bookAnimator;
+    
     void Update()
-    {
-        
+    { 
         if (spells.Count != 0 && Input.GetMouseButtonDown(0))
         {
-            equippedSpell = spells[0];
+            equippedSpell = spells[selectedSpellIndex];
             FireProjectile();
+        } 
+        for (int i = 0; i < spells.Count && i < 9; i++) 
+        {
+            if (Input.GetKeyDown(KeyCode.Alpha1 + i))
+            {
+                selectedSpellIndex = i;
+                equippedSpell = spells[selectedSpellIndex];
+                EquipSpellbook();
+            }
         }
     }
 
@@ -30,6 +42,18 @@ public class AttackController : MonoBehaviour
             Quaternion.Euler(0f, 0f, angle));
         Rigidbody2D rb = projectile.GetComponent<Rigidbody2D>();
         rb.velocity = direction * equippedSpell.speed;
+
+        if (currentBook != null)
+        {
+            Transform normal = currentBook.transform.Find("Normal");
+            Transform aura = currentBook.transform.Find("Aura");
+            
+            if (normal != null) normal.gameObject.SetActive(false);
+            if (aura != null) aura.gameObject.SetActive(true);
+
+            StartCoroutine(ResetBookEffect(0.1f, normal, aura));
+        }
+        
     }
 
     public Vector2 DirectionToMouse()
@@ -43,5 +67,25 @@ public class AttackController : MonoBehaviour
     public void DisplayText(String spellName)
     {
         text.text = "New spell added: " + spellName;
+    }
+
+    private void EquipSpellbook()
+    {
+        if (currentBook != null)
+        {
+            Destroy(currentBook);
+        }
+        
+        currentBook = Instantiate(equippedSpell.spellBookPrefab, transform);
+        bookAnimator = currentBook.GetComponent<Animator>();
+    }
+
+    IEnumerator ResetBookEffect(float delay, Transform normal, Transform aura)
+    {
+        yield return new WaitForSeconds(delay);
+        
+        if (normal != null) normal.gameObject.SetActive(true);
+        if (aura != null) aura.gameObject.SetActive(false);
+        
     }
 }
