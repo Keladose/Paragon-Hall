@@ -24,7 +24,7 @@ public class AttackController : MonoBehaviour
 
     public void FireProjectile()
     {
-        Vector2 direction = MouseInput();
+        Vector2 direction = DirectionToMouse();
         float angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
         GameObject projectile = Instantiate(equippedSpell.projectilePrefab, transform.position,
             Quaternion.Euler(0f, 0f, angle));
@@ -32,7 +32,7 @@ public class AttackController : MonoBehaviour
         rb.velocity = direction * equippedSpell.speed;
     }
 
-    public Vector2 MouseInput()
+    public Vector2 DirectionToMouse()
     {
         Vector3 mouseWorldPos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
         mouseWorldPos.z = 0f;

@@ -19,7 +19,6 @@ namespace Spellect
 
         public override void UpdateHealth(object o, HealthController.HealthChangedEventArgs e)
         {
-            Debug.Log("Took" +  (e.oldHealth - e.newHealth).ToString() + " damage");
             damageTween.Complete();
             damageTween = DOTween.To(() => healthBar.size.x, x => healthBar.size = new Vector2(x, healthBar.size.y), e.newHealth/_maxHealth, 0.5f);
             damageTween.SetEase(Ease.OutCubic);
