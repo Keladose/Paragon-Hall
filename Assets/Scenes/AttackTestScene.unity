@@ -2998,6 +2998,10 @@ PrefabInstance:
       propertyPath: m_FlipX
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 4724526342530291957, guid: ee257bba2c2df2947bd2d10357e6d97f, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: e4362492e84deed48a8b5169833a38e6, type: 3}
     - target: {fileID: 5905577708468786321, guid: ee257bba2c2df2947bd2d10357e6d97f, type: 3}
       propertyPath: healthBarController
       value: 

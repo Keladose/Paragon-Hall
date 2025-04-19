@@ -42,6 +42,18 @@ public class AttackController : MonoBehaviour
             Quaternion.Euler(0f, 0f, angle));
         Rigidbody2D rb = projectile.GetComponent<Rigidbody2D>();
         rb.velocity = direction * equippedSpell.speed;
+
+        if (currentBook != null)
+        {
+            Transform normal = currentBook.transform.Find("Normal");
+            Transform aura = currentBook.transform.Find("Aura");
+            
+            if (normal != null) normal.gameObject.SetActive(false);
+            if (aura != null) aura.gameObject.SetActive(true);
+
+            StartCoroutine(ResetBookEffect(0.1f, normal, aura));
+        }
+        
     }
 
     public Vector2 MouseInput()
@@ -66,5 +78,14 @@ public class AttackController : MonoBehaviour
         
         currentBook = Instantiate(equippedSpell.spellBookPrefab, transform);
         bookAnimator = currentBook.GetComponent<Animator>();
+    }
+
+    IEnumerator ResetBookEffect(float delay, Transform normal, Transform aura)
+    {
+        yield return new WaitForSeconds(delay);
+        
+        if (normal != null) normal.gameObject.SetActive(true);
+        if (aura != null) aura.gameObject.SetActive(false);
+        
     }
 }
