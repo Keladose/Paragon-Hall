@@ -9,16 +9,28 @@ using UnityEngine.UIElements;
 public class AttackController : MonoBehaviour
 {
     public List<SpellData> spells = new List<SpellData>();
-    private SpellData equippedSpell;
+    public SpellData equippedSpell;
     public TextMeshProUGUI text;
     
+    private int selectedSpellIndex = 0;
+    public GameObject currentBook;
+    public Animator bookAnimator;
+    
     void Update()
-    {
-        
+    { 
         if (spells.Count != 0 && Input.GetMouseButtonDown(0))
         {
-            equippedSpell = spells[0];
+            equippedSpell = spells[selectedSpellIndex];
             FireProjectile();
+        } 
+        for (int i = 0; i < spells.Count && i < 9; i++) 
+        {
+            if (Input.GetKeyDown(KeyCode.Alpha1 + i))
+            {
+                selectedSpellIndex = i;
+                equippedSpell = spells[selectedSpellIndex];
+                EquipSpellbook();
+            }
         }
     }
 
@@ -43,5 +55,16 @@ public class AttackController : MonoBehaviour
     public void DisplayText(String spellName)
     {
         text.text = "New spell added: " + spellName;
+    }
+
+    private void EquipSpellbook()
+    {
+        if (currentBook != null)
+        {
+            Destroy(currentBook);
+        }
+        
+        currentBook = Instantiate(equippedSpell.spellBookPrefab, transform);
+        bookAnimator = currentBook.GetComponent<Animator>();
     }
 }

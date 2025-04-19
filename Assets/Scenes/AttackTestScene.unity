@@ -448,7 +448,7 @@ MonoBehaviour:
   player: {fileID: 1446171732}
   chaseRange: 2
   attackRange: 2
-  maxHealthInitial: 100
+  maxHealthInitial: 2333
   healthBarController: {fileID: 994152775}
   healthController: {fileID: 162198163}
 --- !u!1 &184647977

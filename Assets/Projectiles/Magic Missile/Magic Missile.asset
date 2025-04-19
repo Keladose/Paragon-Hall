@@ -17,3 +17,4 @@ MonoBehaviour:
   damage: 15
   range: 5
   speed: 15
+  spellBookPrefab: {fileID: 5156918935807161773, guid: fdde091cf877dce46b053b4a79713b03, type: 3}

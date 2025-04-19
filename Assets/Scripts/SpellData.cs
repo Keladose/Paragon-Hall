@@ -10,4 +10,5 @@ public class SpellData : ScriptableObject
         public float damage;
         public float range;
         public float speed;
+        public GameObject spellBookPrefab;
 }
