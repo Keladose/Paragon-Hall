@@ -7,6 +7,7 @@ public class SpellData : ScriptableObject
 {
         public string spellName;
         public GameObject projectilePrefab;
+        public float damage;
         public float range;
         public float speed;
 }

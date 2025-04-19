@@ -14,5 +14,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   spellName: Magic Missile
   projectilePrefab: {fileID: 5675730827327611252, guid: 140993a4f1e9f144e894c68561d39b94, type: 3}
+  damage: 15
   range: 5
   speed: 15
