@@ -54,15 +54,15 @@ namespace Spellect
                 {
                     DrawPoint(new Vector3(mouseWorldPos.x, mouseWorldPos.y));
                 }
-
-                    _isCasting = true;
+                _isCasting = true;
             }
         }
         private bool TryDrawNewPoint(Vector2 pos)
         {
             float minDist = 10000f;
 
-            if (_drawing.EnoughDistanceFromLastPoint(pos) && )
+            if (_drawing.EnoughDistanceFromLastPoint(pos) && 
+                Time.time - _timeLastPointDrawn > MIN_TIME)
             {
                 DrawPoint(pos);
                 return true;
@@ -79,6 +79,7 @@ namespace Spellect
             {
                 DrawConnection(_drawingPoints[^1].transform.position, _drawingPoints[^2].transform.position);
             }
+
 
         }
         private void DrawConnection(Vector3 pos0, Vector3 pos1)
