@@ -35,6 +35,11 @@ namespace Spellect
             return _maxHealth;
         }
 
+        public float GetHealth()
+        {
+            return _health;
+        }
+
         public void AddMaxHealth(float healthChange)
         {
             float oldMaxHealth = _maxHealth;
@@ -47,6 +52,7 @@ namespace Spellect
         {
             float oldHealth = _health;
             _health = Mathf.Max(0, _health - damage);
+            Debug.Log($"{gameObject.name} took {damage} damage! Remaining HP: {_health}");
             OnDamageTaken?.Invoke(this, new HealthChangedEventArgs { oldHealth = oldHealth, newHealth = _health });
         }
 

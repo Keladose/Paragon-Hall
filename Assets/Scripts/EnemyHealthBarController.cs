@@ -9,17 +9,25 @@ namespace Spellect
     public class EnemyHealthBarController : HealthBarController
     {
         public SpriteRenderer healthBar;
-
-
+        
 
         private void Awake()
         {
-            healthbarScaler = 150f;
+            healthbarScaler = 150f; 
         }
-
+        
+        
+        private void Start()
+        {
+            var health = GetComponent<HealthController>();
+            if (health != null)
+                health.OnDamageTaken += UpdateHealth;
+        }
+        
         public override void UpdateHealth(object o, HealthController.HealthChangedEventArgs e)
         {
             Debug.Log("Took" +  (e.oldHealth - e.newHealth).ToString() + " damage");
+            Debug.Log($"UpdateHealth called! {e.oldHealth} → {e.newHealth}");
             damageTween.Complete();
             damageTween = DOTween.To(() => healthBar.size.x, x => healthBar.size = new Vector2(x, healthBar.size.y), e.newHealth/_maxHealth, 0.5f);
             damageTween.SetEase(Ease.OutCubic);

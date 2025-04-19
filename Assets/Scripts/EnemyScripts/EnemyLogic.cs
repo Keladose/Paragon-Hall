@@ -24,6 +24,8 @@ public class EnemyLogic : MonoBehaviour
     private float attackCooldown = 2f;
     private float lastAttackTime;
 
+    public float maxHealthInitial = 100;
+
     public HealthBarController healthBarController;
     public HealthController healthController;
     // Start is called before the first frame update
@@ -31,7 +33,7 @@ public class EnemyLogic : MonoBehaviour
     {
         targetPoint = 0;
         originalSpeed = moveSpeed;
-        healthController.Init(50);
+        healthController.Init(maxHealthInitial);
         healthBarController.Init(healthController.GetMaxHealth());
         healthController.OnDamageTaken += healthBarController.UpdateHealth;
         healthController.OnHealed += healthBarController.UpdateHealth;
@@ -68,11 +70,7 @@ public class EnemyLogic : MonoBehaviour
             lastAttackTime = Time.time;
             onDamagePlayer();
         }
-
-        if (Input.GetKeyDown(KeyCode.O))
-        {
-            healthController.TakeDamage(10);
-        }
+        
     }
 
     void increaseTargetInt()
@@ -102,11 +100,15 @@ public class EnemyLogic : MonoBehaviour
     
     void patrol()
     {
-        transform.position = Vector3.MoveTowards(transform.position, patrolPoints[targetPoint].position, moveSpeed * Time.deltaTime);
-        if (transform.position == patrolPoints[targetPoint].position)
+        if (patrolPoints.Length != 0)
         {
-            StartCoroutine(WaitAtPoint());
+            transform.position = Vector3.MoveTowards(transform.position, patrolPoints[targetPoint].position, moveSpeed * Time.deltaTime);
+            if (transform.position == patrolPoints[targetPoint].position)
+            {
+                StartCoroutine(WaitAtPoint());
+            }
         }
+
     }
 
     public void onDamagePlayer()

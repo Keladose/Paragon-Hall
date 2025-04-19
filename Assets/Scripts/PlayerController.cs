@@ -12,16 +12,18 @@ namespace Spellect
         public Rigidbody2D rb;
         public float moveSpeed = 5f;
         public Animator animator;
+        private Animator bookAnimator;
         private SpriteRenderer spriteRenderer;
+
+        private AttackController attackController; 
         public HealthBarController healthBarController;
         public HealthController healthController;
         public PlayerSoundController playerSoundController;
         bool moving = false;
+        
         void Awake()
         {
             Debug.Log("Awoke player");
-            
-
         }
         void Start()
         {
@@ -36,6 +38,9 @@ namespace Spellect
                 DontDestroyOnLoad(this.gameObject);
             }
             spriteRenderer = GetComponent<SpriteRenderer>();
+            attackController = GetComponent<AttackController>();
+            
+            
             healthController.Init(100);
             healthBarController.Init(healthController.GetMaxHealth());
             healthController.OnDamageTaken += healthBarController.UpdateHealth;
@@ -81,17 +86,29 @@ namespace Spellect
                 if (velocity.x > 0)
                 {
                     animator.Play("PlayerRun");
-                    spriteRenderer.flipX = true;
+                    transform.localRotation = Quaternion.Euler(0, 180, 0);
+                    if (attackController.currentBook)
+                    {
+                        attackController.bookAnimator.Play("Book");
+                    }
                 }
                 else if (velocity.x < 0)
                 {
                     animator.Play("PlayerRun");
-                    spriteRenderer.flipX = false;
+                    transform.localRotation = Quaternion.Euler(0, 0, 0);
+                    if (attackController.currentBook)
+                    {
+                        attackController.bookAnimator.Play("Book");
+                    }
                 }
             }
             else
             {
                 animator.Play("PlayerIdle");
+                if (attackController.currentBook)
+                {
+                    attackController.bookAnimator.Play("BookIdle");
+                }
             }
         }
 
