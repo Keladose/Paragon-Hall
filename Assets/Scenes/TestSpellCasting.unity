@@ -223,6 +223,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2016715782}
+  - component: {fileID: 2016715783}
   m_Layer: 0
   m_Name: GameObject
   m_TagString: Untagged
@@ -245,6 +246,45 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &2016715783
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2016715781}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 50f18a15458d8e545852f7b260141da7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _inSpellMode: 1
+  _spellImages:
+  - points:
+    - Position: {x: 0, y: 0}
+    - Position: {x: 0.25, y: 0}
+    - Position: {x: 0.5, y: 0}
+    - Position: {x: 0.75, y: 0}
+    connections:
+    - _point0:
+        Position: {x: 0, y: 0}
+      _point1:
+        Position: {x: 0.25, y: 0}
+    - _point0:
+        Position: {x: 0.25, y: 0}
+      _point1:
+        Position: {x: 0.5, y: 0}
+    - _point0:
+        Position: {x: 0.5, y: 0}
+      _point1:
+        Position: {x: 0.75, y: 0}
+    _spellPointPrefab: {fileID: 5119930382665963439, guid: ca8c4aa55b4943449b729efc2be28939, type: 3}
+    _spellConnectionPrefab: {fileID: 4055750123763955085, guid: bbdf455cb9fb7204fb3cd6ce648bf8f9, type: 3}
+    _spellcastingController: {fileID: 2016715783}
+  _drawingPointPrefab: {fileID: 8925533620568600424, guid: 099b5503afee7644c90154c0d32354d8, type: 3}
+  _drawingConnectionPrefab: {fileID: 6053326370665384048, guid: ceb5917daed5a81429d70874f01d4c49, type: 3}
+  SpellScores:
+  - 0
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0

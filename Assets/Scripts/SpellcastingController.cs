@@ -8,21 +8,19 @@ namespace Spellect
 {
     public class SpellcastingController : MonoBehaviour
     {
-        private bool _inSpellMode = false;
-        private List<SpellImage> _spellImages = new();
-        [SerializeField] private GameObject _spellPointPrefab;
-        [SerializeField] private GameObject _spellConnectionPrefab;
+        public bool _inSpellMode = true;
+        public List<SpellImage> _spellImages = new();
 
         [SerializeField] private GameObject _drawingPointPrefab;
         [SerializeField] private GameObject _drawingConnectionPrefab;
+        [SerializeField] private SpellDrawing _drawing;
 
-        [SerializeField] private SpellDrawing _drawing; 
-
+        public List<float> SpellScores = new();
         private bool _isCasting = false;
 
         [SerializeField] private const float DRAWING_Z = 1;
-        [SerializeField] private const float MIN_DIST = 0.3f;
-        [SerializeField] private const float MIN_TIME = 0.1f;
+        [SerializeField] private const float MIN_DIST = 0.1f;
+        [SerializeField] private const float MIN_TIME = 0.0f;
 
         private List<GameObject> _drawingPoints = new();
         private List<GameObject> _drawingConnections = new();
@@ -33,8 +31,8 @@ namespace Spellect
         void Start()
         {
             _drawing = new SpellDrawing();
+            _spellImages[0].Draw();
         }
-
         // Update is called once per frame
         void Update()
         {
@@ -42,52 +40,62 @@ namespace Spellect
             {
                 Vector3 mouseWorldPos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
 
+                Vector2 pointPos = mouseWorldPos;
 
                 if (_isCasting)
                 {
                     if (TryDrawNewPoint(mouseWorldPos))
                     {
-                        DrawPoint(new Vector3(mouseWorldPos.x, mouseWorldPos.y));
+                        DrawDrawingPoint(pointPos);
                     }
                 }
                 else
                 {
-                    DrawPoint(new Vector3(mouseWorldPos.x, mouseWorldPos.y));
+                    DrawDrawingPoint(pointPos);
                 }
                 _isCasting = true;
             }
         }
         private bool TryDrawNewPoint(Vector2 pos)
         {
-            float minDist = 10000f;
-
-            if (_drawing.EnoughDistanceFromLastPoint(pos) && 
-                Time.time - _timeLastPointDrawn > MIN_TIME)
+            if (_drawing.EnoughDistanceFromLastPoint(pos) && Time.time - _timeLastPointDrawn > MIN_TIME)
             {
-                DrawPoint(pos);
                 return true;
             }
             return false;
         }
-        
-        private void DrawPoint(Vector2 pos)
+        private void DrawDrawingPoint(Vector2 pos)
         {
-            _drawingPoints.Add(Instantiate(_drawingPointPrefab, new Vector3(pos.x, pos.y, DRAWING_Z), Quaternion.identity, transform));
+            _drawingPoints.Add(DrawPoint(pos, _drawingPointPrefab));
             _drawing.AddPoint(pos);
             _timeLastPointDrawn = Time.time;
             if (_drawing.GetNumPoints() > 1)
             {
-                DrawConnection(_drawingPoints[^1].transform.position, _drawingPoints[^2].transform.position);
+                _drawingConnections.Add(DrawConnection(_drawingPoints[^1].transform.position, _drawingPoints[^2].transform.position, _drawingConnectionPrefab));
             }
-
-
+            UpdateDrawingScores();
         }
-        private void DrawConnection(Vector3 pos0, Vector3 pos1)
+        public GameObject DrawPoint(Vector2 pos, GameObject prefab)
         {
-            Quaternion rot = Quaternion.LookRotation(Vector3.Cross(-pos0 + pos1, Vector3.up));
-            _drawingConnections.Add(Instantiate(_drawingPointPrefab, (pos0+pos1)/2, rot, transform));
+            return Instantiate(prefab, new Vector3(pos.x, pos.y, DRAWING_Z), Quaternion.identity, transform);            
         }
-
-
+        public GameObject DrawConnection(Vector3 pos0, Vector3 pos1, GameObject prefab)
+        {
+            GameObject connection = Instantiate(prefab, (pos0 + pos1) / 2, Quaternion.identity, transform);
+            Vector3 LC = connection.transform.localScale;
+            connection.transform.localScale = new Vector3(Vector3.Distance(pos0,pos1), LC.y, LC.z);
+            connection.transform.Rotate(new Vector3(0, 0, Vector3.SignedAngle(Vector3.right, (-pos0 + pos1), Vector3.forward)));
+            return connection;
+        }
+        private void UpdateDrawingScores()
+        {
+            for (int i = 0; i < _spellImages.Count; i++)
+            {
+                for (int j = _drawing.FirstUnevaluatedPoint; j < _drawing.GetNumPoints() - 1; j++)
+                {
+                    SpellScores[i] = SpellScores[i] + _spellImages[i].GetScore(_drawing.GetPoint(j));
+                }
+            }
+        }
     }
 }

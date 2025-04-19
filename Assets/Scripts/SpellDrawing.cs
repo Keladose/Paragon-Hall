@@ -8,7 +8,7 @@ namespace Spellect
     {
         private List<Vector2> points = new();
         private float score;
-        private int _firstUnevaluatedPoint;
+        public int FirstUnevaluatedPoint = 0;
         [SerializeField] private const float MIN_DIST = 0.3f;
 
         public bool EnoughDistanceFromLastPoint(Vector2 pos)
@@ -27,6 +27,10 @@ namespace Spellect
         public void AddPoint(Vector2 pos)
         {
             points.Add(pos);
+        }
+        public Vector2 GetPoint(int index)
+        {
+            return points[index];
         }
 
         public int GetNumPoints()
