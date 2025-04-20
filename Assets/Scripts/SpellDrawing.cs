@@ -37,6 +37,12 @@ namespace Spellect
         {
             return points.Count;
         }
+
+        public void Clear()
+        {
+            points.Clear();
+
+        }
     }
 
 }
