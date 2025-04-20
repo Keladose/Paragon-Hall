@@ -9,22 +9,43 @@ namespace Spellect
 
     public static class ImageCreator
     {
+        public static SpellImage.ImageInfo CreateIce()
+        {
+            List<Vector2> points = new();
+            List<int[]> cons = new();
+            // head
+            int linePoints = 7;
+            SpellImage.ImageInfo tempInfo = GetLinePoints(new Vector2(-2, -0), new Vector2(2, 0f), linePoints, 0);
+            points.AddRange(tempInfo.Points);
+            cons.AddRange(tempInfo.Connections);
+            tempInfo = GetLinePoints(new Vector2(0, 2f), new Vector2(0, -2f), linePoints, linePoints);
+            points.AddRange(tempInfo.Points);
+            cons.AddRange(tempInfo.Connections);
+
+
+            for (int i = 0; i < points.Count; i++)
+            {
+                // points[i] += new Vector2(-1, 3f);
+            }// 
+            return new SpellImage.ImageInfo(points, cons);
+        }
+
         public static SpellImage.ImageInfo CreateFire()
         {
             List<Vector2> points = new();
             List<int[]> cons = new();
             // head
             int linePoints = 5;
-            SpellImage.ImageInfo tempInfo =GetLinePoints2(new Vector2(-4, -1.5f), new Vector2(-2, 1.5f), linePoints, 0);
+            SpellImage.ImageInfo tempInfo =GetLinePoints(new Vector2(-1, -1.5f), new Vector2(-0.5f, 1.5f), linePoints, 0);
             points.AddRange(tempInfo.Points);
             cons.AddRange(tempInfo.Connections);
-            tempInfo = GetLinePoints2(new Vector2(-2, 1.5f), new Vector2(0, 0.75f), linePoints, linePoints);
+            tempInfo = GetLinePoints2(new Vector2(-0.5f, 1.5f), new Vector2(0, 0.75f), linePoints, linePoints);
             points.AddRange(tempInfo.Points);
             cons.AddRange(tempInfo.Connections);
-            tempInfo = GetLinePoints2(new Vector2(0, 0.75f), new Vector2(2, 1.5f), linePoints, linePoints*2);
+            tempInfo = GetLinePoints2(new Vector2(0, 0.75f), new Vector2(0.5f, 1.5f), linePoints, linePoints*2);
             points.AddRange(tempInfo.Points);
             cons.AddRange(tempInfo.Connections);
-            tempInfo = GetLinePoints2(new Vector2(2, 1.5f), new Vector2(4, -1.5f), linePoints, linePoints*3);
+            tempInfo = GetLinePoints2(new Vector2(0.5f, 1.5f), new Vector2(1, -1.5f), linePoints, linePoints*3);
             points.AddRange(tempInfo.Points);
             cons.AddRange(tempInfo.Connections);
             cons.Add(new int[] { linePoints-1, linePoints }); 
@@ -34,7 +55,7 @@ namespace Spellect
 
             for (int i = 0; i < points.Count; i++)
             {
-                // points[i] += new Vector2(-1, 3f);
+                points[i] *= 2;
             }// 
             return new SpellImage.ImageInfo(points, cons);
         }

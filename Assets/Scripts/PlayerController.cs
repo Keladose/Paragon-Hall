@@ -58,6 +58,7 @@ namespace Spellect
             {
                 spellbookController.OnBookChanged += attackController.ChangeBook;
                 attackController.OnAttackSpell += spellbookController.AnimateSpell;
+                spellCastingController.OnSpellCast += attackController.OnSpellCast;
                 if (spellCastingController != null)
                 {
                     spellbookController.OnBookChanged += spellCastingController.ChangeSpell;

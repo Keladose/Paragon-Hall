@@ -66,8 +66,15 @@ namespace Spellect
             newSpell.Draw();
             newSpell.Hide();
             SpellScores.Add(0f);
+            // ICE SPELL
+            newSpell = new SpellImage(ImageCreator.CreateIce(), _spellPointPrefab, _spellConnectionPrefab,
+                _startMaterial, _doneMaterial, this, new CastedSpell { type = CastedSpell.Type.Icicle, strength = 4f });
+            _spellImages.Add(newSpell);
+            newSpell.Draw();
+            newSpell.Hide();
+            SpellScores.Add(0f);
             //_spellImages.Add(new SpellImage(ImageCreator.CreateDash(), _spellPointPrefab, _spellConnectionPrefab, _startMaterial,_doneMaterial, this, Spells[0]));
-            _activeSpell = _spellImages[1];
+            _activeSpell = _spellImages[2];
         }
 
         public void ChangeSpell(object o, SpellbookController.BookChangedEventArgs e)
@@ -140,10 +147,12 @@ namespace Spellect
             {
                 Destroy(con);
             }
-            _activeSpell.Hide();
+            foreach (SpellImage image in _spellImages)
+            {
+                image.Hide();
+            }
             _isCasting = false;
             _inSpellMode = false;
-            _activeSpell.Hide();
         }
 
         private bool CanDrawNewPoint(Vector2 pos)

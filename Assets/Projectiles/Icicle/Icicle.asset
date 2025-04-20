@@ -10,12 +10,12 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 384775b632805a444a94b14d4a560335, type: 3}
-  m_Name: FireBall
+  m_Name: Icicle
   m_EditorClassIdentifier: 
-  spellName: Fireball
-  projectilePrefab: {fileID: 5675730827327611252, guid: 2974e12242088bd4680665c8253a4c8a, type: 3}
+  spellName: Icicle
+  projectilePrefab: {fileID: 5675730827327611252, guid: dbcd07021afbcd64c81c3ded1c80be63, type: 3}
   specialPrefab: {fileID: 0}
-  damage: 40
+  damage: 5
   range: 5
-  speed: 10
-  cooldown: 0.75
+  speed: 25
+  cooldown: 0.1

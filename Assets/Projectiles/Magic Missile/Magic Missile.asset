@@ -18,3 +18,4 @@ MonoBehaviour:
   damage: 15
   range: 5
   speed: 15
+  cooldown: 0.25

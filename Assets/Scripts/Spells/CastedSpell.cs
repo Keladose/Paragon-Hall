@@ -14,7 +14,7 @@ namespace Spellect
             MagicMissile,
             FireWall,
             Laser,
-            FrostSpikes,
+            Icicle,
             Tornado
         }
 
