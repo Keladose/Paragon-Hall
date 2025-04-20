@@ -9,6 +9,42 @@ namespace Spellect
 
     public static class ImageCreator
     {
+
+        public static SpellImage.ImageInfo CreateNado()
+        {
+            List<Vector2> points = new();
+            List<int[]> cons = new();
+            // head
+            int linePoints = 7;
+            SpellImage.ImageInfo tempInfo = GetLinePoints(new Vector2(0, -3), new Vector2(0.5f, -2.75f), linePoints, 0);
+            points.AddRange(tempInfo.Points);
+            cons.AddRange(tempInfo.Connections);
+            tempInfo = GetLinePoints2(new Vector2(0.5f, -2.75f), new Vector2(-1f, -1.5f), linePoints, linePoints);
+            points.AddRange(tempInfo.Points);
+            cons.AddRange(tempInfo.Connections);
+            tempInfo = GetLinePoints2(new Vector2(-1f, -1.5f), new Vector2(2, 0f), linePoints, linePoints*2);
+            points.AddRange(tempInfo.Points);
+            cons.AddRange(tempInfo.Connections);
+            tempInfo = GetLinePoints2(new Vector2(2, 0f), new Vector2(-3f, 2f), linePoints, linePoints*3);
+            points.AddRange(tempInfo.Points);
+            cons.AddRange(tempInfo.Connections);
+
+            cons.Add(new int[] { linePoints - 1, linePoints });
+            cons.Add(new int[] { 2 * linePoints - 1, 2 * linePoints });
+            cons.Add(new int[] { 3 * linePoints - 1, 3 * linePoints });
+
+            for (int i = 0; i < points.Count; i++)
+            {
+                // points[i] += new Vector2(-1, 3f);
+            }// 
+            return new SpellImage.ImageInfo(points, cons);
+        }
+
+
+
+
+
+
         public static SpellImage.ImageInfo CreateIce()
         {
             List<Vector2> points = new();

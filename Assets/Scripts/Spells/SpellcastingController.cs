@@ -73,6 +73,14 @@ namespace Spellect
             newSpell.Draw();
             newSpell.Hide();
             SpellScores.Add(0f);
+
+            // WIND SPELL
+            newSpell = new SpellImage(ImageCreator.CreateNado(), _spellPointPrefab, _spellConnectionPrefab,
+                _startMaterial, _doneMaterial, this, new CastedSpell { type = CastedSpell.Type.Tornado, strength = 4f });
+            _spellImages.Add(newSpell);
+            newSpell.Draw();
+            newSpell.Hide();
+            SpellScores.Add(0f);
             //_spellImages.Add(new SpellImage(ImageCreator.CreateDash(), _spellPointPrefab, _spellConnectionPrefab, _startMaterial,_doneMaterial, this, Spells[0]));
             _activeSpell = _spellImages[2];
         }
