@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Spellect;
 using UnityEngine;
 
 public class WaterSpirit : BaseEnemy
