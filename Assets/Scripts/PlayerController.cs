@@ -15,12 +15,16 @@ namespace Spellect
         private Animator bookAnimator;
         private SpriteRenderer spriteRenderer;
 
-        private AttackController attackController; 
+        private AttackController attackController;
         public HealthBarController healthBarController;
         public HealthController healthController;
         public PlayerSoundController playerSoundController;
         bool moving = false;
-        
+
+        private bool isInvulnerable = false;
+        private float invulnerabilityDuration = 1f;
+        public float damageRadius = 0.5f;
+
         void Awake()
         {
             Debug.Log("Awoke player");
@@ -39,8 +43,8 @@ namespace Spellect
             }
             spriteRenderer = GetComponent<SpriteRenderer>();
             attackController = GetComponent<AttackController>();
-            
-            
+
+
             healthController.Init(100);
             healthBarController.Init(healthController.GetMaxHealth());
             healthController.OnDamageTaken += healthBarController.UpdateHealth;
@@ -118,6 +122,56 @@ namespace Spellect
             healthController.OnDamageTaken -= healthBarController.UpdateHealth;
             healthController.OnHealed -= healthBarController.UpdateHealth;
             healthController.OnMaxHealthChanged -= healthBarController.UpdateMaxHealth;
+        }
+
+        private void OnTriggerEnter2D(Collider2D other)
+        {
+            if (other.CompareTag("Enemy") && !isInvulnerable)
+            {
+                Debug.Log($"Collided with enemy: {other.name}");
+                TakeDamage(10);
+            }
+        }
+
+        private void TakeDamage(int amount)
+        {
+            if (healthController != null)
+            {
+                healthController.TakeDamage(amount);
+                Debug.Log("Player took " + amount + " damage! Health: ");
+
+                StartCoroutine(FlashPlayerRed());
+
+                StartCoroutine(Invulnerability());
+
+            }
+
+        }
+
+        private IEnumerator Invulnerability()
+        {
+            isInvulnerable = true;
+            yield return new WaitForSeconds(invulnerabilityDuration);
+            isInvulnerable = false;
+        }
+        private IEnumerator FlashPlayerRed()
+        {
+            Color originalColor = spriteRenderer.color;
+            float flashInterval = 0.1f; // How fast it flashes
+            float elapsedTime = 0f;
+
+            while (elapsedTime < invulnerabilityDuration)
+            {
+                spriteRenderer.color = Color.red;
+                yield return new WaitForSeconds(flashInterval);
+                spriteRenderer.color = originalColor;
+                yield return new WaitForSeconds(flashInterval);
+
+                elapsedTime += flashInterval * 2;
+            }
+
+            // Just to be safe, ensure it's the original color at the end
+            spriteRenderer.color = originalColor;
         }
     }
 }

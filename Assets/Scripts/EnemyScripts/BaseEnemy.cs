@@ -25,7 +25,9 @@ public abstract class BaseEnemy : MonoBehaviour
     protected Animator animator;
     protected bool isDead = false;
 
-    protected SpriteRenderer spriteRenderer;    
+    protected SpriteRenderer spriteRenderer;
+    private float wanderTime = 2f;
+    private Vector2 wanderDirection;
 
     protected virtual void Start()
     {
@@ -33,6 +35,11 @@ public abstract class BaseEnemy : MonoBehaviour
         enemyCollider = GetComponent<Collider>();
         animator = GetComponent<Animator>();
         spriteRenderer = GetComponentInChildren<SpriteRenderer>();
+
+        if (player == null)
+        {
+            player = GameObject.FindGameObjectWithTag("Player").transform;
+        }
 
         if (healthController != null)
         {
@@ -77,6 +84,25 @@ public abstract class BaseEnemy : MonoBehaviour
     }
 
     protected virtual void Patrol() {
+        if (patrolPoints == null || patrolPoints.Length == 0)
+        {
+            // Wander randomly if no patrol points are assigned
+
+            // Check if a wandering timer is active; otherwise, start one
+            if (wanderTime <= 0f)
+            {
+                wanderTime = Random.Range(1f, 3f); // Random wandering duration between 1 to 3 seconds
+                wanderDirection = Random.insideUnitCircle.normalized; // Pick a new wander direction
+            }
+
+            wanderTime -= Time.deltaTime; // Reduce timer
+
+            // Wander toward the target position (new random position)
+            Vector3 wanderTarget = transform.position + (Vector3)wanderDirection * 2f; // Adjust 2f for range
+            UpdateSpriteDirection(wanderTarget);
+            transform.position = Vector3.MoveTowards(transform.position, wanderTarget, moveSpeed * Time.deltaTime);
+            return;
+        }
 
         Vector3 targetPos = patrolPoints[targetPoint].position;
         UpdateSpriteDirection(targetPos);

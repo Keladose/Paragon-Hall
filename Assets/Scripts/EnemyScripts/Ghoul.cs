@@ -14,6 +14,9 @@ public class Ghoul : BaseEnemy
     private float sprintDuration = 0.75f;
     public float slowDuration = 2f;
 
+    public float aggroRadiusMultiplier;
+    private bool isAggro = false;
+
     private Coroutine speedCycleCoroutine;
 
     // Animator + position tracking
@@ -23,7 +26,7 @@ public class Ghoul : BaseEnemy
     {
         base.Start();
         targetPoint = 0;
-
+        
         // Initialize Animator and lastPosition
         animator = GetComponent<Animator>();
         lastPosition = transform.position;
@@ -33,6 +36,12 @@ public class Ghoul : BaseEnemy
     {
         if (isChasing)
         {
+            if (!isAggro)
+            {
+                isAggro = true;
+                chaseRange = chaseRange * aggroRadiusMultiplier;
+            }
+            
             if (speedCycleCoroutine == null)
             {
                 speedCycleCoroutine = StartCoroutine(SpeedCycle());
@@ -75,13 +84,19 @@ public class Ghoul : BaseEnemy
 
     protected override void Patrol()
     {
-        if (patrolPoints.Length == 0 || isWaiting) return;
-        UpdateSpriteDirection(patrolPoints[targetPoint].position); 
-
-        transform.position = Vector3.MoveTowards(transform.position, patrolPoints[targetPoint].position, moveSpeed * Time.deltaTime);
-        if (Vector3.Distance(transform.position, patrolPoints[targetPoint].position) < 0.1f)
+        if (patrolPoints != null)
         {
-            StartCoroutine(WaitAtPoint());
+            if (patrolPoints.Length == 0 || isWaiting) return;
+            UpdateSpriteDirection(patrolPoints[targetPoint].position);
+
+            transform.position = Vector3.MoveTowards(transform.position, patrolPoints[targetPoint].position, moveSpeed * Time.deltaTime);
+            if (Vector3.Distance(transform.position, patrolPoints[targetPoint].position) < 0.1f)
+            {
+                StartCoroutine(WaitAtPoint());
+            }
+        } else
+        {
+            base.Patrol();
         }
     }
 
@@ -107,5 +122,21 @@ public class Ghoul : BaseEnemy
         {
             spriteRenderer.flipX = direction.x > 0;
         }
+    }
+
+    protected override void Die()
+    {
+        isDead = true;
+
+        if (animator != null)
+        {
+            animator.SetTrigger("Die"); // Or animator.SetBool("isDead", true);
+        }
+
+        // Disable collider & movement if needed
+        if (enemyCollider != null) enemyCollider.enabled = false;
+        moveSpeed = 0f;
+
+        Destroy(gameObject, 0.35f); // Adjust time based on animation length
     }
 }

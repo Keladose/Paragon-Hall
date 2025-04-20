@@ -5,8 +5,6 @@ using UnityEngine;
 
 public class Phantom : BaseEnemy
 {
-    public Transform[] patrolPoints;
-    private int targetPoint;
     private bool isWaiting;
     private float waitTime = 1.5f;
 
