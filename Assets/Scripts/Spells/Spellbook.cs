@@ -1,14 +1,23 @@
+using Spellect;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Spellbook
+namespace Spellect
 {
-    public enum Type
+    [Serializable]
+    public class Spellbook
     {
-        Attack,
-        Passive
+        public enum Type
+        {
+            Attack,
+            Passive
 
+        }
+        public Type type;
+        public GameObject spellBookPrefab;
+        public CastedSpell castedSpell;
     }
-    public Type type;
+
 }

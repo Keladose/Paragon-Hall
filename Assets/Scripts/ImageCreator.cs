@@ -9,24 +9,54 @@ namespace Spellect
 
     public static class ImageCreator
     {
+        public static SpellImage.ImageInfo CreateFire()
+        {
+            List<Vector2> points = new();
+            List<int[]> cons = new();
+            // head
+            int linePoints = 5;
+            SpellImage.ImageInfo tempInfo =GetLinePoints2(new Vector2(-4, -1.5f), new Vector2(-2, 1.5f), linePoints, 0);
+            points.AddRange(tempInfo.Points);
+            cons.AddRange(tempInfo.Connections);
+            tempInfo = GetLinePoints2(new Vector2(-2, 1.5f), new Vector2(0, 0.75f), linePoints, linePoints);
+            points.AddRange(tempInfo.Points);
+            cons.AddRange(tempInfo.Connections);
+            tempInfo = GetLinePoints2(new Vector2(0, 0.75f), new Vector2(2, 1.5f), linePoints, linePoints*2);
+            points.AddRange(tempInfo.Points);
+            cons.AddRange(tempInfo.Connections);
+            tempInfo = GetLinePoints2(new Vector2(2, 1.5f), new Vector2(4, -1.5f), linePoints, linePoints*3);
+            points.AddRange(tempInfo.Points);
+            cons.AddRange(tempInfo.Connections);
+            cons.Add(new int[] { linePoints-1, linePoints }); 
+            cons.Add(new int[] { 2*linePoints - 1, 2*linePoints });
+            cons.Add(new int[] { 3*linePoints - 1, 3*linePoints });
+
+
+            for (int i = 0; i < points.Count; i++)
+            {
+                // points[i] += new Vector2(-1, 3f);
+            }// 
+            return new SpellImage.ImageInfo(points, cons);
+        }
+
         public static SpellImage.ImageInfo CreateMeteor()
         {
             List<Vector2> points = new();
             List<int[]> cons = new();
             // head
-            int ballPoints = 14;
+            int ballPoints = 8;
             SpellImage.ImageInfo tempInfo = GetArcPoints(Vector2.zero, 3, -100, 120, true, ballPoints, 0);
             points.AddRange(tempInfo.Points);
             cons.AddRange(tempInfo.Connections);
-            int linePoints = 10;
+            int linePoints = 4;
             tempInfo = GetLinePoints2(points[0], new Vector2(-8.638155725f, -1.523139918f), linePoints, ballPoints);
             points.AddRange(tempInfo.Points);
             cons.AddRange(tempInfo.Connections);
-            tempInfo = GetLinePoints2(points[ballPoints - 1], new Vector2(-8.638155725f, -1.523139919f), linePoints, ballPoints);
+            tempInfo = GetLinePoints2(points[ballPoints - 1], new Vector2(-8.638155725f, -1.523139919f), linePoints, ballPoints + linePoints);
             points.AddRange(tempInfo.Points);
             cons.AddRange(tempInfo.Connections);
-            cons.Add(new int[] { ballPoints - 1, ballPoints }); // top
-            cons.Add(new int[] { 0, ballPoints + linePoints }); // bottom;
+            cons.Add(new int[] {0 , ballPoints }); // top
+            cons.Add(new int[] { ballPoints - 1, ballPoints + linePoints }); // bottom;
 
 
             for (int i = 0; i < points.Count; i++)
@@ -125,9 +155,9 @@ namespace Spellect
         {
             List<Vector2> points = new();
             List<int[]> cons = new();
-            for (int i = 1; i < numPoints; i++)
+            for (int i = 1; i <= numPoints; i++)
             {
-                points.Add(startPoint + i / (numPoints) * (endPoint - startPoint));
+                points.Add(startPoint + i / (numPoints*1f) * (endPoint - startPoint));
                 if (i > 1)
                 {
                     cons.Add(new int[] { index + i - 2, index + i - 1 });
@@ -143,16 +173,16 @@ namespace Spellect
             float multiplier;
             if (isClockwise)
             {
-                multiplier = -1;
+                multiplier = 1f;
             }
             else
             {
-                multiplier = 1;
+                multiplier = -1f;
 
             }
             for (int i = 0; i < numPoints; i++)
             {
-                float angle = (startAngle + multiplier * i / (numPoints - 1) * (endAngle - startAngle)) * Mathf.PI / 180;
+                float angle = (startAngle + multiplier * i / (numPoints - 1f) * (endAngle - startAngle)) * Mathf.PI / 180f;
 
                 points.Add(middle + new Vector2(radius * Mathf.Cos(angle), radius * Mathf.Sin(angle)));
                 if (i > 0)

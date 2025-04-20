@@ -10,14 +10,23 @@ namespace Spellect
 
         private SpellbookController spellbookController;
         private bool playerInRange;
-        public Spellbook spellbook;
+        public Spellbook.Type type;
+        public AttackSpellbook attackSpellbook;
+        public PassiveSpellbook passiveSpellbook;
         private void Update()
         {
             if (playerInRange)
             {
                 if (Input.GetKeyDown(KeyCode.E))
                 {
-                    spellbookController.AddBook(spellbook);
+                    if (type == Spellbook.Type.Attack)
+                    {
+                        spellbookController.AddBook(attackSpellbook);
+                    }
+                    else if (type == Spellbook.Type.Passive)
+                    {
+                        spellbookController.AddBook(passiveSpellbook);
+                    }
                     Destroy(gameObject);
                 }
             }

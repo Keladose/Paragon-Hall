@@ -7,6 +7,7 @@ TagManager:
   - Spellbook
   - Enemy
   - Map Bounds
+  - MagicMissile
   layers:
   - Default
   - TransparentFX

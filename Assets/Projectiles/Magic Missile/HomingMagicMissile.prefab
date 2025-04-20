@@ -15,8 +15,9 @@ GameObject:
   - component: {fileID: 2180799048533018228}
   - component: {fileID: 9005313028229636574}
   - component: {fileID: 8574075095539703720}
+  - component: {fileID: 2033031305196476370}
   m_Layer: 0
-  m_Name: Magic Missile
+  m_Name: HomingMagicMissile
   m_TagString: MagicMissile
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -137,7 +138,7 @@ Rigidbody2D:
   m_UseFullKinematicContacts: 0
   m_UseAutoMass: 0
   m_Mass: 1
-  m_LinearDrag: 0
+  m_LinearDrag: 3
   m_AngularDrag: 0.05
   m_GravityScale: 0
   m_Material: {fileID: 0}
@@ -199,3 +200,18 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   spellData: {fileID: 11400000, guid: b3c02725c81cd9f41bc0d81f903c4b5d, type: 2}
+--- !u!114 &2033031305196476370
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5675730827327611252}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b9bd6c2123f1f5c4691848e639939ee7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ReachedDistance: 1.6
+  SpeedupTime: 0.3
+  FinalForce: 140

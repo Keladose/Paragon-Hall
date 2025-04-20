@@ -74,13 +74,13 @@ namespace Spellect
             float closestDist = Vector2.Distance(pos, Points[nearestPoint].Position);
             if (nearestConnection != -1)
             {
-                Debug.Log("Connection score: " + Connections[nearestConnection].GetDistanceToPoint(pos) + ", point score is: " + closestDist);
+                //Debug.Log("Connection score: " + Connections[nearestConnection].GetDistanceToPoint(pos) + ", point score is: " + closestDist);
                 closestDist = Mathf.Min(closestDist, Connections[nearestConnection].GetDistanceToPoint(pos));
 
             }
             else
             {
-                Debug.Log("Not between connections, score is" + closestDist);
+                //Debug.Log("Not between connections, score is" + closestDist);
             }
 
             return closestDist;

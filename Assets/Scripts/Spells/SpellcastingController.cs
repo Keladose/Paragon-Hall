@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using UnityEditor.Experimental.GraphView;
 using UnityEngine;
 using UnityEngine.Rendering;
 using static UnityEditor.PlayerSettings;
@@ -17,7 +18,7 @@ namespace Spellect
 
         public bool _inSpellMode = true;
         public List<SpellImage> _spellImages = new();
-        public List<CastedSpell> Spells = new();
+        private CastedSpell activeSpell;
         private SpellImage _activeSpell;
 
         [SerializeField] private GameObject _drawingPointPrefab;
@@ -28,7 +29,7 @@ namespace Spellect
         [SerializeField] private Material _startMaterial;
         [SerializeField] private Material _doneMaterial;
 
-        public List<float> SpellScores = new();
+        private List<float> SpellScores = new();
         private bool _isCasting = false;
 
         [SerializeField] private const float DRAWING_Z = 1;
@@ -40,7 +41,7 @@ namespace Spellect
         private List<GameObject> _drawingConnections = new();
         private float _timeLastPointDrawn = 0f;
 
-        public float castingTime = 2;
+        private float castingTime = 500;
         private float _castingStartTime = 0;
         private bool failedDrawing = false;
 
@@ -49,27 +50,37 @@ namespace Spellect
         void Start()
         {
             _drawing = new SpellDrawing();
+
             SpellImage newSpell;
-            foreach (CastedSpell spell in Spells)
-            {
-                switch (spell.type)
-                {
-                    case CastedSpell.Type.MagicMissile: 
-                        newSpell = new SpellImage(ImageCreator.CreateMeteor(), _spellPointPrefab, _spellConnectionPrefab, _startMaterial, _doneMaterial, this, spell);
-                        _spellImages.Add(newSpell);
-                        newSpell.Draw();
-                        newSpell.Hide();
-                        break;
-                    default:
-                        break;
-                }
-                SpellScores.Add(0f);
-            }
+            // MAGIC MISSILE SPELL
+            newSpell = new SpellImage(ImageCreator.CreateMeteor(), _spellPointPrefab, _spellConnectionPrefab,
+                _startMaterial, _doneMaterial, this, new CastedSpell { type = CastedSpell.Type.MagicMissile, strength = 20f});
+            _spellImages.Add(newSpell);
+            newSpell.Draw();
+            newSpell.Hide();
+            SpellScores.Add(0f);
+            // FIRE WALL SPELL
+            newSpell = new SpellImage(ImageCreator.CreateFire(), _spellPointPrefab, _spellConnectionPrefab,
+                _startMaterial, _doneMaterial, this, new CastedSpell { type = CastedSpell.Type.FireWall, strength = 4f });
+            _spellImages.Add(newSpell);
+            newSpell.Draw();
+            newSpell.Hide();
+            SpellScores.Add(0f);
             //_spellImages.Add(new SpellImage(ImageCreator.CreateDash(), _spellPointPrefab, _spellConnectionPrefab, _startMaterial,_doneMaterial, this, Spells[0]));
-            _activeSpell = _spellImages[0];
+            _activeSpell = _spellImages[1];
         }
 
-
+        public void ChangeSpell(object o, SpellbookController.BookChangedEventArgs e)
+        {
+            foreach (SpellImage image in _spellImages)
+            {
+                if (image.Spell.type == e.book.castedSpell.type)
+                {
+                    Debug.Log("Changed active spell to " + e.book.castedSpell.type);
+                    _activeSpell = image;
+                }
+            }
+        }
 
 
         // Update is called once per frame
@@ -97,6 +108,7 @@ namespace Spellect
                 {
                     if (CanDrawNewPoint(mouseWorldPos))
                     {
+                        
                         DrawDrawingPoint(pointPos);
                     }
                 }
@@ -136,7 +148,7 @@ namespace Spellect
 
         private bool CanDrawNewPoint(Vector2 pos)
         {
-            if (_drawing.EnoughDistanceFromLastPoint(pos) && Time.time - _timeLastPointDrawn > MIN_TIME)
+            if (_drawing.EnoughDistanceFromLastPoint(pos, 0.1f) && Time.time - _timeLastPointDrawn > MIN_TIME)
             {
                 return true;
             }
@@ -161,6 +173,7 @@ namespace Spellect
             {
                 if (_spellImages[i].IsCompleted())
                 {
+                    Debug.Log("Successfully cast" + _spellImages[i].Spell.type);
                     OnSpellCast?.Invoke(this, new SpellCastEventArgs { spell = _spellImages[i].Spell });
                     StopCasting();
                 }
@@ -185,10 +198,10 @@ namespace Spellect
                 for (int j = _drawing.FirstUnevaluatedPoint; j < _drawing.GetNumPoints(); j++)
                 {
                     SpellScores[i] = SpellScores[i] - _spellImages[i].GetScore(_drawing.GetPoint(j));
-                    Debug.Log("Spell score is " + SpellScores[i]);
+                    //Debug.Log("Spell score is " + SpellScores[i]);
                 }
-                _drawing.FirstUnevaluatedPoint = _drawing.GetNumPoints();
             }
+            _drawing.FirstUnevaluatedPoint = _drawing.GetNumPoints();
         }
     }
 }

@@ -22,8 +22,8 @@ namespace Spellect
             {
                 if (Input.GetKeyDown(KeyCode.E))
                 {
-                    attackController.spells.Add(spellData);
-                    attackController.DisplayText(spellData.spellName);
+                    //attackController.spells.Add(spellData);
+                    //attackController.DisplayText(spellData.spellName);
                     Destroy(gameObject);
                 }
             }
