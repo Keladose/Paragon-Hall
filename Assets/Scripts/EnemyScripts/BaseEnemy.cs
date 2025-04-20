@@ -3,136 +3,141 @@ using System.Collections.Generic;
 using Spellect;
 using UnityEngine;
 
-public abstract class BaseEnemy : MonoBehaviour
+namespace Spellect
 {
-    public Transform[] patrolPoints;
-    protected int targetPoint;
-
-    public Transform player;
-    public float moveSpeed = 2f;
-    protected float originalSpeed;
-    public float chaseRange = 2f;
-    public float attackRange = 2f;
-
-    protected bool isChasing = false;
-    protected float attackCooldown = 2f;
-    protected float lastAttackTime;
-    protected Collider enemyCollider;
-
-    public HealthBarController healthBarController;
-    public HealthController healthController;
-
-    protected Animator animator;
-    protected bool isDead = false;
-
-    protected SpriteRenderer spriteRenderer;    
-
-    protected virtual void Start()
+    public abstract class BaseEnemy : MonoBehaviour
     {
-        originalSpeed = moveSpeed;
-        enemyCollider = GetComponent<Collider>();
-        animator = GetComponent<Animator>();
-        spriteRenderer = GetComponentInChildren<SpriteRenderer>();
+        public Transform[] patrolPoints;
+        protected int targetPoint;
 
-        if (healthController != null)
+        public Transform player;
+        public float moveSpeed = 2f;
+        protected float originalSpeed;
+        public float chaseRange = 2f;
+        public float attackRange = 2f;
+
+        protected bool isChasing = false;
+        protected float attackCooldown = 2f;
+        protected float lastAttackTime;
+        protected Collider enemyCollider;
+
+        public HealthBarController healthBarController;
+        public HealthController healthController;
+
+        protected Animator animator;
+        protected bool isDead = false;
+
+        protected SpriteRenderer spriteRenderer;
+
+        protected virtual void Start()
         {
-            healthController.Init(50);
-            healthBarController.Init(healthController.GetMaxHealth());
-            healthController.OnDamageTaken += healthBarController.UpdateHealth;
-            healthController.OnHealed += healthBarController.UpdateHealth;
-            healthController.OnMaxHealthChanged += healthBarController.UpdateMaxHealth;
+            originalSpeed = moveSpeed;
+            enemyCollider = GetComponent<Collider>();
+            animator = GetComponent<Animator>();
+            spriteRenderer = GetComponentInChildren<SpriteRenderer>();
+
+            if (healthController != null)
+            {
+                healthController.Init(50);
+                healthBarController.Init(healthController.GetMaxHealth());
+                healthController.OnDamageTaken += healthBarController.UpdateHealth;
+                healthController.OnHealed += healthBarController.UpdateHealth;
+                healthController.OnMaxHealthChanged += healthBarController.UpdateMaxHealth;
+            }
         }
-    }
 
-    protected virtual void Update()
-    {
-        float distanceToPlayer = Vector3.Distance(transform.position, player.position);
-        isChasing = distanceToPlayer <= chaseRange;
-
-        if (isChasing)
+        protected virtual void Update()
         {
-            ChasePlayer();
+            float distanceToPlayer = Vector3.Distance(transform.position, player.position);
+            isChasing = distanceToPlayer <= chaseRange;
+
+            if (isChasing)
+            {
+                ChasePlayer();
+            }
+            else
+            {
+                Patrol();
+            }
+
+            TryAttack(distanceToPlayer);
         }
-        else
+
+        protected virtual void TryAttack(float distanceToPlayer)
         {
-            Patrol();
+            if (distanceToPlayer <= attackRange && Time.time >= lastAttackTime + attackCooldown)
+            {
+                lastAttackTime = Time.time;
+                AttackPlayer();
+            }
         }
 
-        TryAttack(distanceToPlayer);
-    }
-
-    protected virtual void TryAttack(float distanceToPlayer)
-    {
-        if (distanceToPlayer <= attackRange && Time.time >= lastAttackTime + attackCooldown)
+        protected virtual void ChasePlayer()
         {
-            lastAttackTime = Time.time;
-            AttackPlayer();
+            UpdateSpriteDirection(player.position);
+            transform.position = Vector3.MoveTowards(transform.position, player.position, moveSpeed * Time.deltaTime);
         }
-    }
 
-    protected virtual void ChasePlayer()
-    {
-        UpdateSpriteDirection(player.position);
-        transform.position = Vector3.MoveTowards(transform.position, player.position, moveSpeed * Time.deltaTime);
-    }
-
-    protected virtual void Patrol() {
-
-        Vector3 targetPos = patrolPoints[targetPoint].position;
-        UpdateSpriteDirection(targetPos);
-        transform.position = Vector3.MoveTowards(transform.position, targetPos, moveSpeed * Time.deltaTime);
-    }
-    protected abstract void AttackPlayer();
-    public virtual void TakeDamage(float amount)
-    {
-        if (isDead || healthController == null) return;
-
-        healthController.TakeDamage(amount);
-
-        if (healthController.GetHealth() <= 0)
+        protected virtual void Patrol()
         {
-            Die();
+
+            Vector3 targetPos = patrolPoints[targetPoint].position;
+            UpdateSpriteDirection(targetPos);
+            transform.position = Vector3.MoveTowards(transform.position, targetPos, moveSpeed * Time.deltaTime);
         }
-    }
-    protected virtual void OnDestroy()
-    {
-        if (healthController != null)
+        protected abstract void AttackPlayer();
+        public virtual void TakeDamage(float amount)
         {
-            healthController.OnDamageTaken -= healthBarController.UpdateHealth;
-            healthController.OnHealed -= healthBarController.UpdateHealth;
-            healthController.OnMaxHealthChanged -= healthBarController.UpdateMaxHealth;
-        }
-    }
-    protected virtual void Die()
-    {
-        isDead = true;
+            if (isDead || healthController == null) return;
 
-        if (animator != null)
+            healthController.TakeDamage(amount);
+
+            if (healthController.GetHealth() <= 0)
+            {
+                Die();
+            }
+        }
+        protected virtual void OnDestroy()
         {
-            animator.SetTrigger("Die"); // Or animator.SetBool("isDead", true);
+            if (healthController != null)
+            {
+                healthController.OnDamageTaken -= healthBarController.UpdateHealth;
+                healthController.OnHealed -= healthBarController.UpdateHealth;
+                healthController.OnMaxHealthChanged -= healthBarController.UpdateMaxHealth;
+            }
+        }
+        protected virtual void Die()
+        {
+            isDead = true;
+
+            if (animator != null)
+            {
+                animator.SetTrigger("Die"); // Or animator.SetBool("isDead", true);
+            }
+
+            // Disable collider & movement if needed
+            if (enemyCollider != null) enemyCollider.enabled = false;
+            moveSpeed = 0f;
+
+            Destroy(gameObject, 0.25f); // Adjust time based on animation length
         }
 
-        // Disable collider & movement if needed
-        if (enemyCollider != null) enemyCollider.enabled = false;
-        moveSpeed = 0f;
-
-        Destroy(gameObject, 0.25f); // Adjust time based on animation length
-    }
-
-    private IEnumerator DeathCleanup()
-    {
-        yield return new WaitForSeconds(0.25f); // Adjust to your animation length
-        Destroy(gameObject);
-    }
-
-    protected virtual void UpdateSpriteDirection(Vector3 Target)
-    {
-        if (spriteRenderer == null) return;
-
-        Vector3 direction = Target - transform.position;
-        if (direction.x != 0) { 
-            spriteRenderer.flipX = direction.x < 0;
+        private IEnumerator DeathCleanup()
+        {
+            yield return new WaitForSeconds(0.25f); // Adjust to your animation length
+            Destroy(gameObject);
         }
-    }
 
+        protected virtual void UpdateSpriteDirection(Vector3 Target)
+        {
+            if (spriteRenderer == null) return;
+
+            Vector3 direction = Target - transform.position;
+            if (direction.x != 0)
+            {
+                spriteRenderer.flipX = direction.x < 0;
+            }
+        }
+
+    }
 }

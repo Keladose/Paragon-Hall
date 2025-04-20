@@ -11,9 +11,11 @@ namespace Spellect
         [Serializable]
         public enum Type
         {
-            WaterBolt,
-            FireBolt,
-            Undefined
+            MagicMissile,
+            FireWall,
+            Laser,
+            FrostWall,
+            Tornado
         }
 
         public Type type;

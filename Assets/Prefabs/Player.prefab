@@ -20,6 +20,8 @@ GameObject:
   - component: {fileID: 4191300548643391172}
   - component: {fileID: 2827781900149890210}
   - component: {fileID: 4939691066743996205}
+  - component: {fileID: 4550981470330439378}
+  - component: {fileID: 5991497655645276404}
   m_Layer: 0
   m_Name: Player
   m_TagString: Player
@@ -133,6 +135,9 @@ MonoBehaviour:
   healthBarController: {fileID: 0}
   healthController: {fileID: 7775545933067550974}
   playerSoundController: {fileID: 5616882074250264890}
+  spellbookController: {fileID: 5991497655645276404}
+  spellCastingController: {fileID: 0}
+  effectsController: {fileID: 4550981470330439378}
 --- !u!50 &7633910547283463433
 Rigidbody2D:
   serializedVersion: 4
@@ -218,7 +223,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   spells: []
-  text: {fileID: 0}
+  equippedSpell: {fileID: 0}
 --- !u!114 &7775545933067550974
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -445,3 +450,32 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+--- !u!114 &4550981470330439378
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8520550288926484140}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5f1ef90cb91f0a0419ae43e1c075c039, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  healthController: {fileID: 7775545933067550974}
+  _fireFrequency: 2
+--- !u!114 &5991497655645276404
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8520550288926484140}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1751388edcef95042bbf678c5b2d78b6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  currentBook: {fileID: 0}
+  bookAnimator: {fileID: 0}
+  text: {fileID: 0}
