@@ -56,6 +56,7 @@ public class HomingMissileController : MonoBehaviour
         if (_nextPoint == _points.Count)
         {
             _finishedPath = true;
+            _rb.drag = 0f;
 
         }
     }

@@ -477,7 +477,7 @@ MonoBehaviour:
     castedSpell:
       type: 1
       strength: 20
-    basicAttack: {fileID: 11400000, guid: b3c02725c81cd9f41bc0d81f903c4b5d, type: 2}
+    basicAttack: {fileID: 11400000, guid: aa03e19a87af1fb49b45dc06f9a35e04, type: 2}
   passiveSpellbook:
     type: 1
     spellBookPrefab: {fileID: 0}
