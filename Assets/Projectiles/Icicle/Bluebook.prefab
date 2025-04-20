@@ -72,8 +72,8 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 10
-  m_Sprite: {fileID: 21300000, guid: 0a47296b3cc090340899fcbb4f0a5b7b, type: 3}
+  m_SortingOrder: 11
+  m_Sprite: {fileID: 21300000, guid: 1c8a513cb7d810e48be336fa2097d565, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -95,7 +95,7 @@ GameObject:
   - component: {fileID: 6111615426567806705}
   - component: {fileID: 8594216675663085930}
   m_Layer: 0
-  m_Name: Greenbook
+  m_Name: Bluebook
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -212,7 +212,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 10
-  m_Sprite: {fileID: 21300000, guid: fc991190e941cf24284b1040356a63a8, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 857c922be63e57248a6ad656aabd1dae, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0

@@ -26,7 +26,7 @@ public class ProjectileCollide : MonoBehaviour
             var enemy = other.GetComponent<BaseEnemy>();
             if (enemy != null)
             {
-                enemy.TakeDamage(spellData.damage); // Uses Phantom’s override
+                enemy.TakeDamage(spellData.damage); // Uses Phantomï¿½s override
             }
 
             animator.Play("Hit");
@@ -43,7 +43,7 @@ public class ProjectileCollide : MonoBehaviour
     }
     IEnumerator WaitBeforeDestroy()
     {
-        yield return new WaitForSeconds(0.1f);
+        yield return new WaitForSeconds(0.4f);
         Destroy(gameObject);
     }
 }
