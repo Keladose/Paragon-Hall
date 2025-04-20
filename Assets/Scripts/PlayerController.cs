@@ -19,6 +19,8 @@ namespace Spellect
         public HealthBarController healthBarController;
         public HealthController healthController;
         public PlayerSoundController playerSoundController;
+        public SpellbookController spellbookController;
+        public SpellcastingController spellCastingController;
         bool moving = false;
         
         void Awake()
@@ -46,6 +48,7 @@ namespace Spellect
             healthController.OnDamageTaken += healthBarController.UpdateHealth;
             healthController.OnHealed += healthBarController.UpdateHealth;
             healthController.OnMaxHealthChanged += healthBarController.UpdateMaxHealth;
+            spellbookController.OnBookChanged += attackController.ChangeBook;
         }
 
         // Update is called once per frame

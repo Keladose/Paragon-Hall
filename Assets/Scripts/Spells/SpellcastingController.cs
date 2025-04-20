@@ -49,10 +49,23 @@ namespace Spellect
         void Start()
         {
             _drawing = new SpellDrawing();
-
-            _spellImages.Add(new SpellImage(ImageCreator.CreateDash(), _spellPointPrefab, _spellConnectionPrefab, _startMaterial,_doneMaterial, this, Spells[0]));
-            _spellImages[0].Draw();
-            _spellImages[0].Hide();
+            SpellImage newSpell;
+            foreach (CastedSpell spell in Spells)
+            {
+                switch (spell.type)
+                {
+                    case CastedSpell.Type.MagicMissile: 
+                        newSpell = new SpellImage(ImageCreator.CreateMeteor(), _spellPointPrefab, _spellConnectionPrefab, _startMaterial, _doneMaterial, this, spell);
+                        _spellImages.Add(newSpell);
+                        newSpell.Draw();
+                        newSpell.Hide();
+                        break;
+                    default:
+                        break;
+                }
+                SpellScores.Add(0f);
+            }
+            //_spellImages.Add(new SpellImage(ImageCreator.CreateDash(), _spellPointPrefab, _spellConnectionPrefab, _startMaterial,_doneMaterial, this, Spells[0]));
             _activeSpell = _spellImages[0];
         }
 
