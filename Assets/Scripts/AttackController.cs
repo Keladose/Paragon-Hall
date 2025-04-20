@@ -22,11 +22,13 @@ namespace Spellect
         private bool magicMissleHoming = false;
 
         private int selectedSpellIndex = 0;
+        private float _timeLastFired = 0f;
 
         void Update()
         {
-            if (equippedSpell != null && Input.GetMouseButtonDown(0))
+            if (equippedSpell != null && Input.GetMouseButton(0) && Time.time > _timeLastFired + equippedSpell.cooldown)
             {
+                _timeLastFired = Time.time;
                 //equippedSpell = spells[selectedSpellIndex];
                 FireProjectile();
             }            
