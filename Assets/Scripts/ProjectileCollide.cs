@@ -29,7 +29,7 @@ public class ProjectileCollide : MonoBehaviour
                 enemy.TakeDamage(spellData.damage); // Uses Phantom’s override
             }
 
-            animator.Play("Magic Missile Hit");
+            animator.Play("Hit");
             StartCoroutine(WaitBeforeDestroy());
         }
 
@@ -37,7 +37,7 @@ public class ProjectileCollide : MonoBehaviour
         {
             Rigidbody2D rb = GetComponent<Rigidbody2D>();
             rb.velocity = Vector2.zero;
-            animator.Play("Magic Missile Hit");
+            animator.Play("Hit");
             StartCoroutine(WaitBeforeDestroy());
         }
     }

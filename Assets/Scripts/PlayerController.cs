@@ -19,6 +19,10 @@ namespace Spellect
         public HealthBarController healthBarController;
         public HealthController healthController;
         public PlayerSoundController playerSoundController;
+        public SpellbookController spellbookController;
+        public SpellcastingController spellCastingController;
+        public EffectsController effectsController;
+        public DrawableSpellController drawableSpellController;
         bool moving = false;
 
         private bool isInvulnerable = false;
@@ -31,16 +35,20 @@ namespace Spellect
         }
         void Start()
         {
-            if (GameManager.Instance.playerObject != null)
+            if (GameManager.Instance != null)
             {
-                Destroy(this.gameObject);
-                Destroy(this);
+                if (GameManager.Instance.playerObject != null)
+                {
+                    Destroy(this.gameObject);
+                    Destroy(this);
+                }
+                else
+                {
+                    GameManager.Instance.playerObject = this.gameObject;
+                    DontDestroyOnLoad(this.gameObject);
+                }
             }
-            else
-            {
-                GameManager.Instance.playerObject = this.gameObject;
-                DontDestroyOnLoad(this.gameObject);
-            }
+            
             spriteRenderer = GetComponent<SpriteRenderer>();
             attackController = GetComponent<AttackController>();
 
@@ -50,6 +58,24 @@ namespace Spellect
             healthController.OnDamageTaken += healthBarController.UpdateHealth;
             healthController.OnHealed += healthBarController.UpdateHealth;
             healthController.OnMaxHealthChanged += healthBarController.UpdateMaxHealth;
+            if (spellbookController != null)
+            {
+                spellbookController.OnBookChanged += attackController.ChangeBook;
+                attackController.OnAttackSpell += spellbookController.AnimateSpell;
+                spellCastingController.OnSpellCast += attackController.OnSpellCast;
+                if (spellCastingController != null)
+                {
+                    spellbookController.OnBookChanged += spellCastingController.ChangeSpell;
+                }
+            }
+            if (spellCastingController != null && drawableSpellController != null)
+            {
+                spellCastingController.OnSpellCast += drawableSpellController.StartDrawing;
+            }
+            if (drawableSpellController != null)
+            {
+                drawableSpellController.OnDrawingFinish += attackController.OnDrawingFinished;
+            }
         }
 
         // Update is called once per frame
@@ -91,27 +117,27 @@ namespace Spellect
                 {
                     animator.Play("PlayerRun");
                     transform.localRotation = Quaternion.Euler(0, 180, 0);
-                    if (attackController.currentBook)
+                    if (spellbookController.currentBook)
                     {
-                        attackController.bookAnimator.Play("Book");
+                        spellbookController.bookAnimator.Play("Book");
                     }
                 }
                 else if (velocity.x < 0)
                 {
                     animator.Play("PlayerRun");
                     transform.localRotation = Quaternion.Euler(0, 0, 0);
-                    if (attackController.currentBook)
+                    if (spellbookController.currentBook)
                     {
-                        attackController.bookAnimator.Play("Book");
+                        spellbookController.bookAnimator.Play("Book");
                     }
                 }
             }
             else
             {
                 animator.Play("PlayerIdle");
-                if (attackController.currentBook)
+                if (spellbookController.currentBook)
                 {
-                    attackController.bookAnimator.Play("BookIdle");
+                    spellbookController.bookAnimator.Play("BookIdle");
                 }
             }
         }
@@ -122,6 +148,10 @@ namespace Spellect
             healthController.OnDamageTaken -= healthBarController.UpdateHealth;
             healthController.OnHealed -= healthBarController.UpdateHealth;
             healthController.OnMaxHealthChanged -= healthBarController.UpdateMaxHealth;
+            spellbookController.OnBookChanged -= attackController.ChangeBook;
+            spellbookController.OnBookChanged -= spellCastingController.ChangeSpell;
+            attackController.OnAttackSpell -= spellbookController.AnimateSpell;
+            spellCastingController.OnSpellCast -= drawableSpellController.StartDrawing;
         }
 
         private void OnTriggerEnter2D(Collider2D other)

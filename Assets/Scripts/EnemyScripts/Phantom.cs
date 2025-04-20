@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using Spellect;
 using UnityEngine;
 
-public class Phantom : BaseEnemy
+namespace Spellect
 {
     private bool isWaiting;
     private float waitTime = 1.5f;
@@ -51,13 +51,13 @@ public class Phantom : BaseEnemy
         isMaterialized = !phased;
         Debug.Log("Phantom is now " + (isMaterialized ? "Materialized" : "Phased"));
 
-        // Set collider behavior (if using collision)
+        // Set collider behavior
         if (phantomCollider != null)
         {
             phantomCollider.enabled = !phased;
         }
 
-        // Visual: transparent when phased
+        // Transparency effect
         if (phantomRenderer != null)
         {
             Color color = phantomRenderer.material.color;
@@ -78,17 +78,6 @@ public class Phantom : BaseEnemy
         }
     }
 
-    protected override void AttackPlayer()
-    {
-        if (!isMaterialized) return; // Only attack if solid
-
-        var playerHealth = player.GetComponent<HealthController>();
-        if (playerHealth != null)
-        {
-            playerHealth.TakeDamage(15); // Adjust damage as needed
-        }
-
-    }
     private IEnumerator WaitAtPoint()
     {
         isWaiting = true;
@@ -97,16 +86,22 @@ public class Phantom : BaseEnemy
         isWaiting = false;
     }
 
-    public override void TakeDamage(float amount)
+    protected override void AttackPlayer()
     {
-        if (isMaterialized == false)
+        if (!isMaterialized) return;
+
+        var playerHealth = player.GetComponent<HealthController>();
+        if (playerHealth != null)
         {
-            return;
-        }
-        else
-        {
-            base.TakeDamage(amount); // Only take damage when materialized
+            playerHealth.TakeDamage(15); // Adjust damage as needed
         }
     }
 
+    public override void TakeDamage(float amount)
+    {
+        if (!isMaterialized) return;
+
+        base.TakeDamage(amount);
+    }
+}
 }
