@@ -29,7 +29,7 @@ namespace Spellect
                     GameManager.Instance.switchingRooms = false;
                     
                 }
-                if (GameManager.Instance.clearedRooms.Contains(roomId))
+                if (GameManager.Instance.clearedRooms.Contains(roomId) && !GameManager.Instance.SpawnBoss)
                 {
                     DisableSpawners();
                 }

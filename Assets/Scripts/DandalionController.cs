@@ -17,6 +17,20 @@ public class DandalionController : BaseEnemy
     {
 
     }
+    void Awake()
+    {
+        if (GameManager.Instance != null)
+        {
+            if (!GameManager.Instance.SpawnBoss)
+            {
+                Destroy(gameObject);
+            }
+        }
+        else
+        {
+            Destroy(gameObject);
+        }
+    }
 
 
     protected override void Update()
