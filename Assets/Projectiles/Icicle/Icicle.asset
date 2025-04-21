@@ -19,3 +19,6 @@ MonoBehaviour:
   range: 5
   speed: 25
   cooldown: 0.1
+  knockBack: 40
+  goesThroughEnemies: 0
+  spawnOffset: {x: 1, y: 0}

@@ -93,7 +93,7 @@ namespace Spellect
                 if (patrolPoints.Length == 0 || isWaiting) return;
 
                 UpdateSpriteDirection(patrolPoints[targetPoint].position);
-                transform.position = Vector3.MoveTowards(transform.position, patrolPoints[targetPoint].position, moveSpeed * Time.deltaTime);
+                AddForceTowardsTarget(patrolPoints[targetPoint].position, moveSpeed);
 
                 if (Vector3.Distance(transform.position, patrolPoints[targetPoint].position) < 0.1f)
                 {

@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using TMPro;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UIElements;
 using static DrawableSpellController;
@@ -13,13 +14,14 @@ namespace Spellect
     public class AttackController : MonoBehaviour
     {
 
-        public class AttackSpellEventArgs : EventArgs { public float power; }
+        public class AttackSpellEventArgs : EventArgs { public float value0; public float value1; public CastedSpell.Type type; }
         public delegate void OnAttackSpellEvent(object source, AttackSpellEventArgs e);
         public event OnAttackSpellEvent OnAttackSpell;
 
         public SpellData equippedSpell;
         public CastedSpell currentSpell;
         private bool magicMissleHoming = false;
+        public Transform LaserRotator;
 
         private int selectedSpellIndex = 0;
         private float _timeLastFired = 0f;
@@ -31,7 +33,15 @@ namespace Spellect
                 _timeLastFired = Time.time;
                 //equippedSpell = spells[selectedSpellIndex];
                 FireProjectile(DirectionToMouse());
-            }            
+            }
+            if (currentSpell.type == CastedSpell.Type.Laser)
+            {
+                if (LaserRotator != null)
+                {
+                    LaserFollowPlayer(DirectionToMouse());
+                }
+            }
+
         }
 
         public void OnSpellCast(object o, SpellCastEventArgs e)
@@ -39,6 +49,16 @@ namespace Spellect
             if (e.spell.type == CastedSpell.Type.Icicle)
             {
                 StartCoroutine(IcicleStorm());
+            }
+            if (e.spell.type == CastedSpell.Type.Laser)
+            {
+                if (LaserRotator != null)
+                {
+                    GameObject laser = Instantiate(equippedSpell.specialPrefab, LaserRotator.transform.position + LaserRotator.rotation * (Vector3)equippedSpell.spawnOffset,
+                                            LaserRotator.rotation, LaserRotator);
+                    laser.GetComponent<LaserController>().Charge();
+                    OnAttackSpell?.Invoke(this, new AttackSpellEventArgs { value0 = 0f, value1 = 4f, type = currentSpell.type });
+                }
             }
         }
 
@@ -63,6 +83,10 @@ namespace Spellect
             {
                 SpawnMagicHomers(e.points);
             }
+            else if (e.type == CastedSpell.Type.Tornado)
+            {
+                SpawnTornado(e.points);
+            }
         }
 
         private void SpawnMagicHomers(List<Vector2> points)
@@ -74,6 +98,14 @@ namespace Spellect
                 Quaternion.Euler(0f, 0f, angle));
                 projectile.GetComponent<HomingMissileController>().Init(points, Quaternion.Euler(0f, 0f, angle) * Vector2.right);
             }
+        }
+
+        private void SpawnTornado(List<Vector2> points)
+        {
+            GameObject tornado = Instantiate(equippedSpell.specialPrefab, points[0],
+                Quaternion.identity);
+            float angle = UnityEngine.Random.Range(0, 360f);
+            tornado.GetComponent<HomingMissileController>().Init(points, Quaternion.Euler(0f, 0f, angle) * Vector2.right);
         }
         public void ChangeBook(object o, BookChangedEventArgs e)
         {
@@ -87,6 +119,16 @@ namespace Spellect
 
         public void FireProjectile(Vector2 direction)
         {
+            if (currentSpell.type == CastedSpell.Type.Laser && LaserRotator != null)
+            {
+                GameObject laser = Instantiate(equippedSpell.projectilePrefab, LaserRotator.transform.position + LaserRotator.rotation*(Vector3)equippedSpell.spawnOffset,
+                                            LaserRotator.rotation, LaserRotator);
+                laser.GetComponent<LaserController>().Charge();
+                OnAttackSpell?.Invoke(this, new AttackSpellEventArgs { value0 = 1f, value1 = 0.5f, type = currentSpell.type });
+                return;
+            }
+
+
             float randomizer = 0f;
             if (currentSpell.type == CastedSpell.Type.Icicle)
             {
@@ -94,20 +136,28 @@ namespace Spellect
             }
             float angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg + randomizer;
 
-            GameObject projectile = Instantiate(equippedSpell.projectilePrefab, transform.position, Quaternion.Euler(0f, 0f, angle)
-                );
+            Vector2 spawnOffset = Quaternion.Euler(0f, 0f, angle) * equippedSpell.spawnOffset;
+
+            if (currentSpell.type == CastedSpell.Type.Tornado)
+            {
+                angle += 180;
+            }
+            GameObject projectile = Instantiate(equippedSpell.projectilePrefab, 
+                                            transform.position + (Vector3)spawnOffset, 
+                                            Quaternion.Euler(0f, 0f, angle));
             Rigidbody2D rb = projectile.GetComponent<Rigidbody2D>();
             rb.velocity = direction * equippedSpell.speed;
             if (currentSpell.type == CastedSpell.Type.Icicle)
             {
                 projectile.GetComponent<ProjectileSpeedup>().Init(equippedSpell.speed, 0.5f, Quaternion.Euler(0,0,randomizer)*direction);
             }
-
-            OnAttackSpell?.Invoke(this, new AttackSpellEventArgs { power = 1f });
-            
+            else if (currentSpell.type == CastedSpell.Type.Tornado)
+            {
+                projectile.GetComponent<ProjectileCollide>().Init(false);
+            }
+            OnAttackSpell?.Invoke(this, new AttackSpellEventArgs { value0 = 0, value1 = 0, type = currentSpell.type });
 
         }
-
         public Vector2 DirectionToMouse()
         {
             Vector3 mouseWorldPos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
@@ -116,5 +166,18 @@ namespace Spellect
             return direction;
         }
 
+        private void LaserFollowPlayer(Vector2 direction)   
+        {
+            float multiplier = 1f;
+            Debug.Log(LaserRotator.parent.localRotation.eulerAngles.y);
+            if (LaserRotator.parent.localRotation.eulerAngles.y > 0)
+            {
+                multiplier = -1;
+            }
+            float angle = Mathf.Atan2(direction.y, direction.x* multiplier) * Mathf.Rad2Deg;
+            LaserRotator.localRotation = Quaternion.Euler(0, 0, angle);
+        }
+
+        
     }
 }

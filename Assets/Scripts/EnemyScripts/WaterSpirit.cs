@@ -47,7 +47,7 @@ public class WaterSpirit : BaseEnemy
         float timer = 0f;
         while (timer < dashDuration)
         {
-            transform.Translate(direction * dashSpeed * Time.deltaTime);
+            AddForceTowardsTarget((Vector2)transform.position + direction, dashSpeed);
             timer += Time.deltaTime;
             yield return null;
         }

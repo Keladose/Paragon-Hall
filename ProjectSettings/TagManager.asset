@@ -8,6 +8,7 @@ TagManager:
   - Enemy
   - Map Bounds
   - MagicMissile
+  - Laser
   layers:
   - Default
   - TransparentFX

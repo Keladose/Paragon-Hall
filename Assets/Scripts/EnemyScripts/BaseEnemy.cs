@@ -22,7 +22,7 @@ namespace Spellect
 
         public HealthBarController healthBarController;
         public HealthController healthController;
-
+        public Rigidbody2D rb;
         protected Animator animator;
         protected bool isDead = false;
 
@@ -41,6 +41,7 @@ namespace Spellect
             enemyCollider = GetComponent<Collider>();
             animator = GetComponent<Animator>();
             spriteRenderer = GetComponentInChildren<SpriteRenderer>();
+            rb = GetComponent<Rigidbody2D>();
 
             if (healthController != null)
             {
@@ -81,7 +82,7 @@ namespace Spellect
         protected virtual void ChasePlayer()
         {
             UpdateSpriteDirection(player.position);
-            transform.position = Vector3.MoveTowards(transform.position, player.position, moveSpeed * Time.deltaTime);
+            AddForceTowardsTarget(player.position, moveSpeed);
         }
 
         protected virtual void Patrol()
@@ -99,13 +100,16 @@ namespace Spellect
 
                 Vector3 wanderTarget = transform.position + (Vector3)wanderDirection * 2f;
                 UpdateSpriteDirection(wanderTarget);
-                transform.position = Vector3.MoveTowards(transform.position, wanderTarget, moveSpeed * Time.deltaTime);
+
+
+                AddForceTowardsTarget(wanderTarget, moveSpeed);
+
                 return;
             }
 
             Vector3 targetPos = patrolPoints[targetPoint].position;
             UpdateSpriteDirection(targetPos);
-            transform.position = Vector3.MoveTowards(transform.position, targetPos, moveSpeed * Time.deltaTime);
+            AddForceTowardsTarget(targetPos, moveSpeed);
         }
 
         protected abstract void AttackPlayer();
@@ -120,6 +124,12 @@ namespace Spellect
             {
                 Die();
             }
+        }
+
+        private protected void AddForceTowardsTarget(Vector2 target, float force)
+        {
+            Vector2 forceDirection = (-(Vector2)transform.position + target).normalized;
+            rb.AddForce(forceDirection * force);
         }
 
         protected virtual void Die()
