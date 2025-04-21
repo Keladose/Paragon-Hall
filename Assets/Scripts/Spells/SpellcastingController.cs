@@ -195,12 +195,12 @@ namespace Spellect
         }
         private void DrawDrawingPoint(Vector2 pos)
         {
-            _drawingPoints.Add(DrawPoint(pos, _drawingPointPrefab));
+            _drawingPoints.Add(DrawDrawingPoint(pos, _drawingPointPrefab));
             _drawing.AddPoint(pos);
             _timeLastPointDrawn = Time.time;
             if (_drawing.GetNumPoints() > 1)
             {
-                _drawingConnections.Add(DrawConnection(_drawingPoints[^1].transform.position, _drawingPoints[^2].transform.position, _drawingConnectionPrefab));
+                _drawingConnections.Add(DrawDrawingConnection(_drawingPoints[^1].transform.position, _drawingPoints[^2].transform.position, _drawingConnectionPrefab));
             }
             UpdateDrawingScores();
             CheckCompleted();
@@ -222,11 +222,25 @@ namespace Spellect
         {
             return Instantiate(prefab, transform.position + new Vector3(pos.x, pos.y, DRAWING_Z), Quaternion.identity, transform);            
         }
+
+        public GameObject DrawDrawingPoint(Vector2 pos, GameObject prefab)
+        {
+            return Instantiate(prefab, new Vector3(pos.x, pos.y, DRAWING_Z), Quaternion.identity, transform);
+        }
         public GameObject DrawConnection(Vector3 pos0, Vector3 pos1, GameObject prefab)
         {
-            GameObject connection = Instantiate(prefab, (pos0 + pos1) / 2, Quaternion.identity, transform);
+            GameObject connection = Instantiate(prefab, this.transform.position + (pos0 + pos1) / 2, Quaternion.identity, transform);
             Vector3 LC = connection.transform.localScale;
             connection.transform.localScale = new Vector3(Vector3.Distance(pos0,pos1), LC.y, LC.z);
+            connection.transform.Rotate(new Vector3(0, 0, Vector3.SignedAngle(Vector3.right, (-pos0 + pos1), Vector3.forward)));
+            return connection;
+        }
+
+        public GameObject DrawDrawingConnection(Vector3 pos0, Vector3 pos1, GameObject prefab)
+        {
+            GameObject connection = Instantiate(prefab,  (pos0 + pos1) / 2, Quaternion.identity, transform);
+            Vector3 LC = connection.transform.localScale;
+            connection.transform.localScale = new Vector3(Vector3.Distance(pos0, pos1), LC.y, LC.z);
             connection.transform.Rotate(new Vector3(0, 0, Vector3.SignedAngle(Vector3.right, (-pos0 + pos1), Vector3.forward)));
             return connection;
         }

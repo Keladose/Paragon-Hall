@@ -10,15 +10,15 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 384775b632805a444a94b14d4a560335, type: 3}
-  m_Name: SmallLaser
+  m_Name: Wind
   m_EditorClassIdentifier: 
-  spellName: Laser
-  projectilePrefab: {fileID: 5675730827327611252, guid: a0c6afefcd123fb4fac1742bda04aec7, type: 3}
-  specialPrefab: {fileID: 5675730827327611252, guid: a49df24217ff04d4f97b1c062bfd0738, type: 3}
-  damage: 50
+  spellName: Wind
+  projectilePrefab: {fileID: 5675730827327611252, guid: ea737cbc8adcec54990938d456b1d72a, type: 3}
+  specialPrefab: {fileID: 5675730827327611252, guid: ee96a8050bcc0af41b124884cc0d4a8c, type: 3}
+  damage: 40
   range: 5
-  speed: 25
-  cooldown: 0.1
-  knockBack: 40
-  goesThroughEnemies: 0
+  speed: 0
+  cooldown: 0.5
+  knockBack: 100
+  goesThroughEnemies: 1
   spawnOffset: {x: 2, y: 0}
