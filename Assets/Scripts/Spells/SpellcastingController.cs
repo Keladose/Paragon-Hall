@@ -19,7 +19,7 @@ namespace Spellect
         public bool _inSpellMode = true;
         public List<SpellImage> _spellImages = new();
         private CastedSpell activeSpell;
-        private SpellImage _activeSpell;
+        private SpellImage _activeSpell = null;
 
         [SerializeField] private GameObject _drawingPointPrefab;
         [SerializeField] private GameObject _drawingConnectionPrefab;
@@ -56,14 +56,14 @@ namespace Spellect
 
             // LETTER A
 
-
+            /*
             newSpell = new SpellImage(ImageCreator.DrawLetterE(), _spellPointPrefab, _spellConnectionPrefab,
                 _startMaterial, _doneMaterial, this, new CastedSpell { type = CastedSpell.Type.Tornado, strength = 4f });
             _spellImages.Add(newSpell);
             newSpell.Draw();
             newSpell.Hide();
             SpellScores.Add(0f);
-
+            */
             // MAGIC MISSILE SPELL
             newSpell = new SpellImage(ImageCreator.CreateMeteor(), _spellPointPrefab, _spellConnectionPrefab,
                 _startMaterial, _doneMaterial, this, new CastedSpell { type = CastedSpell.Type.MagicMissile, strength = 20f});
@@ -104,7 +104,7 @@ namespace Spellect
 
 
             //_spellImages.Add(new SpellImage(ImageCreator.CreateDash(), _spellPointPrefab, _spellConnectionPrefab, _startMaterial,_doneMaterial, this, Spells[0]));
-            _activeSpell = _spellImages[0];
+            //_activeSpell = _spellImages[0];
         }
 
         public void ChangeSpell(object o, SpellbookController.BookChangedEventArgs e)
@@ -123,7 +123,7 @@ namespace Spellect
         // Update is called once per frame
         void Update()
         {
-            if (!_inSpellMode && Input.GetKeyDown(KeyCode.Space) )
+            if (_activeSpell != null && !_inSpellMode && Input.GetKeyDown(KeyCode.Space) )
             {
                 _inSpellMode = true;
                 _activeSpell.Show();
@@ -139,11 +139,11 @@ namespace Spellect
             {
                 Vector3 mouseWorldPos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
 
-                Vector2 pointPos = mouseWorldPos;
+                Vector2 pointPos = mouseWorldPos- transform.position;
 
                 if (_isCasting)
                 {
-                    if (CanDrawNewPoint(mouseWorldPos))
+                    if (CanDrawNewPoint(pointPos))
                     {
                         
                         DrawDrawingPoint(pointPos);
@@ -195,12 +195,12 @@ namespace Spellect
         }
         private void DrawDrawingPoint(Vector2 pos)
         {
-            _drawingPoints.Add(DrawDrawingPoint(pos, _drawingPointPrefab));
+            _drawingPoints.Add(DrawPoint(pos, _drawingPointPrefab));
             _drawing.AddPoint(pos);
             _timeLastPointDrawn = Time.time;
             if (_drawing.GetNumPoints() > 1)
             {
-                _drawingConnections.Add(DrawDrawingConnection(_drawingPoints[^1].transform.position, _drawingPoints[^2].transform.position, _drawingConnectionPrefab));
+                _drawingConnections.Add(DrawConnection(_drawingPoints[^1].transform.position- transform.position, _drawingPoints[^2].transform.position - transform.position, _drawingConnectionPrefab));
             }
             UpdateDrawingScores();
             CheckCompleted();

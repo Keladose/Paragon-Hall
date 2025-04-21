@@ -18,6 +18,7 @@ public class WheelSelectController : MonoBehaviour
     void Start()
     {
         spellbookController = GameObject.FindObjectOfType<SpellbookController>();
+        closestSectorSlot = sectorSlots[0];
     }
 
     // Update is called once per frame

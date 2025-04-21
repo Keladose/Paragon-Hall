@@ -14,5 +14,5 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   type: 1
   objectPrefab: {fileID: 5902560901854271256, guid: 8472a705b3373c747902c0058c9b9d84, type: 3}
-  distanceBetween: 0.03
+  distanceBetween: 0.3
   timeBetween: 0

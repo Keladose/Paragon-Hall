@@ -14,6 +14,7 @@ GameObject:
   - component: {fileID: 3063716080115967754}
   - component: {fileID: 7737236514229384273}
   - component: {fileID: 4275248314826020199}
+  - component: {fileID: -4676611731025029618}
   - component: {fileID: 5313488993086443946}
   m_Layer: 0
   m_Name: Phantom
@@ -190,6 +191,20 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6ee831eceaa35d340951a31d99aa2bbf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &-4676611731025029618
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4729488601714868812}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5f1ef90cb91f0a0419ae43e1c075c039, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  healthController: {fileID: 4275248314826020199}
+  _fireFrequency: 2
 --- !u!50 &5313488993086443946
 Rigidbody2D:
   serializedVersion: 4

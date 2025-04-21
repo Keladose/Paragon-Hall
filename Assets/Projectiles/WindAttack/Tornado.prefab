@@ -18,7 +18,7 @@ GameObject:
   - component: {fileID: 2033031305196476370}
   m_Layer: 0
   m_Name: Tornado
-  m_TagString: MagicMissile
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

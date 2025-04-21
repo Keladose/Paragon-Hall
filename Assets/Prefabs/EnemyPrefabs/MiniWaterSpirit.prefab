@@ -166,8 +166,9 @@ MonoBehaviour:
   moveSpeed: 2
   chaseRange: 5
   attackRange: 2
-  healthBarController: {fileID: 6504104358406035889, guid: ef292b6b49e91a741a5c8e1fe9cdb7a8, type: 3}
+  healthBarController: {fileID: 7822076972015461252}
   healthController: {fileID: 8082258814247492782}
+  rb: {fileID: 0}
   smallSpiritPrefab: {fileID: 2652397382560283750}
   numberToSpawn: 0
   spawnOffset: 0.5

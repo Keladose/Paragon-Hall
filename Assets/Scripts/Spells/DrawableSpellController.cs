@@ -140,13 +140,13 @@ public class DrawableSpellController : MonoBehaviour
     }
     public GameObject DrawPoint(Vector2 pos, GameObject prefab)
     {
-        return Instantiate(prefab, new Vector3(pos.x, pos.y, DRAWING_Z), Quaternion.identity, transform);
+        return Instantiate(prefab, new Vector3(pos.x, pos.y, DRAWING_Z), Quaternion.identity);
     }
 
 
     public GameObject DrawConnection(Vector3 pos0, Vector3 pos1, GameObject prefab)
     {
-        GameObject connection = Instantiate(prefab, (pos0 + pos1) / 2, Quaternion.identity, transform);
+        GameObject connection = Instantiate(prefab, (pos0 + pos1) / 2, Quaternion.identity);
         Vector3 LC = connection.transform.localScale;
         connection.transform.localScale = new Vector3(Vector3.Distance(pos0, pos1), LC.y, LC.z);
         connection.transform.Rotate(new Vector3(0, 0, Vector3.SignedAngle(Vector3.right, (-pos0 + pos1), Vector3.forward)));
