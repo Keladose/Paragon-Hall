@@ -4,6 +4,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using static Spellect.AttackController;
+using static Spellect.HealthController;
 
 namespace Spellect
 {
@@ -71,6 +72,7 @@ namespace Spellect
             healthController.Init(100);
             healthBarController.Init(healthController.GetMaxHealth());
             healthController.OnDamageTaken += healthBarController.UpdateHealth;
+            healthController.OnDamageTaken += ShowDamage;
             healthController.OnHealed += healthBarController.UpdateHealth;
             healthController.OnMaxHealthChanged += healthBarController.UpdateMaxHealth;
             if (GameManager.Instance != null)
@@ -191,21 +193,16 @@ namespace Spellect
             if (other.CompareTag("Enemy") && !isInvulnerable)
             {
                 Debug.Log($"Collided with enemy: {other.name}");
-                TakeDamage(10);
+                healthController.TakeDamage(10);
             }
         }
 
-        private void TakeDamage(int amount)
+        private void ShowDamage(object o, HealthChangedEventArgs e)
         {
             if (healthController != null)
             {
-                healthController.TakeDamage(amount);
-                Debug.Log("Player took " + amount + " damage! Health: ");
-
                 StartCoroutine(FlashPlayerRed());
-
                 StartCoroutine(Invulnerability());
-
             }
 
         }

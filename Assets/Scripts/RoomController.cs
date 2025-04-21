@@ -7,6 +7,8 @@ namespace Spellect
     public class RoomController : MonoBehaviour
     {
         public List<DoorController> doors = new();
+        public List<GameObject> enmies;
+        public int roomId = 0;
         // Start is called before the first frame update
         private void Awake()
         {

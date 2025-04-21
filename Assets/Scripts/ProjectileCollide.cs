@@ -11,6 +11,7 @@ public class ProjectileCollide : MonoBehaviour
     public SpellData spellData;
     private bool healthNotInit;
     private bool _hasHitAnimation = true;
+    public bool isPlayerProjectile = false;
     void Start()
     {
         animator = GetComponent<Animator>();
@@ -23,7 +24,7 @@ public class ProjectileCollide : MonoBehaviour
     
     private void OnTriggerEnter2D(Collider2D other)
     {
-        if (other.CompareTag("Enemy"))
+        if ((other.CompareTag("Enemy") && isPlayerProjectile) || (other.CompareTag("Player") && !isPlayerProjectile) )
         {
             Rigidbody2D rb = GetComponent<Rigidbody2D>();
             Vector2 knockbackDirection = (-transform.position + other.transform.position).normalized;
@@ -41,7 +42,6 @@ public class ProjectileCollide : MonoBehaviour
                 enemy.TakeDamage(spellData.damage); // Uses Phantom�s override
             }
             
-
 
             if (_hasHitAnimation)
             {

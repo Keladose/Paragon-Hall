@@ -18,6 +18,8 @@ namespace Spellect
         public Door.Direction SpawnDirection = Door.Direction.Undefined;
         private string previousRoom;
 
+        List<int> clearedRooms = new();
+
 
         // Start is called before the first frame update
         void Awake()
@@ -57,6 +59,11 @@ namespace Spellect
         public void OnDeath(object o, EventArgs e)
         {
             GoToRoom(previousRoom, SpawnDirection);
+        }
+
+        public void RoomCleared(int roomId)
+        {
+
         }
     }
 
