@@ -2,7 +2,6 @@ using System.Collections;
 using System.Collections.Generic;
 using Spellect;
 using UnityEngine;
-
 namespace Spellect
 {
     public abstract class BaseEnemy : MonoBehaviour
@@ -28,9 +27,16 @@ namespace Spellect
         protected bool isDead = false;
 
         protected SpriteRenderer spriteRenderer;
+        private float wanderTime = 2f;
+        private Vector2 wanderDirection;
 
         protected virtual void Start()
         {
+            if (player == null)
+            {
+                player = GameObject.FindGameObjectWithTag("Player").transform;
+            }
+
             originalSpeed = moveSpeed;
             enemyCollider = GetComponent<Collider>();
             animator = GetComponent<Animator>();
@@ -80,12 +86,30 @@ namespace Spellect
 
         protected virtual void Patrol()
         {
+            if (patrolPoints == null || patrolPoints.Length == 0)
+            {
+                // Wander randomly if no patrol points are assigned
+                if (wanderTime <= 0f)
+                {
+                    wanderTime = Random.Range(1f, 3f);
+                    wanderDirection = Random.insideUnitCircle.normalized;
+                }
+
+                wanderTime -= Time.deltaTime;
+
+                Vector3 wanderTarget = transform.position + (Vector3)wanderDirection * 2f;
+                UpdateSpriteDirection(wanderTarget);
+                transform.position = Vector3.MoveTowards(transform.position, wanderTarget, moveSpeed * Time.deltaTime);
+                return;
+            }
 
             Vector3 targetPos = patrolPoints[targetPoint].position;
             UpdateSpriteDirection(targetPos);
             transform.position = Vector3.MoveTowards(transform.position, targetPos, moveSpeed * Time.deltaTime);
         }
+
         protected abstract void AttackPlayer();
+
         public virtual void TakeDamage(float amount)
         {
             if (isDead || healthController == null) return;
@@ -97,6 +121,22 @@ namespace Spellect
                 Die();
             }
         }
+
+        protected virtual void Die()
+        {
+            isDead = true;
+
+            if (animator != null)
+            {
+                animator.SetTrigger("Die");
+            }
+
+            if (enemyCollider != null) enemyCollider.enabled = false;
+            moveSpeed = 0f;
+
+            Destroy(gameObject, 0.25f);
+        }
+
         protected virtual void OnDestroy()
         {
             if (healthController != null)
@@ -106,38 +146,22 @@ namespace Spellect
                 healthController.OnMaxHealthChanged -= healthBarController.UpdateMaxHealth;
             }
         }
-        protected virtual void Die()
-        {
-            isDead = true;
-
-            if (animator != null)
-            {
-                animator.SetTrigger("Die"); // Or animator.SetBool("isDead", true);
-            }
-
-            // Disable collider & movement if needed
-            if (enemyCollider != null) enemyCollider.enabled = false;
-            moveSpeed = 0f;
-
-            Destroy(gameObject, 0.25f); // Adjust time based on animation length
-        }
 
         private IEnumerator DeathCleanup()
         {
-            yield return new WaitForSeconds(0.25f); // Adjust to your animation length
+            yield return new WaitForSeconds(0.25f);
             Destroy(gameObject);
         }
 
-        protected virtual void UpdateSpriteDirection(Vector3 Target)
+        protected virtual void UpdateSpriteDirection(Vector3 target)
         {
             if (spriteRenderer == null) return;
 
-            Vector3 direction = Target - transform.position;
+            Vector3 direction = target - transform.position;
             if (direction.x != 0)
             {
                 spriteRenderer.flipX = direction.x < 0;
             }
         }
-
     }
 }

@@ -15,6 +15,9 @@ namespace Spellect
         private float sprintDuration = 0.75f;
         public float slowDuration = 2f;
 
+        public float aggroRadiusMultiplier;
+        private bool isAggro = false;
+
         private Coroutine speedCycleCoroutine;
 
         // Animator + position tracking
@@ -25,9 +28,19 @@ namespace Spellect
             base.Start();
             targetPoint = 0;
 
-            // Initialize Animator and lastPosition
             animator = GetComponent<Animator>();
             lastPosition = transform.position;
+
+            if (!isAggro)
+            {
+                isAggro = true;
+                chaseRange = chaseRange * aggroRadiusMultiplier;
+            }
+
+            if (speedCycleCoroutine == null)
+            {
+                speedCycleCoroutine = StartCoroutine(SpeedCycle());
+            }
         }
 
         protected override void Update()
@@ -49,7 +62,6 @@ namespace Spellect
                 moveSpeed = originalSpeed;
             }
 
-            // Check if ghoul is walking
             bool isWalking = (transform.position != lastPosition);
             animator.SetBool("isWalking", isWalking);
             lastPosition = transform.position;
@@ -76,13 +88,21 @@ namespace Spellect
 
         protected override void Patrol()
         {
-            if (patrolPoints.Length == 0 || isWaiting) return;
-            UpdateSpriteDirection(patrolPoints[targetPoint].position);
-
-            transform.position = Vector3.MoveTowards(transform.position, patrolPoints[targetPoint].position, moveSpeed * Time.deltaTime);
-            if (Vector3.Distance(transform.position, patrolPoints[targetPoint].position) < 0.1f)
+            if (patrolPoints != null)
             {
-                StartCoroutine(WaitAtPoint());
+                if (patrolPoints.Length == 0 || isWaiting) return;
+
+                UpdateSpriteDirection(patrolPoints[targetPoint].position);
+                transform.position = Vector3.MoveTowards(transform.position, patrolPoints[targetPoint].position, moveSpeed * Time.deltaTime);
+
+                if (Vector3.Distance(transform.position, patrolPoints[targetPoint].position) < 0.1f)
+                {
+                    StartCoroutine(WaitAtPoint());
+                }
+            }
+            else
+            {
+                base.Patrol();
             }
         }
 
@@ -99,15 +119,30 @@ namespace Spellect
             // Add damage logic here
         }
 
-        protected override void UpdateSpriteDirection(Vector3 Target)
+        protected override void UpdateSpriteDirection(Vector3 target)
         {
             if (spriteRenderer == null) return;
 
-            Vector3 direction = Target - transform.position;
+            Vector3 direction = target - transform.position;
             if (direction.x != 0)
             {
                 spriteRenderer.flipX = direction.x > 0;
             }
+        }
+
+        protected override void Die()
+        {
+            isDead = true;
+
+            if (animator != null)
+            {
+                animator.SetTrigger("Die");
+            }
+
+            if (enemyCollider != null) enemyCollider.enabled = false;
+            moveSpeed = 0f;
+
+            Destroy(gameObject, 0.35f); // Slightly longer death delay than base
         }
     }
 }

@@ -20,6 +20,13 @@ namespace Spellect
         public GameObject currentBook;
         public Animator bookAnimator;
         public TextMeshProUGUI text;
+        
+        private WheelSelectController wheelSelectController;
+
+        public void Start()
+        {
+            wheelSelectController = FindObjectOfType<WheelSelectController>();
+        }
 
         public void AddBook(Spellbook spellBook)
         {
@@ -32,6 +39,7 @@ namespace Spellect
                 PassiveSpellbooks.Add((PassiveSpellbook)spellBook);
             }
             ChangeBook(spellBook);
+            wheelSelectController.UpdateWheelSlots();
 
         }
 
@@ -93,6 +101,7 @@ namespace Spellect
             text.text = "New spell added: " + spellName;
         }
 
+        
     }
 
 }

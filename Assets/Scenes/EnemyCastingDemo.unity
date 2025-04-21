@@ -473,7 +473,7 @@ MonoBehaviour:
   type: 0
   attackSpellbook:
     type: 0
-    spellBookPrefab: {fileID: 5156918935807161773, guid: fdde091cf877dce46b053b4a79713b03, type: 3}
+    spellBookPrefab: {fileID: 5156918935807161773, guid: ed80df143a6ae3644b900be40837ce2c, type: 3}
     castedSpell:
       type: 1
       strength: 20
@@ -1050,7 +1050,7 @@ MonoBehaviour:
   type: 0
   attackSpellbook:
     type: 0
-    spellBookPrefab: {fileID: 5156918935807161773, guid: fdde091cf877dce46b053b4a79713b03, type: 3}
+    spellBookPrefab: {fileID: 5156918935807161773, guid: 6ffbf9b7c1af839499531a9b9bb4125f, type: 3}
     castedSpell:
       type: 3
       strength: 20
