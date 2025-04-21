@@ -41,6 +41,11 @@ public class ProjectileCollide : MonoBehaviour
             {
                 enemy.healthController.TakeDamage(spellData.damage); // Uses Phantom�s override
             }
+
+            if (other.CompareTag("Player"))
+            {
+                other.GetComponent<HealthController>().TakeDamage(spellData.damage / 2);
+            }
             
 
             if (_hasHitAnimation)

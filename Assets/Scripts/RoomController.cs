@@ -112,7 +112,7 @@ namespace Spellect
 
         private void InitDoors()
         {
-            foreach (DoorController door in doors)
+            foreach (DoorController door in doors)  
             {
                 door.Init();
             }
