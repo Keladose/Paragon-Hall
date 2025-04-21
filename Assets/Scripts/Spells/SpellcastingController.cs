@@ -52,6 +52,18 @@ namespace Spellect
             _drawing = new SpellDrawing();
 
             SpellImage newSpell;
+
+
+            // LETTER A
+
+
+            newSpell = new SpellImage(ImageCreator.DrawLetterE(), _spellPointPrefab, _spellConnectionPrefab,
+                _startMaterial, _doneMaterial, this, new CastedSpell { type = CastedSpell.Type.Tornado, strength = 4f });
+            _spellImages.Add(newSpell);
+            newSpell.Draw();
+            newSpell.Hide();
+            SpellScores.Add(0f);
+
             // MAGIC MISSILE SPELL
             newSpell = new SpellImage(ImageCreator.CreateMeteor(), _spellPointPrefab, _spellConnectionPrefab,
                 _startMaterial, _doneMaterial, this, new CastedSpell { type = CastedSpell.Type.MagicMissile, strength = 20f});
@@ -89,8 +101,10 @@ namespace Spellect
             newSpell.Draw();
             newSpell.Hide();
             SpellScores.Add(0f);
+
+
             //_spellImages.Add(new SpellImage(ImageCreator.CreateDash(), _spellPointPrefab, _spellConnectionPrefab, _startMaterial,_doneMaterial, this, Spells[0]));
-            _activeSpell = _spellImages[4];
+            _activeSpell = _spellImages[0];
         }
 
         public void ChangeSpell(object o, SpellbookController.BookChangedEventArgs e)

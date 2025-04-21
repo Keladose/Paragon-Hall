@@ -24,6 +24,7 @@ namespace Spellect
 
         public void UpdateMaxHealth(object o, HealthController.HealthChangedEventArgs e)
         {
+            Debug.Log("Updated max health to" + e.newHealth);
             _maxHealth = e.newHealth;
             SizeHealthbar(e.oldHealth);
         }

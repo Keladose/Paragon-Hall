@@ -17,13 +17,6 @@ namespace Spellect
         }
         
         
-        private void Start()
-        {
-            var health = GetComponent<HealthController>();
-            if (health != null)
-                health.OnDamageTaken += UpdateHealth;
-        }
-        
         public override void UpdateHealth(object o, HealthController.HealthChangedEventArgs e)
         {
             Debug.Log("Took" +  (e.oldHealth - e.newHealth).ToString() + " damage");
@@ -33,8 +26,6 @@ namespace Spellect
             damageTween.SetEase(Ease.OutCubic);
             _oldHealth = e.newHealth ;
         }
-
-
         protected override void SizeHealthbar(float oldMaxHealth)
         {
             sizeTween.Complete();

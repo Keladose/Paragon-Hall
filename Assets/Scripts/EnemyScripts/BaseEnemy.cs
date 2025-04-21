@@ -45,6 +45,7 @@ namespace Spellect
 
             if (healthController != null)
             {
+                Debug.Log("Initialised health controller");
                 healthController.Init(50);
                 healthBarController.Init(healthController.GetMaxHealth());
                 healthController.OnDamageTaken += healthBarController.UpdateHealth;

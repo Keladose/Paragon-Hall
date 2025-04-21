@@ -35,7 +35,7 @@ namespace Spellect
         public CastedSpell Spell;
 
         public SpellcastingController _spellcastingController;
-        [SerializeField] private const float DRAWING_Z = 0.5f;
+        [SerializeField] private const float DRAWING_Z = -0.5f;
 
         [SerializeField] private const float DONE_DIST = 0.6f;
 

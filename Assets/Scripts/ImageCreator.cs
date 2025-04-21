@@ -9,6 +9,124 @@ namespace Spellect
 
     public static class ImageCreator
     {
+        public static SpellImage.ImageInfo DrawLetterE()
+        {
+            List<Vector2> allPoints = new();
+            List<int[]> allConnections = new();
+
+            int index = 0;
+            int numPoints = 10;
+
+            // Vertical line (from bottom to top)
+            var verticalLine = GetLinePoints(new Vector2(-0.5f, 0f), new Vector2(-0.5f, 1f), numPoints, index);
+            allPoints.AddRange(verticalLine.Points);
+            allConnections.AddRange(verticalLine.Connections);
+            index += verticalLine.Points.Count;
+
+            // Top horizontal line (from left to right)
+            var topLine = GetLinePoints(new Vector2(-0.5f, 1f), new Vector2(0.5f, 1f), numPoints, index);
+            allPoints.AddRange(topLine.Points);
+            allConnections.AddRange(topLine.Connections);
+            index += topLine.Points.Count;
+
+            // Middle horizontal line (from left to right)
+            var middleLine = GetLinePoints(new Vector2(-0.5f, 0.5f), new Vector2(0.5f, 0.5f), numPoints, index);
+            allPoints.AddRange(middleLine.Points);
+            allConnections.AddRange(middleLine.Connections);
+            index += middleLine.Points.Count;
+
+            // Bottom horizontal line (from left to right)
+            var bottomLine = GetLinePoints(new Vector2(-0.5f, 0f), new Vector2(0.5f, 0f), numPoints, index);
+            allPoints.AddRange(bottomLine.Points);
+            allConnections.AddRange(bottomLine.Connections);
+            index += bottomLine.Points.Count;
+
+            for (int i = 0; i < allPoints.Count; i++)
+            {
+                allPoints[i] *= 6;
+            }// 
+
+            return new SpellImage.ImageInfo(allPoints, allConnections);
+        }
+
+        public static SpellImage.ImageInfo DrawLetterA()
+        {
+            List<Vector2> allPoints = new();
+            List<int[]> allConnections = new();
+
+            int index = 0;
+            int numPointsPerLine = 10;
+
+            // Left leg: from bottom left (-0.5, 0) to top center (0, 1)
+            var leftLeg = GetLinePoints(new Vector2(-0.5f, 0f), new Vector2(0f, 1f), numPointsPerLine, index);
+            allPoints.AddRange(leftLeg.Points);
+            allConnections.AddRange(leftLeg.Connections);
+            index += leftLeg.Points.Count;
+
+            // Right leg: from bottom right (0.5, 0) to top center (0, 1)
+            var rightLeg = GetLinePoints(new Vector2(0.5f, 0f), new Vector2(0f, 1f), numPointsPerLine, index);
+            allPoints.AddRange(rightLeg.Points);
+            allConnections.AddRange(rightLeg.Connections);
+            index += rightLeg.Points.Count;
+
+            // Crossbar: from left to right across the middle (you can adjust the height as needed)
+            var crossbar = GetLinePoints(new Vector2(-0.25f, 0.5f), new Vector2(0.25f, 0.5f), numPointsPerLine, index);
+            allPoints.AddRange(crossbar.Points);
+            allConnections.AddRange(crossbar.Connections);
+            index += crossbar.Points.Count;
+
+            for (int i = 0; i < allPoints.Count; i++)
+            {
+                allPoints[i] *= 6;
+            }// 
+            return new SpellImage.ImageInfo(allPoints, allConnections);
+        }
+        public static SpellImage.ImageInfo DrawLetterS()
+        {
+            List<Vector2> allPoints = new();
+            List<int[]> allConnections = new();
+
+            int index = 0;
+            int numPointsPerArc = 30;
+            float radius = 3f; // 8x larger scale
+
+            // Top arc: center at (0, 4), from 135° to -45°, clockwise
+            var topArc = GetArcPoints(new Vector2(0f, 3f), radius, 0f, 270f, true, numPointsPerArc, index);
+            allPoints.AddRange(topArc.Points);
+            allConnections.AddRange(topArc.Connections);
+            index += topArc.Points.Count;
+
+            // Bottom arc: center at (0, -4), from 135° to -45°, counterclockwise
+            var bottomArc = GetArcPoints(new Vector2(0f, -3f), radius, -180f, 90f, true, numPointsPerArc, index);
+            allPoints.AddRange(bottomArc.Points);
+            allConnections.AddRange(bottomArc.Connections);
+            index += bottomArc.Points.Count;
+
+            return new SpellImage.ImageInfo(allPoints, allConnections);
+        }
+        public static SpellImage.ImageInfo DrawLetterC()
+        {
+            List<Vector2> allPoints = new();
+            List<int[]> allConnections = new();
+
+            int index = 0;
+            int numPoints = 60;
+
+            // Bigger and rotated C
+            Vector2 center = new Vector2(0f, 0f);     // Centered at origin
+            float radius = 4f;                        // 8x larger than original (was 0.5)
+            float startAngle = 135f;                  // Top-left
+            float endAngle = -135f;                   // Bottom-left
+            bool isClockwise = true;                  // So the open part is on the right
+
+            var arc = GetArcPoints(center, radius, startAngle, endAngle, isClockwise, numPoints, index);
+            allPoints.AddRange(arc.Points);
+            allConnections.AddRange(arc.Connections);
+
+            return new SpellImage.ImageInfo(allPoints, allConnections);
+        }
+
+
 
         public static SpellImage.ImageInfo CreateLaser()
         {
@@ -258,12 +376,12 @@ namespace Spellect
             return new SpellImage.ImageInfo(points, cons);
         }
 
-        private static SpellImage.ImageInfo GetArcPoints(Vector2 middle, float radius, float startAngle, float endAngle, bool isClockwise, int numPoints, int index)
+        private static SpellImage.ImageInfo GetArcPoints(Vector2 middle, float radius, float startAngle, float endAngle, bool isCounterClockwise, int numPoints, int index)
         {
             List<Vector2> points = new();
             List<int[]> cons = new();
             float multiplier;
-            if (isClockwise)
+            if (isCounterClockwise)
             {
                 multiplier = 1f;
             }
