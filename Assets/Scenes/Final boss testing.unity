@@ -1685,7 +1685,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   playerPrefab: {fileID: 0}
   playerObject: {fileID: 0}
+  cameraTrack: {fileID: 0}
   switchingRooms: 0
+  SpawnDirection: 4
 --- !u!114 &408360048
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5165,6 +5167,7 @@ MonoBehaviour:
   player: {fileID: 1754185275}
   offset: {x: 0, y: 0, z: 0}
   smoothSpeed: 1
+  screenBlocker: {fileID: 0}
 --- !u!1 &1408968465
 GameObject:
   m_ObjectHideFlags: 0
