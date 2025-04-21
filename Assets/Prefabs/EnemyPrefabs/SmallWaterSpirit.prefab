@@ -240,6 +240,7 @@ MonoBehaviour:
   attackRange: 2
   healthBarController: {fileID: 2169101217607741253}
   healthController: {fileID: 5997002248751244242}
+  rb: {fileID: 0}
   smallSpiritPrefab: {fileID: 2652397382560283750, guid: 6957123d3000a37419787881cee45416, type: 3}
   numberToSpawn: 3
   spawnOffset: 0.5
@@ -279,7 +280,7 @@ Rigidbody2D:
   m_UseAutoMass: 0
   m_Mass: 2
   m_LinearDrag: 2
-  m_AngularDrag: 0.05
+  m_AngularDrag: 3
   m_GravityScale: 0
   m_Material: {fileID: 0}
   m_IncludeLayers:

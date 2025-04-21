@@ -153,6 +153,7 @@ MonoBehaviour:
   attackRange: 2
   healthBarController: {fileID: 6740635289895065110}
   healthController: {fileID: 4275248314826020199}
+  rb: {fileID: 0}
   phaseDuration: 3
   materializeDuration: 1
 --- !u!95 &7737236514229384273
