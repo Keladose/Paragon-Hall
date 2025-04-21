@@ -1893,7 +1893,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   playerPrefab: {fileID: 0}
   playerObject: {fileID: 0}
+  cameraTrack: {fileID: 0}
   switchingRooms: 0
+  SpawnDirection: 4
+  clearedRooms: 
+  NUM_CLEARABLE_ROOMS: 8
+  SpawnBoss: 0
 --- !u!4 &408360050
 Transform:
   m_ObjectHideFlags: 0
@@ -4379,6 +4384,11 @@ MonoBehaviour:
   - {fileID: 147268526}
   - {fileID: 1009323071}
   - {fileID: 1136087126}
+  spawners:
+  - {fileID: 2013790087}
+  enemiesAlive: 0
+  roomId: 0
+  numWaves: 0
 --- !u!4 &1018433192
 Transform:
   m_ObjectHideFlags: 0
@@ -7540,8 +7550,6 @@ GameObject:
   m_Component:
   - component: {fileID: 2013790088}
   - component: {fileID: 2013790087}
-  - component: {fileID: 2013790086}
-  - component: {fileID: 2013790089}
   m_Layer: 0
   m_Name: SpawnEnemies
   m_TagString: Untagged
@@ -7549,24 +7557,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!114 &2013790086
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2013790085}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e15457b6ecfd39e4aa56b3f8b446cdc6, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  enemyPrefabs:
-  - {fileID: 6233746885102936521, guid: 9c6041d9112fb9a47b8b78c77dd0375b, type: 3}
-  spawnPoint: {fileID: 1252649035}
-  minSpawnDelay: 0
-  maxSpawnDelay: 3
-  totalEnemiesToSpawn: 10
 --- !u!114 &2013790087
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -7579,13 +7569,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c7d7c8fb560b4d548a0a6c9af232a7b0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  wavePrefabs:
+  - innerList: 0000000001000000
+  - innerList: 03000000
+  enemiesPerWave: 0f0000000a000000
+  numWaves: 3
   enemyPrefabs:
   - {fileID: 1145835005388068861, guid: 4f30644b394b7c342bb86703249d70d2, type: 3}
   - {fileID: 6233746885102936521, guid: 9c6041d9112fb9a47b8b78c77dd0375b, type: 3}
   - {fileID: 2652397382560283750, guid: 6957123d3000a37419787881cee45416, type: 3}
   - {fileID: 4729488601714868812, guid: 4367c2e5c0fe9c448ab65723e22b2408, type: 3}
   - {fileID: 4069278916236259307, guid: 52e2b457d16b30244aa0326c7fefac22, type: 3}
-  numberToSpawn: 30
   spawnPoints:
   - {fileID: 1252649035}
   - {fileID: 256801811}
@@ -7606,24 +7600,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &2013790089
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2013790085}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e15457b6ecfd39e4aa56b3f8b446cdc6, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  enemyPrefabs:
-  - {fileID: 1556647154339057300, guid: 762243eb80d6a9048943122d207193e9, type: 3}
-  spawnPoint: {fileID: 1314657393}
-  minSpawnDelay: 0
-  maxSpawnDelay: 3
-  totalEnemiesToSpawn: 5
 --- !u!1 &2029060938
 GameObject:
   m_ObjectHideFlags: 0

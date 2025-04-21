@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -7,13 +8,16 @@ namespace Spellect
     public class RoomController : MonoBehaviour
     {
         public List<DoorController> doors = new();
-        public List<GameObject> enmies;
+        public List<Spawner> spawners;
+        public int enemiesAlive = 0;
         public int roomId = 0;
+
+        public int numWaves = 3;
+        private int _wavesRemaining = 0;
+
+
+        
         // Start is called before the first frame update
-        private void Awake()
-        {
-            
-        }
         void Start()
         {
             InitDoors();
@@ -23,10 +27,66 @@ namespace Spellect
                 {
                     GameManager.Instance.playerObject.transform.position = GetDoorPosition(GameManager.Instance.SpawnDirection);
                     GameManager.Instance.switchingRooms = false;
+                    if (GameManager.Instance.clearedRooms.Contains(roomId))
+                    {
+                        DisableSpawners();
+                    }
+                }
+            }
+            foreach (Spawner spawner in spawners)
+            {
+                spawner.OnEnemySpawned += OnEnemySpawned;
+                spawner.OnEnemyDied += OnEnemyDied;
+            }
+            SpawnNextWave();
+
+        }
+
+        private void OnEnemySpawned(object o, EventArgs e)
+        {
+            enemiesAlive++;
+        }
+
+        private void OnEnemyDied(object o, EventArgs e)
+        {
+            enemiesAlive--;
+            if (enemiesAlive == 0)
+            {
+                if (_wavesRemaining == 0)
+                {
+                    MarkRoomCompelted();
+                }
+                else
+                {
+                    SpawnNextWave();
                 }
             }
         }
 
+        private void SpawnNextWave()
+        {
+            foreach (Spawner spawner in spawners)
+            {
+                spawner.SpawnNextWave();
+            }
+            _wavesRemaining--;
+        }
+
+        private void MarkRoomCompelted()
+        {
+            foreach (DoorController door in doors)
+            {
+                door.isOpen = true;
+            }
+            GameManager.Instance.AddClearedRoom(roomId);
+        }
+        private void DisableSpawners()
+        {
+            foreach (Spawner spawner in spawners)
+            {
+                spawner.Disable();
+            }
+        }
         // Update is called once per frame
         void Update()
         {

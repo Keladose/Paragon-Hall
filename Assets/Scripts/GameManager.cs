@@ -18,8 +18,10 @@ namespace Spellect
         public Door.Direction SpawnDirection = Door.Direction.Undefined;
         private string previousRoom;
 
-        List<int> clearedRooms = new();
+        public List<int> clearedRooms = new();
 
+        public int NUM_CLEARABLE_ROOMS = 8;
+        public bool SpawnBoss = false;
 
         // Start is called before the first frame update
         void Awake()
@@ -61,9 +63,18 @@ namespace Spellect
             GoToRoom(previousRoom, SpawnDirection);
         }
 
-        public void RoomCleared(int roomId)
+        public void AddClearedRoom(int roomId)
         {
+            clearedRooms.Add(roomId);
 
+        }
+        private void CheckIfAllRoomsCleared()
+        {
+            if (clearedRooms.Count == NUM_CLEARABLE_ROOMS)
+            {
+                SpawnBoss = true;
+                GoToRoom("Level1", Door.Direction.Up);
+            }
         }
     }
 

@@ -1,16 +1,34 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class EnemySpawner : MonoBehaviour
+public class EnemySpawner : Spawner
 {
-    public GameObject[] enemyPrefabs;        
-    public int numberToSpawn = 5;
+    public GameObject[] enemyPrefabs;      
     public Transform[] spawnPoints;
+
+
 
     void Start()
     {
-        // Start a coroutine for each spawn point to spawn enemies simultaneously
+
+            // Start a coroutine for each spawn point to spawn enemies simultaneously
+        
+    }
+
+    public override void SpawnNextWave()
+    {
+        if (_isDisabled)
+        {
+            return;
+        }
+        _nextWave++;
+        currentWaveEnemyPrefabs.Clear();
+        foreach (int i in wavePrefabs[_nextWave].innerList)
+        {
+            currentWaveEnemyPrefabs.Add(enemyPrefabs[i]);
+        }
         for (int i = 0; i < spawnPoints.Length; i++)
         {
             StartCoroutine(SpawnEnemiesAtPoint(spawnPoints[i], i));
@@ -19,20 +37,22 @@ public class EnemySpawner : MonoBehaviour
 
     IEnumerator SpawnEnemiesAtPoint(Transform spawnPoint,int spawnIndex)
     {
-        int enemiesPerPoint = numberToSpawn/spawnPoints.Length;
-        int remainder = numberToSpawn % spawnPoints.Length;
+        int enemiesPerPoint = enemiesPerWave[_nextWave] / spawnPoints.Length;
+        int remainder = enemiesPerWave[_nextWave] % spawnPoints.Length;
 
         for (int i = 0; i < spawnPoints.Length; i++)
         {
-            yield return new WaitForSeconds(Random.Range(0f, 1f));
+            yield return new WaitForSeconds(UnityEngine.Random.Range(0f, 1f));
 
             // Randomly choose an enemy from the prefab array
-            GameObject enemyPrefab = enemyPrefabs[Random.Range(0, enemyPrefabs.Length)];
+            GameObject enemyPrefab = currentWaveEnemyPrefabs[UnityEngine.Random.Range(0, currentWaveEnemyPrefabs.Count)];
 
             // Instantiate the enemy at the chosen spawn point
-            Instantiate(enemyPrefab, spawnPoints[i].position, Quaternion.identity);
-            
-           
+            GameObject newEnemy = Instantiate(enemyPrefab, spawnPoints[i].position, Quaternion.identity);
+
+            CaptureEnemyDeath(newEnemy);
+            OnEnemySpawned?.Invoke(this, new EventArgs());
         }
     }
+
 }

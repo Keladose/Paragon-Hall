@@ -1,8 +1,9 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class SingleSpawner : MonoBehaviour
+public class SingleSpawner : Spawner
 {
     public GameObject[] enemyPrefabs;
     public Transform spawnPoint;
@@ -14,21 +15,38 @@ public class SingleSpawner : MonoBehaviour
 
     void Start()
     {
-        StartCoroutine(SpawnEnemiesOneByOne());
+        if (!_isDisabled)
+        {
+            StartCoroutine(SpawnEnemiesOneByOne());
+        }
     }
 
     IEnumerator SpawnEnemiesOneByOne()
     {
         while (spawnedCount < totalEnemiesToSpawn)
         {
-            float delay = Random.Range(minSpawnDelay, maxSpawnDelay);
+            float delay = UnityEngine.Random.Range(minSpawnDelay, maxSpawnDelay);
             yield return new WaitForSeconds(delay);
 
-            GameObject prefabToSpawn = enemyPrefabs[Random.Range(0, enemyPrefabs.Length)];
-            Instantiate(prefabToSpawn, spawnPoint.position, Quaternion.identity);
-
+            GameObject prefabToSpawn = currentWaveEnemyPrefabs[UnityEngine.Random.Range(0, currentWaveEnemyPrefabs.Count)];
+            GameObject newEnemy = Instantiate(prefabToSpawn, spawnPoint.position, Quaternion.identity);
+            CaptureEnemyDeath(newEnemy);
+            OnEnemySpawned?.Invoke(this, new EventArgs());
             spawnedCount++;
         }
     }
+
+
+    public override void SpawnNextWave()
+    {
+        _nextWave++;
+        currentWaveEnemyPrefabs.Clear();
+        foreach (int i in wavePrefabs[_nextWave].innerList)
+        {
+            currentWaveEnemyPrefabs.Add(enemyPrefabs[i]);
+        }
+        StartCoroutine(SpawnEnemiesOneByOne());
+    }
+
 }
 
