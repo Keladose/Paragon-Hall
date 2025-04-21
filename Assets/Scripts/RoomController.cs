@@ -80,6 +80,16 @@ namespace Spellect
             }
             GameManager.Instance.AddClearedRoom(roomId);
         }
+
+        private bool CheckRoomCompleted()
+        {
+            if (GameManager.Instance.clearedRooms.Contains(roomId))
+            {
+                return true;
+            }
+            return false;
+        }
+        
         private void DisableSpawners()
         {
             foreach (Spawner spawner in spawners)

@@ -5582,6 +5582,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e15457b6ecfd39e4aa56b3f8b446cdc6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  wavePrefabs: []
+  enemiesPerWave: 
+  numWaves: 1
   enemyPrefabs:
   - {fileID: 6233746885102936521, guid: 9c6041d9112fb9a47b8b78c77dd0375b, type: 3}
   spawnPoint: {fileID: 1252649035}
@@ -5600,13 +5603,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c7d7c8fb560b4d548a0a6c9af232a7b0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  wavePrefabs: []
+  enemiesPerWave: 
+  numWaves: 1
   enemyPrefabs:
   - {fileID: 1145835005388068861, guid: 4f30644b394b7c342bb86703249d70d2, type: 3}
   - {fileID: 6233746885102936521, guid: 9c6041d9112fb9a47b8b78c77dd0375b, type: 3}
   - {fileID: 2652397382560283750, guid: 6957123d3000a37419787881cee45416, type: 3}
   - {fileID: 4729488601714868812, guid: 4367c2e5c0fe9c448ab65723e22b2408, type: 3}
   - {fileID: 4069278916236259307, guid: 52e2b457d16b30244aa0326c7fefac22, type: 3}
-  numberToSpawn: 30
   spawnPoints:
   - {fileID: 1252649035}
   - {fileID: 256801811}
@@ -5639,6 +5644,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e15457b6ecfd39e4aa56b3f8b446cdc6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  wavePrefabs: []
+  enemiesPerWave: 
+  numWaves: 1
   enemyPrefabs:
   - {fileID: 1556647154339057300, guid: 762243eb80d6a9048943122d207193e9, type: 3}
   spawnPoint: {fileID: 1314657393}
@@ -5678,6 +5686,10 @@ MonoBehaviour:
   - {fileID: 2048900081}
   - {fileID: 183776743}
   - {fileID: 125324056}
+  spawners: []
+  enemiesAlive: 0
+  roomId: 4
+  numWaves: 3
 --- !u!4 &2036065085
 Transform:
   m_ObjectHideFlags: 0
