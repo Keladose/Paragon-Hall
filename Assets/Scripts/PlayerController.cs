@@ -73,6 +73,12 @@ namespace Spellect
             healthController.OnDamageTaken += healthBarController.UpdateHealth;
             healthController.OnHealed += healthBarController.UpdateHealth;
             healthController.OnMaxHealthChanged += healthBarController.UpdateMaxHealth;
+            if (GameManager.Instance != null)
+            {            
+                healthController.OnDeath += GameManager.Instance.OnDeath;
+            }
+
+            healthController.OnDeath += OnDeath;
             if (spellbookController != null)
             {
                 spellbookController.OnBookChanged += attackController.ChangeBook;
@@ -113,6 +119,10 @@ namespace Spellect
             }
         }
 
+        private void OnDeath(object o, EventArgs e)
+        {
+            healthController.Heal(healthController.GetMaxHealth());
+        }
         private void LateUpdate()
         {
 

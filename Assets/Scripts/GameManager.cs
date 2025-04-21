@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -15,6 +16,7 @@ namespace Spellect
         public CameraTrack cameraTrack;
         public bool switchingRooms = false; // used to give invuln on room switching?
         public Door.Direction SpawnDirection = Door.Direction.Undefined;
+        private string previousRoom;
 
 
         // Start is called before the first frame update
@@ -31,6 +33,7 @@ namespace Spellect
                 Instance = this;
                 DontDestroyOnLoad(this.gameObject);
             }
+            previousRoom = SceneManager.GetActiveScene().name;
         }
 
 
@@ -41,6 +44,7 @@ namespace Spellect
         }
         public void GoToRoom(string roomName, Door.Direction fromDoorDirection)
         {
+            previousRoom = SceneManager.GetActiveScene().name;
             switchingRooms = true;
             playerObject.GetComponent<PlayerController>().canMove = false;
             SpawnDirection = Door.GetOppositeDirection(fromDoorDirection);
@@ -48,6 +52,11 @@ namespace Spellect
             SceneManager.LoadScene(roomName);
 
             // TODO: move player to door location vulnerable again
+        }
+
+        public void OnDeath(object o, EventArgs e)
+        {
+            GoToRoom(previousRoom, SpawnDirection);
         }
     }
 
