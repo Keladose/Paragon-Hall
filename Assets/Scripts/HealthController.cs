@@ -16,6 +16,8 @@ namespace Spellect
         public event OnHealthChangedEvent OnDamageTaken;
         public event OnHealthChangedEvent OnHealed;
         public event OnHealthChangedEvent OnMaxHealthChanged;
+        public delegate void OnDeathEvent(object source, EventArgs e);
+        public event OnDeathEvent OnDeath;
         // TODO: private gameobject
         // Start is called before the first frame update
         public void Init(float maxHealth, float health)
@@ -54,6 +56,10 @@ namespace Spellect
             _health = Mathf.Max(0, _health - damage);
             Debug.Log($"{gameObject.name} took {damage} damage! Remaining HP: {_health}");
             OnDamageTaken?.Invoke(this, new HealthChangedEventArgs { oldHealth = oldHealth, newHealth = _health });
+            if (_health == 0)
+            {
+                OnDeath?.Invoke(this, new EventArgs());
+            }
         }
 
         public void Heal(float healAmount)
@@ -62,5 +68,6 @@ namespace Spellect
             _health = Mathf.Min(_maxHealth, _health + healAmount);
             OnHealed?.Invoke(this, new HealthChangedEventArgs { oldHealth = oldHealth, newHealth = _health });
         }
+
     }
 }

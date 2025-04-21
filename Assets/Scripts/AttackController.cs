@@ -97,6 +97,7 @@ namespace Spellect
                 GameObject projectile = Instantiate(equippedSpell.specialPrefab, transform.position,
                 Quaternion.Euler(0f, 0f, angle));
                 projectile.GetComponent<HomingMissileController>().Init(points, Quaternion.Euler(0f, 0f, angle) * Vector2.right);
+                projectile.GetComponent<ProjectileCollide>().isPlayerProjectile = true;
             }
         }
 
@@ -106,6 +107,7 @@ namespace Spellect
                 Quaternion.identity);
             float angle = UnityEngine.Random.Range(0, 360f);
             tornado.GetComponent<HomingMissileController>().Init(points, Quaternion.Euler(0f, 0f, angle) * Vector2.right);
+            tornado.GetComponent<ProjectileCollide>().isPlayerProjectile = true;
         }
         public void ChangeBook(object o, BookChangedEventArgs e)
         {
@@ -155,6 +157,7 @@ namespace Spellect
             {
                 projectile.GetComponent<ProjectileCollide>().Init(false);
             }
+            projectile.GetComponent<ProjectileCollide>().isPlayerProjectile = true;
             OnAttackSpell?.Invoke(this, new AttackSpellEventArgs { value0 = 0, value1 = 0, type = currentSpell.type });
 
         }

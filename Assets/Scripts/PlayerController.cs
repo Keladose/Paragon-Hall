@@ -4,6 +4,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using static Spellect.AttackController;
+using static Spellect.HealthController;
 
 namespace Spellect
 {
@@ -29,6 +30,9 @@ namespace Spellect
         private bool isInvulnerable = false;
         private float invulnerabilityDuration = 1f;
         public float damageRadius = 0.5f;
+        private bool initialised = false;
+        public bool canMove = true;
+
 
         void Awake()
         {
@@ -47,9 +51,20 @@ namespace Spellect
                 {
                     GameManager.Instance.playerObject = this.gameObject;
                     DontDestroyOnLoad(this.gameObject);
+                    Init();
                 }
             }
+            else
+            {
+                Init();
+            }
             
+        }
+
+        private void Init()
+        {
+            initialised = true;
+
             spriteRenderer = GetComponent<SpriteRenderer>();
             attackController = GetComponent<AttackController>();
 
@@ -57,8 +72,15 @@ namespace Spellect
             healthController.Init(100);
             healthBarController.Init(healthController.GetMaxHealth());
             healthController.OnDamageTaken += healthBarController.UpdateHealth;
+            healthController.OnDamageTaken += ShowDamage;
             healthController.OnHealed += healthBarController.UpdateHealth;
             healthController.OnMaxHealthChanged += healthBarController.UpdateMaxHealth;
+            if (GameManager.Instance != null)
+            {            
+                healthController.OnDeath += GameManager.Instance.OnDeath;
+            }
+
+            healthController.OnDeath += OnDeath;
             if (spellbookController != null)
             {
                 spellbookController.OnBookChanged += attackController.ChangeBook;
@@ -99,6 +121,10 @@ namespace Spellect
             }
         }
 
+        private void OnDeath(object o, EventArgs e)
+        {
+            healthController.Heal(healthController.GetMaxHealth());
+        }
         private void LateUpdate()
         {
 
@@ -107,7 +133,14 @@ namespace Spellect
 
         private void FixedUpdate()
         {
-            rb.velocity = new Vector2(_movement.x * moveSpeed, _movement.y * moveSpeed);
+            if (canMove)
+            {
+                rb.velocity = new Vector2(_movement.x * moveSpeed, _movement.y * moveSpeed);
+            }
+            else
+            {
+                rb.velocity = Vector2.zero;
+            }
 
         }
 
@@ -117,21 +150,17 @@ namespace Spellect
             {
                 if (velocity.x > 0)
                 {
-                    animator.Play("PlayerRun");
                     transform.localRotation = Quaternion.Euler(0, 180, 0);
-                    if (spellbookController.currentBook)
-                    {
-                        spellbookController.bookAnimator.Play("Book");
-                    }
                 }
-                else if (velocity.x < 0)
+                else if (velocity.x < 0 )
                 {
-                    animator.Play("PlayerRun");
                     transform.localRotation = Quaternion.Euler(0, 0, 0);
-                    if (spellbookController.currentBook)
-                    {
-                        spellbookController.bookAnimator.Play("Book");
-                    }
+                    
+                }
+                animator.Play("PlayerRun");
+                if (spellbookController.currentBook)
+                {
+                    spellbookController.bookAnimator.Play("Book");
                 }
             }
             else
@@ -147,13 +176,16 @@ namespace Spellect
 
         private void OnDestroy()
         {
-            healthController.OnDamageTaken -= healthBarController.UpdateHealth;
-            healthController.OnHealed -= healthBarController.UpdateHealth;
-            healthController.OnMaxHealthChanged -= healthBarController.UpdateMaxHealth;
-            spellbookController.OnBookChanged -= attackController.ChangeBook;
-            spellbookController.OnBookChanged -= spellCastingController.ChangeSpell;
-            attackController.OnAttackSpell -= spellbookController.AnimateSpell;
-            spellCastingController.OnSpellCast -= drawableSpellController.StartDrawing;
+            if (initialised)
+            {
+                healthController.OnDamageTaken -= healthBarController.UpdateHealth;
+                healthController.OnHealed -= healthBarController.UpdateHealth;
+                healthController.OnMaxHealthChanged -= healthBarController.UpdateMaxHealth;
+                spellbookController.OnBookChanged -= attackController.ChangeBook;
+                spellbookController.OnBookChanged -= spellCastingController.ChangeSpell;
+                attackController.OnAttackSpell -= spellbookController.AnimateSpell;
+                spellCastingController.OnSpellCast -= drawableSpellController.StartDrawing;
+            }
         }
 
         private void OnTriggerStay2D(Collider2D other)
@@ -161,21 +193,16 @@ namespace Spellect
             if (other.CompareTag("Enemy") && !isInvulnerable)
             {
                 Debug.Log($"Collided with enemy: {other.name}");
-                TakeDamage(10);
+                healthController.TakeDamage(10);
             }
         }
 
-        private void TakeDamage(int amount)
+        private void ShowDamage(object o, HealthChangedEventArgs e)
         {
             if (healthController != null)
             {
-                healthController.TakeDamage(amount);
-                Debug.Log("Player took " + amount + " damage! Health: ");
-
                 StartCoroutine(FlashPlayerRed());
-
                 StartCoroutine(Invulnerability());
-
             }
 
         }
