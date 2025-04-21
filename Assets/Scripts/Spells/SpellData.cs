@@ -14,6 +14,9 @@ namespace Spellect
         public float range;
         public float speed;
         public float cooldown;
+        public float knockBack;
+        public bool goesThroughEnemies;
+        public Vector2 spawnOffset;
     }
 
 }

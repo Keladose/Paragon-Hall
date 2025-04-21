@@ -3,6 +3,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using TMPro;
+using UnityEditor.Rendering;
 using UnityEngine;
 using static Spellect.AttackController;
 
@@ -39,7 +40,11 @@ namespace Spellect
                 PassiveSpellbooks.Add((PassiveSpellbook)spellBook);
             }
             ChangeBook(spellBook);
-            wheelSelectController.UpdateWheelSlots();
+            if (wheelSelectController != null)
+            {
+                wheelSelectController.UpdateWheelSlots();
+
+            }
 
         }
 

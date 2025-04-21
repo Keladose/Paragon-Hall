@@ -81,8 +81,16 @@ namespace Spellect
             newSpell.Draw();
             newSpell.Hide();
             SpellScores.Add(0f);
+
+            // LASER SPELL
+            newSpell = new SpellImage(ImageCreator.CreateLaser(), _spellPointPrefab, _spellConnectionPrefab,
+                _startMaterial, _doneMaterial, this, new CastedSpell { type = CastedSpell.Type.Laser, strength = 4f });
+            _spellImages.Add(newSpell);
+            newSpell.Draw();
+            newSpell.Hide();
+            SpellScores.Add(0f);
             //_spellImages.Add(new SpellImage(ImageCreator.CreateDash(), _spellPointPrefab, _spellConnectionPrefab, _startMaterial,_doneMaterial, this, Spells[0]));
-            _activeSpell = _spellImages[2];
+            _activeSpell = _spellImages[4];
         }
 
         public void ChangeSpell(object o, SpellbookController.BookChangedEventArgs e)
@@ -113,7 +121,7 @@ namespace Spellect
             }
 
 
-            if (_inSpellMode && Input.GetMouseButton(0))
+            if (_inSpellMode && Input.GetMouseButton(1))
             {
                 Vector3 mouseWorldPos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
 

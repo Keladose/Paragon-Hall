@@ -3,6 +3,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using static Spellect.AttackController;
 
 namespace Spellect
 {
@@ -62,6 +63,7 @@ namespace Spellect
             {
                 spellbookController.OnBookChanged += attackController.ChangeBook;
                 attackController.OnAttackSpell += spellbookController.AnimateSpell;
+                attackController.OnAttackSpell += OnAttackSpell;
                 spellCastingController.OnSpellCast += attackController.OnSpellCast;
                 if (spellCastingController != null)
                 {
@@ -178,12 +180,40 @@ namespace Spellect
 
         }
 
+        private void OnAttackSpell( object o, AttackSpellEventArgs e )
+        {
+            if (e.type == CastedSpell.Type.Laser)
+            {
+                StartCoroutine(DelayedInvulnForTime(e.value0, e.value1));
+            }
+        }
+
+
+
         private IEnumerator Invulnerability()
         {
             isInvulnerable = true;
             yield return new WaitForSeconds(invulnerabilityDuration);
             isInvulnerable = false;
         }
+
+
+
+        private IEnumerator DelayedInvulnForTime(float delay, float duration)
+        {
+            yield return new WaitForSeconds(delay);
+            StartCoroutine(InvulnForTime(duration));
+        }
+
+
+
+        private IEnumerator InvulnForTime(float duration)
+        {
+            isInvulnerable = true;
+            yield return new WaitForSeconds(duration);
+            isInvulnerable = false;
+        }
+
         private IEnumerator FlashPlayerRed()
         {
             Color originalColor = spriteRenderer.color;
