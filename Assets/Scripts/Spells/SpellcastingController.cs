@@ -220,7 +220,7 @@ namespace Spellect
         }
         public GameObject DrawPoint(Vector2 pos, GameObject prefab)
         {
-            return Instantiate(prefab, new Vector3(pos.x, pos.y, DRAWING_Z), Quaternion.identity, transform);            
+            return Instantiate(prefab, transform.position + new Vector3(pos.x, pos.y, DRAWING_Z), Quaternion.identity, transform);            
         }
         public GameObject DrawConnection(Vector3 pos0, Vector3 pos1, GameObject prefab)
         {

@@ -35,7 +35,7 @@ namespace Spellect
         // Update is called once per frame
         void Update()
         {
-
+            transform.position = playerObject.transform.position;
         }
         public void GoToRoom(string roomName, Door.Direction fromDoorDirection)
         {
