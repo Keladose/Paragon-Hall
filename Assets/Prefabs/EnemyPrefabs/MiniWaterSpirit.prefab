@@ -80,7 +80,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 0
+  m_SortingOrder: 3
   m_Sprite: {fileID: 10915, guid: 0000000000000000f000000000000000, type: 0}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -164,14 +164,14 @@ MonoBehaviour:
   patrolPoints: []
   player: {fileID: 8030817515975974097, guid: ee257bba2c2df2947bd2d10357e6d97f, type: 3}
   moveSpeed: 2
-  chaseRange: 2
+  chaseRange: 5
   attackRange: 2
   healthBarController: {fileID: 6504104358406035889, guid: ef292b6b49e91a741a5c8e1fe9cdb7a8, type: 3}
   healthController: {fileID: 8082258814247492782}
   smallSpiritPrefab: {fileID: 2652397382560283750}
   numberToSpawn: 0
   spawnOffset: 0.5
-  dashCooldown: 2
+  dashCooldown: 1
 --- !u!114 &2166599793719868109
 MonoBehaviour:
   m_ObjectHideFlags: 0
