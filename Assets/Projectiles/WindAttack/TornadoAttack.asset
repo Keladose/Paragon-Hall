@@ -1,0 +1,24 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 384775b632805a444a94b14d4a560335, type: 3}
+  m_Name: TornadoAttack
+  m_EditorClassIdentifier: 
+  spellName: Wind
+  projectilePrefab: {fileID: 5675730827327611252, guid: ea737cbc8adcec54990938d456b1d72a, type: 3}
+  specialPrefab: {fileID: 5675730827327611252, guid: ee96a8050bcc0af41b124884cc0d4a8c, type: 3}
+  damage: 40
+  range: 5
+  speed: 0
+  cooldown: 0.5
+  knockBack: 1000
+  goesThroughEnemies: 1
+  spawnOffset: {x: 2, y: 0}

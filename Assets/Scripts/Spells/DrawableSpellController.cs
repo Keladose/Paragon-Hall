@@ -56,14 +56,14 @@ public class DrawableSpellController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (_canDraw && (Time.time > _drawingTime + _drawingStartTime || (_isDrawing && Input.GetMouseButtonUp(1) && _currentSpell.type == CastedSpell.Type.MagicMissile)))
+        if (_canDraw && (Time.time > _drawingTime + _drawingStartTime || (_isDrawing && Input.GetMouseButtonUp(1) && (_currentSpell.type == CastedSpell.Type.MagicMissile || _currentSpell.type == CastedSpell.Type.Tornado))))
         {
             Debug.Log("Stopping spell after " + Time.time + " started at " + _drawingStartTime + " duration was meant to be " + _drawingTime);
             _canDraw = false;
-            if (_currentSpell.type == CastedSpell.Type.MagicMissile)
+            if (_currentSpell.type == CastedSpell.Type.MagicMissile || _currentSpell.type  ==  CastedSpell.Type.Tornado)
             {
                 Debug.Log("Finished drawing");
-                OnDrawingFinish?.Invoke(this, new DrawingFinishEventArgs { points = _currentDrawing.GetPoints(), type = CastedSpell.Type.MagicMissile });
+                OnDrawingFinish?.Invoke(this, new DrawingFinishEventArgs { points = _currentDrawing.GetPoints(), type = _currentSpell.type });
             }
         }
 

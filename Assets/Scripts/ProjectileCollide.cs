@@ -10,10 +10,15 @@ public class ProjectileCollide : MonoBehaviour
     private EnemyHealthBarController barController;
     public SpellData spellData;
     private bool healthNotInit;
+    private bool _hasHitAnimation = true;
     void Start()
     {
         animator = GetComponent<Animator>();
         barController = GetComponentInChildren<EnemyHealthBarController>();
+    }
+    public void Init(bool hasHisAnimation)
+    {
+        _hasHitAnimation = hasHisAnimation;
     }
     
     private void OnTriggerEnter2D(Collider2D other)
@@ -21,23 +26,42 @@ public class ProjectileCollide : MonoBehaviour
         if (other.CompareTag("Enemy"))
         {
             Rigidbody2D rb = GetComponent<Rigidbody2D>();
-            rb.velocity = Vector2.zero;
+            Vector2 knockbackDirection = (-transform.position + other.transform.position).normalized;
 
-            var enemy = other.GetComponent<BaseEnemy>();
+
+            
+            if (!spellData.goesThroughEnemies)
+            {
+                rb.velocity = Vector2.zero;
+            }
+            other.GetComponent<Rigidbody2D>().AddForce(knockbackDirection * spellData.knockBack);
+                var enemy = other.GetComponent<BaseEnemy>();
             if (enemy != null)
             {
                 enemy.TakeDamage(spellData.damage); // Uses Phantom�s override
             }
+            
 
-            animator.Play("Hit");
-            StartCoroutine(WaitBeforeDestroy());
+
+            if (_hasHitAnimation)
+            {
+                animator.Play("Hit");
+            }
+            if (!spellData.goesThroughEnemies)
+            {
+                StartCoroutine(WaitBeforeDestroy());
+            }
         }
 
         if (other.CompareTag("Map Bounds"))
         {
             Rigidbody2D rb = GetComponent<Rigidbody2D>();
-            rb.velocity = Vector2.zero;
-            animator.Play("Hit");
+            rb.velocity = Vector2.zero; 
+            if (_hasHitAnimation)
+            {
+
+                animator.Play("Hit");
+            }
             StartCoroutine(WaitBeforeDestroy());
         }
     }

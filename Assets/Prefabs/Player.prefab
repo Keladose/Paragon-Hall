@@ -1,5 +1,36 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+--- !u!1 &2484712002546857169
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 8118340376378887789}
+  m_Layer: 0
+  m_Name: LaserRotator
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &8118340376378887789
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2484712002546857169}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 8030817515975974097}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &8520550288926484140
 GameObject:
   m_ObjectHideFlags: 0
@@ -41,7 +72,8 @@ Transform:
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
-  m_Children: []
+  m_Children:
+  - {fileID: 8118340376378887789}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!212 &4724526342530291957
@@ -138,6 +170,8 @@ MonoBehaviour:
   spellbookController: {fileID: 5991497655645276404}
   spellCastingController: {fileID: 0}
   effectsController: {fileID: 4550981470330439378}
+  drawableSpellController: {fileID: 0}
+  damageRadius: 0.5
 --- !u!50 &7633910547283463433
 Rigidbody2D:
   serializedVersion: 4
@@ -222,8 +256,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f3a70a70753a4f343b1c2cd631bf960b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  spells: []
   equippedSpell: {fileID: 0}
+  currentSpell:
+    type: 0
+    strength: 0
+  LaserRotator: {fileID: 8118340376378887789}
 --- !u!114 &7775545933067550974
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -476,6 +513,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1751388edcef95042bbf678c5b2d78b6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  AttackSpellbooks: []
+  PassiveSpellbooks: []
+  currentSpellbook:
+    type: 0
+    spellBookPrefab: {fileID: 0}
+    castedSpell:
+      type: 0
+      strength: 0
   currentBook: {fileID: 0}
   bookAnimator: {fileID: 0}
   text: {fileID: 0}
