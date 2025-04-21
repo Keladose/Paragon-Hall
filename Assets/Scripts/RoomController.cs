@@ -19,7 +19,7 @@ namespace Spellect
             {
                 if (GameManager.Instance.switchingRooms)
                 {
-                    GameManager.Instance.playerObject.transform.position = GetDoorPosition(Door.GetOppositeDirection(GameManager.Instance.SpawnDirection));
+                    GameManager.Instance.playerObject.transform.position = GetDoorPosition(GameManager.Instance.SpawnDirection);
                     GameManager.Instance.switchingRooms = false;
                 }
             }

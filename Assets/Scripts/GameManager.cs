@@ -46,10 +46,6 @@ namespace Spellect
             SpawnDirection = Door.GetOppositeDirection(fromDoorDirection);
             // TODO: make player invincible/invisible
             SceneManager.LoadScene(roomName);
-            if (currentRoom == null)
-            {
-                Debug.Log("Room controller not found");
-            }
 
             // TODO: move player to door location vulnerable again
         }

@@ -14,7 +14,14 @@ namespace Spellect
         private void Awake()
         {
             healthbarScaler = 150f;
-            DontDestroyOnLoad(this);
+            if (GameManager.Instance.playerObject != null)
+            {
+                Destroy(gameObject); 
+            }
+            else
+            {
+                DontDestroyOnLoad(this);
+            }
         }
         public override void UpdateHealth(object o, HealthController.HealthChangedEventArgs e)
         {
