@@ -66,6 +66,7 @@ namespace Spellect
         public void AddClearedRoom(int roomId)
         {
             clearedRooms.Add(roomId);
+            CheckIfAllRoomsCleared();
 
         }
         private void CheckIfAllRoomsCleared()

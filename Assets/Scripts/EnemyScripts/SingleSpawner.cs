@@ -15,10 +15,7 @@ public class SingleSpawner : Spawner
 
     void Start()
     {
-        if (!_isDisabled)
-        {
-            StartCoroutine(SpawnEnemiesOneByOne());
-        }
+        
     }
 
     IEnumerator SpawnEnemiesOneByOne()

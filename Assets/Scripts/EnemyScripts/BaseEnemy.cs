@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using Spellect;
+using System;
 using UnityEngine;
 namespace Spellect
 {
@@ -51,6 +52,8 @@ namespace Spellect
                 healthController.OnDamageTaken += healthBarController.UpdateHealth;
                 healthController.OnHealed += healthBarController.UpdateHealth;
                 healthController.OnMaxHealthChanged += healthBarController.UpdateMaxHealth;
+                healthController.OnDeath += Die;
+
             }
         }
 
@@ -93,8 +96,8 @@ namespace Spellect
                 // Wander randomly if no patrol points are assigned
                 if (wanderTime <= 0f)
                 {
-                    wanderTime = Random.Range(1f, 3f);
-                    wanderDirection = Random.insideUnitCircle.normalized;
+                    wanderTime = UnityEngine.Random.Range(1f, 3f);
+                    wanderDirection = UnityEngine.Random.insideUnitCircle.normalized;
                 }
 
                 wanderTime -= Time.deltaTime;
@@ -115,17 +118,6 @@ namespace Spellect
 
         protected abstract void AttackPlayer();
 
-        public virtual void TakeDamage(float amount)
-        {
-            if (isDead || healthController == null) return;
-
-            healthController.TakeDamage(amount);
-
-            if (healthController.GetHealth() <= 0)
-            {
-                Die();
-            }
-        }
 
         private protected void AddForceTowardsTarget(Vector2 target, float force)
         {
@@ -133,7 +125,7 @@ namespace Spellect
             rb.AddForce(forceDirection * force);
         }
 
-        protected virtual void Die()
+        protected virtual void Die(object o, EventArgs e)
         {
             isDead = true;
 

@@ -39,7 +39,7 @@ public class ProjectileCollide : MonoBehaviour
                 var enemy = other.GetComponent<BaseEnemy>();
             if (enemy != null)
             {
-                enemy.TakeDamage(spellData.damage); // Uses Phantom�s override
+                enemy.healthController.TakeDamage(spellData.damage); // Uses Phantom�s override
             }
             
 

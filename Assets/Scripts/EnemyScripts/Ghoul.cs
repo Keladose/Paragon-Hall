@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 namespace Spellect
@@ -130,7 +131,7 @@ namespace Spellect
             }
         }
 
-        protected override void Die()
+        protected override void Die(object o, EventArgs e)
         {
             isDead = true;
 

@@ -10,6 +10,7 @@ namespace Spellect
     {
         private float _maxHealth;
         private float _health;
+        private bool _isDead = false;
 
         public class HealthChangedEventArgs : EventArgs { public float oldHealth; public float newHealth; }
         public delegate void OnHealthChangedEvent(object source, HealthChangedEventArgs e);
@@ -18,12 +19,23 @@ namespace Spellect
         public event OnHealthChangedEvent OnMaxHealthChanged;
         public delegate void OnDeathEvent(object source, EventArgs e);
         public event OnDeathEvent OnDeath;
+        private bool _isInvincible = false;
         // TODO: private gameobject
         // Start is called before the first frame update
         public void Init(float maxHealth, float health)
         {
             _maxHealth = maxHealth;
             _health = health;
+        }
+
+        public void MakeInvincible()
+        {
+            _isInvincible = true;
+        }
+
+        public void CancelInvincible()
+        {
+            _isInvincible = false;
         }
 
         public void Init(float maxHealth)
@@ -52,13 +64,17 @@ namespace Spellect
         }
         public void TakeDamage(float damage)
         {
-            float oldHealth = _health;
-            _health = Mathf.Max(0, _health - damage);
-            Debug.Log($"{gameObject.name} took {damage} damage! Remaining HP: {_health}");
-            OnDamageTaken?.Invoke(this, new HealthChangedEventArgs { oldHealth = oldHealth, newHealth = _health });
-            if (_health == 0)
+            if (!_isInvincible)
             {
-                OnDeath?.Invoke(this, new EventArgs());
+                float oldHealth = _health;
+                _health = Mathf.Max(0, _health - damage);
+                Debug.Log($"{gameObject.name} took {damage} damage! Remaining HP: {_health}");
+                OnDamageTaken?.Invoke(this, new HealthChangedEventArgs { oldHealth = oldHealth, newHealth = _health });
+                if (_health == 0 && !_isDead)
+                {
+                    OnDeath?.Invoke(this, new EventArgs());
+                    _isDead = true;
+                }
             }
         }
 

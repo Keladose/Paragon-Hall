@@ -36,6 +36,10 @@ namespace Spellect
             disabled = true;
         }
 
+        public void Lock()
+        {
+            isOpen = false;
+        }
     
 
     }

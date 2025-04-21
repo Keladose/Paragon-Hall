@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using Spellect;
@@ -32,7 +33,7 @@ public class WaterSpirit : BaseEnemy
             else
             {
                 // Dash randomly
-                dashDir = Random.insideUnitCircle.normalized;
+                dashDir = UnityEngine.Random.insideUnitCircle.normalized;
             }
 
             StartCoroutine(Dash(dashDir));
@@ -55,13 +56,13 @@ public class WaterSpirit : BaseEnemy
         isDashing = false;
     }
 
-    protected override void Die()
+    protected override void Die(object o, EventArgs e)
     {
         if (!isDead)
         {
             for (int i = 0; i < numberToSpawn; i++)
             {
-                Vector2 offset = Random.insideUnitCircle * spawnOffset;
+                Vector2 offset = UnityEngine.Random.insideUnitCircle * spawnOffset;
                 var spirit = Instantiate(smallSpiritPrefab, (Vector2)transform.position + offset, Quaternion.identity);
 
                 BaseEnemy enemyScript = spirit.GetComponent<BaseEnemy>();
@@ -73,7 +74,7 @@ public class WaterSpirit : BaseEnemy
             }
         }
 
-        base.Die();
+        base.Die(o, e);
     }
 
     protected override void AttackPlayer()

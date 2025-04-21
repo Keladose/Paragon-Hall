@@ -50,7 +50,15 @@ namespace Spellect
         private void SetPhasedState(bool phased)
         {
             isMaterialized = !phased;
-            Debug.Log("Phantom is now " + (isMaterialized ? "Materialized" : "Phased"));
+            if (isMaterialized)
+            {
+                healthController.MakeInvincible();
+            }
+            else
+            {
+                healthController.CancelInvincible();
+            }
+                Debug.Log("Phantom is now " + (isMaterialized ? "Materialized" : "Phased"));
 
             // Set collider behavior
             if (phantomCollider != null)
@@ -98,11 +106,5 @@ namespace Spellect
             }
         }
 
-        public override void TakeDamage(float amount)
-        {
-            if (!isMaterialized) return;
-
-            base.TakeDamage(amount);
-        }
     }
 }

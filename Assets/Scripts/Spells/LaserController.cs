@@ -77,7 +77,7 @@ public class LaserController : MonoBehaviour
                 var enemy = other.GetComponent<BaseEnemy>();
                 if (enemy != null)
                 {
-                    enemy.TakeDamage(spellData.damage); // Uses Phantom�s override
+                    enemy.healthController.TakeDamage(spellData.damage); // Uses Phantom�s override
                 }
 
                 Instantiate(HitPrefab, closestPointOnLaser, Quaternion.identity);

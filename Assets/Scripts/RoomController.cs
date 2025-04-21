@@ -27,10 +27,15 @@ namespace Spellect
                 {
                     GameManager.Instance.playerObject.transform.position = GetDoorPosition(GameManager.Instance.SpawnDirection);
                     GameManager.Instance.switchingRooms = false;
-                    if (GameManager.Instance.clearedRooms.Contains(roomId))
-                    {
-                        DisableSpawners();
-                    }
+                    
+                }
+                if (GameManager.Instance.clearedRooms.Contains(roomId))
+                {
+                    DisableSpawners();
+                }
+                else
+                {
+                    LockAllDoors();
                 }
             }
             foreach (Spawner spawner in spawners)
@@ -38,6 +43,7 @@ namespace Spellect
                 spawner.OnEnemySpawned += OnEnemySpawned;
                 spawner.OnEnemyDied += OnEnemyDied;
             }
+            _wavesRemaining = numWaves;
             SpawnNextWave();
 
         }
@@ -65,6 +71,7 @@ namespace Spellect
 
         private void SpawnNextWave()
         {
+            Debug.Log("Spawning wave" + _wavesRemaining);
             foreach (Spawner spawner in spawners)
             {
                 spawner.SpawnNextWave();
@@ -110,6 +117,15 @@ namespace Spellect
                 door.Init();
             }
         }
+        private void LockAllDoors()
+        {
+            foreach (DoorController door in doors)
+            {
+                door.Lock();
+            }
+
+        }
+
         public Vector3 GetDoorPosition(Door.Direction direction)
         {
             foreach (DoorController door in doors)
