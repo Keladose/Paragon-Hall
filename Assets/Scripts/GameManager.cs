@@ -43,13 +43,13 @@ namespace Spellect
         {
             switchingRooms = true;
             playerObject.GetComponent<PlayerController>().canMove = false;
+            SpawnDirection = Door.GetOppositeDirection(fromDoorDirection);
             // TODO: make player invincible/invisible
             SceneManager.LoadScene(roomName);
             if (currentRoom == null)
             {
                 Debug.Log("Room controller not found");
             }
-            SpawnDirection = Door.GetOppositeDirection(fromDoorDirection);
 
             // TODO: move player to door location vulnerable again
         }
