@@ -12,9 +12,11 @@ namespace Spellect
         public GameObject playerPrefab;
         public GameObject playerObject;
         private RoomController currentRoom;
+        public CameraTrack cameraTrack;
         public bool switchingRooms = false; // used to give invuln on room switching?
+        public Door.Direction SpawnDirection = Door.Direction.Undefined;
 
-        
+
         // Start is called before the first frame update
         void Awake()
         {
@@ -40,17 +42,15 @@ namespace Spellect
         public void GoToRoom(string roomName, Door.Direction fromDoorDirection)
         {
             switchingRooms = true;
+            playerObject.GetComponent<PlayerController>().canMove = false;
             // TODO: make player invincible/invisible
             SceneManager.LoadScene(roomName);
-            currentRoom = FindFirstObjectByType<RoomController>();
             if (currentRoom == null)
             {
                 Debug.Log("Room controller not found");
             }
-            Door.Direction spawnDirection = Door.GetOppositeDirection(fromDoorDirection);
-            currentRoom.DisableDoorOnEntry(spawnDirection);
+            SpawnDirection = Door.GetOppositeDirection(fromDoorDirection);
 
-            playerObject.transform.position = currentRoom.GetDoorPosition(Door.GetOppositeDirection(fromDoorDirection));
             // TODO: move player to door location vulnerable again
         }
     }

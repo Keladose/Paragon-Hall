@@ -8,9 +8,21 @@ namespace Spellect
     {
         public List<DoorController> doors = new();
         // Start is called before the first frame update
+        private void Awake()
+        {
+            
+        }
         void Start()
         {
             InitDoors();
+            if (GameManager.Instance != null)
+            {
+                if (GameManager.Instance.switchingRooms)
+                {
+                    GameManager.Instance.playerObject.transform.position = GetDoorPosition(Door.GetOppositeDirection(GameManager.Instance.SpawnDirection));
+                    GameManager.Instance.switchingRooms = false;
+                }
+            }
         }
 
         // Update is called once per frame

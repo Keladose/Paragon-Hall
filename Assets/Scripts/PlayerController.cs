@@ -29,6 +29,9 @@ namespace Spellect
         private bool isInvulnerable = false;
         private float invulnerabilityDuration = 1f;
         public float damageRadius = 0.5f;
+        private bool initialised = false;
+        public bool canMove = true;
+
 
         void Awake()
         {
@@ -47,9 +50,20 @@ namespace Spellect
                 {
                     GameManager.Instance.playerObject = this.gameObject;
                     DontDestroyOnLoad(this.gameObject);
+                    Init();
                 }
             }
+            else
+            {
+                Init();
+            }
             
+        }
+
+        private void Init()
+        {
+            initialised = true;
+
             spriteRenderer = GetComponent<SpriteRenderer>();
             attackController = GetComponent<AttackController>();
 
@@ -107,7 +121,14 @@ namespace Spellect
 
         private void FixedUpdate()
         {
-            rb.velocity = new Vector2(_movement.x * moveSpeed, _movement.y * moveSpeed);
+            if (canMove)
+            {
+                rb.velocity = new Vector2(_movement.x * moveSpeed, _movement.y * moveSpeed);
+            }
+            else
+            {
+                rb.velocity = Vector2.zero;
+            }
 
         }
 
@@ -117,21 +138,17 @@ namespace Spellect
             {
                 if (velocity.x > 0)
                 {
-                    animator.Play("PlayerRun");
                     transform.localRotation = Quaternion.Euler(0, 180, 0);
-                    if (spellbookController.currentBook)
-                    {
-                        spellbookController.bookAnimator.Play("Book");
-                    }
                 }
-                else if (velocity.x < 0)
+                else if (velocity.x < 0 )
                 {
-                    animator.Play("PlayerRun");
                     transform.localRotation = Quaternion.Euler(0, 0, 0);
-                    if (spellbookController.currentBook)
-                    {
-                        spellbookController.bookAnimator.Play("Book");
-                    }
+                    
+                }
+                animator.Play("PlayerRun");
+                if (spellbookController.currentBook)
+                {
+                    spellbookController.bookAnimator.Play("Book");
                 }
             }
             else
@@ -147,13 +164,16 @@ namespace Spellect
 
         private void OnDestroy()
         {
-            healthController.OnDamageTaken -= healthBarController.UpdateHealth;
-            healthController.OnHealed -= healthBarController.UpdateHealth;
-            healthController.OnMaxHealthChanged -= healthBarController.UpdateMaxHealth;
-            spellbookController.OnBookChanged -= attackController.ChangeBook;
-            spellbookController.OnBookChanged -= spellCastingController.ChangeSpell;
-            attackController.OnAttackSpell -= spellbookController.AnimateSpell;
-            spellCastingController.OnSpellCast -= drawableSpellController.StartDrawing;
+            if (initialised)
+            {
+                healthController.OnDamageTaken -= healthBarController.UpdateHealth;
+                healthController.OnHealed -= healthBarController.UpdateHealth;
+                healthController.OnMaxHealthChanged -= healthBarController.UpdateMaxHealth;
+                spellbookController.OnBookChanged -= attackController.ChangeBook;
+                spellbookController.OnBookChanged -= spellCastingController.ChangeSpell;
+                attackController.OnAttackSpell -= spellbookController.AnimateSpell;
+                spellCastingController.OnSpellCast -= drawableSpellController.StartDrawing;
+            }
         }
 
         private void OnTriggerStay2D(Collider2D other)
