@@ -23,7 +23,7 @@ public class MiscUIController : MonoBehaviour
             mapInterface.SetActive(false);
         }
         
-        for (int i = 1; i < 9; i++)
+        for (int i = 0; i < 8; i++)
         {
             mapInterface.transform.GetChild(i).gameObject.SetActive(false);
         }
