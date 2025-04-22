@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using Spellect;
@@ -15,21 +16,38 @@ public class DandalionController : BaseEnemy
     // Start is called before the first frame update
     void Start()
     {
+        if (healthController != null)
+        {
+            Debug.Log("Initialised health controller");
+            healthController.Init(1000);
+            healthBarController.Init(healthController.GetMaxHealth());
+            healthController.OnDamageTaken += healthBarController.UpdateHealth;
+            healthController.OnHealed += healthBarController.UpdateHealth;
+            healthController.OnMaxHealthChanged += healthBarController.UpdateMaxHealth;
+            healthController.OnDeath += Die;
 
+        }
     }
+    
     void Awake()
     {
-        /*if (GameManager.Instance != null)
+        if (GameManager.Instance != null)
         {
             if (!GameManager.Instance.SpawnBoss)
             {
                 Destroy(gameObject);
             }
+            else
+            {
+                player = GameManager.Instance.playerObject.transform;
+            }
         }
         else
         {
             Destroy(gameObject);
-        }*/
+        }
+        
+        
     }
 
 
@@ -51,7 +69,7 @@ public class DandalionController : BaseEnemy
         if (inRange)
         {
             ShootProjectile();
-            if (Random.Range(0, 500) == 2)
+            if (Random.Range(0, 2000) == 2)
             {
                 ActivateSpecialAbility();
             }
@@ -126,4 +144,20 @@ public class DandalionController : BaseEnemy
             }
         }
     }
+    
+    protected override void Die(object o, EventArgs e)
+    {
+        isDead = true;
+
+        if (animator != null)
+        {
+            animator.SetTrigger("Die");
+        }
+
+        if (enemyCollider != null) enemyCollider.enabled = false;
+        moveSpeed = 0f;
+
+        Destroy(gameObject, 0.25f);
+    }
+
 }
