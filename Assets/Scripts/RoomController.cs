@@ -146,5 +146,13 @@ namespace Spellect
                 }
             }
         }
+
+        public void KillAllEnemies()
+        {
+            foreach (Spawner spawner in spawners)
+            {
+                spawner.KillAllEnemies();
+            }
+        }
     }
 }

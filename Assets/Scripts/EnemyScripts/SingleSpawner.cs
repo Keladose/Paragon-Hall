@@ -1,3 +1,4 @@
+using Spellect;
 using System;
 using System.Collections;
 using UnityEngine;
@@ -26,6 +27,8 @@ public class SingleSpawner : Spawner
 
             GameObject prefabToSpawn = currentWaveEnemyPrefabs[UnityEngine.Random.Range(0, currentWaveEnemyPrefabs.Count)];
             GameObject newEnemy = Instantiate(prefabToSpawn, spawnPoint.position, Quaternion.identity);
+
+            OnKillAllEnemies += newEnemy.GetComponent<HealthController>().Kill;
             CaptureEnemyDeath(newEnemy);
             OnEnemySpawned?.Invoke(this, new EventArgs());
             spawnedCount++;

@@ -104,6 +104,11 @@ namespace Spellect
                 GoToRoom("Level1", Door.Direction.Up);
             }
         }
+
+        public void KillAllEnemies()
+        {
+            currentRoom.KillAllEnemies();
+        }
     }
 
 }

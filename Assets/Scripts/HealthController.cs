@@ -74,7 +74,10 @@ namespace Spellect
                 }
             }
         }
-
+        public void Kill(object o, EventArgs e)
+        {
+            TakeDamage(_maxHealth * 2);
+        }
         public void Heal(float healAmount)
         {
             _isDead = false;

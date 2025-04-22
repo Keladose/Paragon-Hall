@@ -21,7 +21,14 @@ namespace Spellect
         {
             if (collision.gameObject.GetComponent<EffectsController>() != null)
             {
-                collision.gameObject.GetComponent<EffectsController>().SetOnFire(FireDamage, FireDuration);
+                if (collision.gameObject.CompareTag("Player"))
+                {
+                    collision.gameObject.GetComponent<EffectsController>().SetOnFire(FireDamage/8, FireDuration);
+                }
+                else
+                {
+                    collision.gameObject.GetComponent<EffectsController>().SetOnFire(FireDamage, FireDuration);
+                }
             }
         }
     }

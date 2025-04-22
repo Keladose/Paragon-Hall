@@ -10,6 +10,8 @@ public abstract class Spawner : MonoBehaviour
     public OnEnemyChangedEvent OnEnemySpawned;
 
     public OnEnemyChangedEvent OnEnemyDied;
+    public delegate void OnKillAllEnemiesEvent(object source, EventArgs e);
+    public OnKillAllEnemiesEvent OnKillAllEnemies;
     protected bool _isDisabled = false;
 
     protected List<GameObject> currentWaveEnemyPrefabs = new();
@@ -34,7 +36,10 @@ public abstract class Spawner : MonoBehaviour
 
     public abstract void SpawnNextWave();
 
-
+    public void KillAllEnemies()
+    {
+        OnKillAllEnemies?.Invoke(this, new EventArgs());
+    }
 }
 [System.Serializable]
 public class IntListWrapper

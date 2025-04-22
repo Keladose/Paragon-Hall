@@ -1,3 +1,4 @@
+using Spellect;
 using System;
 using System.Collections;
 using UnityEngine;
@@ -48,8 +49,9 @@ public class EnemySpawner : Spawner
 
             // Instantiate the enemy at the chosen spawn point
             GameObject newEnemy = Instantiate(enemyPrefab, spawnPoints[i].position, Quaternion.identity);
-
+            OnKillAllEnemies += newEnemy.GetComponent<HealthController>().Kill;
             CaptureEnemyDeath(newEnemy);
+
             OnEnemySpawned?.Invoke(this, new EventArgs());
         }
     }
