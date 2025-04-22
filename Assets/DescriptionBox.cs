@@ -1,21 +1,47 @@
+using System;
 using TMPro;
 using UnityEngine;
+using UnityEngine.UI;
+
 
 public class DescriptionBox : MonoBehaviour
 {
     public TextMeshProUGUI nameText;
     public TextMeshProUGUI descriptionText;
-    public GameObject panel;
+    public TextMeshProUGUI largeDescriptionText;
+    public GameObject sprite;
+        public GameObject panel;
 
-    public void Show(string name, string description)
+    private void Start()
     {
+        
+    }
+    
+    public void Show(string name, string description, string largeDescription, Sprite spriteInput)
+    {
+        
         nameText.text = name;
         descriptionText.text = description;
-        panel.SetActive(true);
+        largeDescriptionText.text = largeDescription;
+        if (sprite != null)
+        {
+            Image image = sprite.GetComponent<Image>();
+            if (image != null)
+            {
+                image.sprite = spriteInput;
+            }
+        }
+        if (panel != null)
+        {
+            panel.SetActive(true);
+        }
     }
 
     public void Hide()
     {
-        panel.SetActive(false);
+        if (panel != null)
+        {
+            panel.SetActive(false);
+        }
     }
 }
