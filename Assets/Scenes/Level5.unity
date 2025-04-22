@@ -803,6 +803,7 @@ GameObject:
   m_Component:
   - component: {fileID: 337910290}
   - component: {fileID: 337910289}
+  - component: {fileID: 337910291}
   m_Layer: 0
   m_Name: Room
   m_TagString: Untagged
@@ -827,10 +828,11 @@ MonoBehaviour:
   - {fileID: 1081941778}
   - {fileID: 24881879}
   - {fileID: 1760147653}
-  spawners: []
+  spawners:
+  - {fileID: 337910291}
   enemiesAlive: 0
   roomId: 5
-  numWaves: 3
+  numWaves: 4
 --- !u!4 &337910290
 Transform:
   m_ObjectHideFlags: 0
@@ -848,6 +850,35 @@ Transform:
   - {fileID: 2072597636}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &337910291
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 337910288}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c7d7c8fb560b4d548a0a6c9af232a7b0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  wavePrefabs:
+  - innerList: 02000000
+  - innerList: 030000000200000000000000
+  - innerList: 03000000
+  enemiesPerWave: 010000000100000001000000
+  numWaves: 3
+  enemyPrefabs:
+  - {fileID: 4729488601714868812, guid: 4367c2e5c0fe9c448ab65723e22b2408, type: 3}
+  - {fileID: 2652397382560283750, guid: 6957123d3000a37419787881cee45416, type: 3}
+  - {fileID: 1145835005388068861, guid: 4f30644b394b7c342bb86703249d70d2, type: 3}
+  - {fileID: 6233746885102936521, guid: 9c6041d9112fb9a47b8b78c77dd0375b, type: 3}
+  - {fileID: 1556647154339057300, guid: 762243eb80d6a9048943122d207193e9, type: 3}
+  spawnPoints:
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
 --- !u!1 &340035981
 GameObject:
   m_ObjectHideFlags: 0

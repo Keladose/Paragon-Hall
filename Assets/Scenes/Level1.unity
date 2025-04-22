@@ -1139,6 +1139,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Main Camera
       objectReference: {fileID: 0}
+    - target: {fileID: 9100861250050816746, guid: 519f7cf9244110043b2a6c06a59c469b, type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -5399,8 +5403,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   isOpen: 1
-  connectedSceneName: Level2
-  direction: 2
+  connectedSceneName: Level4
+  direction: 0
   spawnPosition: {fileID: 1605648952}
 --- !u!1 &1136087125
 GameObject:

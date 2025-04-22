@@ -172,7 +172,7 @@ namespace Spellect
         private void LaserFollowPlayer(Vector2 direction)   
         {
             float multiplier = 1f;
-            Debug.Log(LaserRotator.parent.localRotation.eulerAngles.y);
+            //Debug.Log(LaserRotator.parent.localRotation.eulerAngles.y);
             if (LaserRotator.parent.localRotation.eulerAngles.y > 0)
             {
                 multiplier = -1;

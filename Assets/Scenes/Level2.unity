@@ -2609,9 +2609,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   wavePrefabs:
+  - innerList: 00000000
   - innerList: 01000000
-  - innerList: 01000000
-  - innerList: 01000000
+  - innerList: 02000000
   enemiesPerWave: 010000000100000001000000
   numWaves: 3
   enemyPrefabs:
