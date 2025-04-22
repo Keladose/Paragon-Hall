@@ -1,3 +1,4 @@
+using System;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
@@ -9,8 +10,13 @@ public class DescriptionBox : MonoBehaviour
     public TextMeshProUGUI descriptionText;
     public TextMeshProUGUI largeDescriptionText;
     public GameObject sprite;
-    public GameObject panel;
+        public GameObject panel;
 
+    private void Start()
+    {
+        
+    }
+    
     public void Show(string name, string description, string largeDescription, Sprite spriteInput)
     {
         
