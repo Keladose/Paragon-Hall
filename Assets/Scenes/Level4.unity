@@ -3136,6 +3136,10 @@ PrefabInstance:
       propertyPath: m_Enabled
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 2484494240059607195, guid: 519f7cf9244110043b2a6c06a59c469b, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 6242976805127262279, guid: 519f7cf9244110043b2a6c06a59c469b, type: 3}
       propertyPath: player
       value: 
@@ -6138,8 +6142,8 @@ MonoBehaviour:
   wavePrefabs:
   - innerList: 02000000
   - innerList: 030000000000000002000000
-  - innerList: 03000000
-  enemiesPerWave: 010000000100000001000000
+  - innerList: 000000000200000003000000
+  enemiesPerWave: 020000000300000003000000
   numWaves: 3
   enemyPrefabs:
   - {fileID: 4729488601714868812, guid: 4367c2e5c0fe9c448ab65723e22b2408, type: 3}
