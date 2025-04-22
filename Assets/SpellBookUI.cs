@@ -1,5 +1,5 @@
-    using Spellect;
-    using UnityEngine;
+using Spellect;
+using UnityEngine;
 using UnityEngine.EventSystems;
 using TMPro;
 
@@ -7,7 +7,7 @@ public class SpellBookUI : MonoBehaviour, IPointerEnterHandler, IPointerExitHand
 {
     public string spellName;
     public string spellDescription;
-
+    public Sprite spellBookIcon;
     [TextArea]
     public string fullDescription;
 
@@ -29,8 +29,7 @@ public class SpellBookUI : MonoBehaviour, IPointerEnterHandler, IPointerExitHand
 
     public void OnPointerEnter(PointerEventData eventData)
     {
-        descriptionBox.Show(spellName, spellDescription);
-        
+        descriptionBox.Show(spellName, spellDescription, fullDescription, spellBookIcon);
         Aura.gameObject.SetActive(true);
         Aura.transform.localScale = new Vector3(1.2f, 1.2f, 1.2f);
     }
@@ -46,6 +45,6 @@ public class SpellBookUI : MonoBehaviour, IPointerEnterHandler, IPointerExitHand
 
     public void OnPointerClick(PointerEventData eventData)
     {
-        descriptionBox.Show(spellName, fullDescription);
+        descriptionBox.Show(spellName, spellDescription, fullDescription, spellBookIcon);
     }
 }
