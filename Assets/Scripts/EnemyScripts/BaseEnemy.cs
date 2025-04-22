@@ -31,6 +31,9 @@ namespace Spellect
         private float wanderTime = 2f;
         private Vector2 wanderDirection;
 
+        public AudioClip deathClunk;
+        protected AudioSource audioSource;
+
         protected virtual void Start()
         {
             if (player == null)
@@ -55,6 +58,8 @@ namespace Spellect
                 healthController.OnDeath += Die;
 
             }
+            audioSource = gameObject.AddComponent<AudioSource>();
+            audioSource.playOnAwake = false;
         }
 
         protected virtual void Update()
@@ -128,6 +133,12 @@ namespace Spellect
         protected virtual void Die(object o, EventArgs e)
         {
             isDead = true;
+
+            // Play death sound
+            if (deathClunk != null && audioSource != null)
+            {
+                audioSource.PlayOneShot(deathClunk);
+            }
 
             if (animator != null)
             {

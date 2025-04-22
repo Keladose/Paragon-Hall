@@ -24,10 +24,10 @@ EditorBuildSettings:
     path: Assets/Scenes/Level1.unity
     guid: 2b4fa8f4e18340c42bdfc2085119484d
   - enabled: 1
-    path: Assets/Scenes/Level2  wind book.unity
+    path: Assets/Scenes/Level2.unity
     guid: d06e867e0114c0b4eb301d71a070f5bd
   - enabled: 1
-    path: Assets/Scenes/Level3 Fire book.unity
+    path: Assets/Scenes/Level3.unity
     guid: ab8de761b0889c84ba98ea6ea84e2586
   - enabled: 1
     path: Assets/Scenes/Level4.unity
@@ -39,10 +39,10 @@ EditorBuildSettings:
     path: Assets/Scenes/Level6.unity
     guid: 98f238c3835d8e0418e5a06c0b62c4f9
   - enabled: 1
-    path: Assets/Scenes/Level7 Ice book.unity
+    path: Assets/Scenes/Level7.unity
     guid: aff83eb607db7be42bd5ef694d972ebe
   - enabled: 1
-    path: Assets/Scenes/Level8 Laser book.unity
+    path: Assets/Scenes/Level8.unity
     guid: 28ff60b04deb4814d85f1dfdcfdc1cf6
   - enabled: 1
     path: Assets/Scenes/GameOverScreen.unity
