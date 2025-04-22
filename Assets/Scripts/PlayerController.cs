@@ -33,13 +33,6 @@ namespace Spellect
         private bool initialised = false;
         public bool canMove = true;
 
-        public AudioClip[] footstepClips;
-        private AudioSource audioSource;
-
-        public float stepInterval = 0.5f;
-        private float stepTimer;
-
-
 
         void Awake()
         {
@@ -47,10 +40,6 @@ namespace Spellect
         }
         void Start()
         {
-            audioSource = GetComponent<AudioSource>();
-            audioSource.loop = false;
-            audioSource.playOnAwake = false;
-
             if (GameManager.Instance != null)
             {
                 if (GameManager.Instance.playerObject != null)
@@ -270,20 +259,6 @@ namespace Spellect
 
             // Just to be safe, ensure it's the original color at the end
             spriteRenderer.color = originalColor;
-        }
-        public void StartFootsteps()
-        {
-            if (!IsInvoking(nameof(PlayStep)))
-            {
-                InvokeRepeating(nameof(PlayStep), 0f, stepInterval);
-            }
-        }
-        private void PlayStep()
-        {
-            if (footstepClips.Length == 0) return;
-
-            var clip = footstepClips[UnityEngine.Random.Range(0, footstepClips.Length)];
-            audioSource.PlayOneShot(clip);
         }
     }
 }
