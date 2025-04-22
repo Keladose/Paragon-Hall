@@ -116,7 +116,7 @@ namespace Spellect
             }
             else if (_movement.magnitude < 0.1 && moving)
             {
-                playerSoundController.StopFootsteps();
+  
                 moving = false;
             }
         }

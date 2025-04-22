@@ -3609,6 +3609,10 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 1034581558}
     - target: {fileID: 5905577708468786321, guid: ee257bba2c2df2947bd2d10357e6d97f, type: 3}
+      propertyPath: playerSoundController
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 5905577708468786321, guid: ee257bba2c2df2947bd2d10357e6d97f, type: 3}
       propertyPath: spellCastingController
       value: 
       objectReference: {fileID: 408360048}
@@ -3671,6 +3675,7 @@ PrefabInstance:
     m_RemovedComponents:
     - {fileID: 2827781900149890210, guid: ee257bba2c2df2947bd2d10357e6d97f, type: 3}
     - {fileID: 0}
+    - {fileID: 5616882074250264890, guid: ee257bba2c2df2947bd2d10357e6d97f, type: 3}
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents:
