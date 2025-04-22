@@ -5,7 +5,7 @@ using UnityEngine;
 public class DrawableObject : MonoBehaviour
 {
     public float LifeTime;
-    private float _startTime;
+    protected float _startTime;
     // Start is called before the first frame update
     void Start()
     {

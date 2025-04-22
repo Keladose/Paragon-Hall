@@ -11,7 +11,8 @@ namespace Spellect
 
         private void Start()
         {
-            if (Random.Range(0,10) > 1)
+            _startTime = Time.time;
+            if (Random.Range(0,30) > 1)
             {
                 GetComponent<AudioSource>().enabled = false;
             }

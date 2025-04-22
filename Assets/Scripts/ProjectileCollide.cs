@@ -84,6 +84,10 @@ public class ProjectileCollide : MonoBehaviour
     }
     IEnumerator WaitBeforeDestroy()
     {
+        if (GetComponent<ProjectileSpeedup>() != null)
+        {
+            GetComponent<ProjectileSpeedup>().enabled = false;
+        }
         yield return new WaitForSeconds(0.4f);
         if (GetComponent<AudioSource>() != null && !spellData.spellName.Equals("Tornado"))
         {

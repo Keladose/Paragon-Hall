@@ -165,7 +165,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1883d5854b0d28243b247120c8fd74fe, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  spellData: {fileID: 11400000, guid: aa03e19a87af1fb49b45dc06f9a35e04, type: 2}
+  spellData: {fileID: 11400000, guid: 1d7faa5a816a3a840aa7401004e0efa8, type: 2}
   isPlayerProjectile: 0
   hasAudio: 0
 --- !u!114 &1605947476166628956
@@ -203,7 +203,7 @@ AudioSource:
   Priority: 128
   DopplerLevel: 1
   MinDistance: 1
-  MaxDistance: 500
+  MaxDistance: 2
   Pan2D: 0
   rolloffMode: 0
   BypassEffects: 0
