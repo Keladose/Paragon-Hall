@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -26,6 +27,11 @@ namespace Spellect
         public AudioClip doorOpen;
         public AudioSource audioSource;
 
+        public TMP_Text soundText;
+
+        public TMP_Text topText;
+
+
         // Start is called before the first frame update
         void Awake()
         {
@@ -43,6 +49,21 @@ namespace Spellect
             previousRoom = SceneManager.GetActiveScene().name;
         }
 
+        public void ToggleSound()
+        {
+            if (playerObject.GetComponent<AudioListener>().enabled)
+            {
+                playerObject.GetComponent<AudioListener>().enabled = false;
+                soundText.text = "Sound Off";
+            }
+            else
+            {
+                
+                playerObject.GetComponent<AudioListener>().enabled = true;
+                soundText.text = "Sound On";
+                
+            }
+        }
 
         // Update is called once per frame
         void Update()
@@ -51,6 +72,7 @@ namespace Spellect
         }
         public void GoToRoom(string roomName, Door.Direction fromDoorDirection)
         {
+            topText.text = "";
             audioSource.PlayOneShot(doorOpen);
             previousRoom = SceneManager.GetActiveScene().name;
             switchingRooms = true;
@@ -72,6 +94,7 @@ namespace Spellect
             clearedRooms.Add(roomId);
             CheckIfAllRoomsCleared();
 
+            topText.text = "Room Cleared!";
         }
         private void CheckIfAllRoomsCleared()
         {
