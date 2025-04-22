@@ -26,6 +26,7 @@ public class ProjectileCollide : MonoBehaviour
     {
         if ((other.CompareTag("Enemy") && isPlayerProjectile) || (other.CompareTag("Player") && !isPlayerProjectile) )
         {
+            
             Rigidbody2D rb = GetComponent<Rigidbody2D>();
             Vector2 knockbackDirection = (-transform.position + other.transform.position).normalized;
 

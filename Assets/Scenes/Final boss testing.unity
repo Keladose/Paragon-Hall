@@ -1631,6 +1631,9 @@ MonoBehaviour:
   cameraTrack: {fileID: 0}
   switchingRooms: 0
   SpawnDirection: 4
+  clearedRooms: 
+  NUM_CLEARABLE_ROOMS: 8
+  SpawnBoss: 0
 --- !u!114 &408360048
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4379,7 +4382,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: -0.24, y: -0.31, z: 0}
-  m_LocalScale: {x: 3, y: 4, z: 1}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
@@ -4473,7 +4476,7 @@ Transform:
   m_GameObject: {fileID: 1253297681}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: 0.7071068, w: 0.7071068}
-  m_LocalPosition: {x: 20.7102, y: 12.6682, z: 0.045754235}
+  m_LocalPosition: {x: 41.58, y: 12.6682, z: 0.045754235}
   m_LocalScale: {x: 78.02859, y: 3.8803, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -4603,7 +4606,7 @@ Transform:
   m_GameObject: {fileID: 1280526708}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: 0.7071068, w: 0.7071068}
-  m_LocalPosition: {x: -11.0148, y: 15.7989, z: 0.045754235}
+  m_LocalPosition: {x: -32.56, y: 15.7989, z: 0.045754235}
   m_LocalScale: {x: 84.28743, y: 3.609855, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -4732,7 +4735,7 @@ Transform:
   m_GameObject: {fileID: 1302323278}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -3.94, y: -9.76, z: 0.12334517}
+  m_LocalPosition: {x: -33.7, y: -10.9, z: 0.12334517}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -5226,7 +5229,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: -0.26825297, y: 1, z: 0}
-  m_LocalScale: {x: 2.5, y: 3, z: 2.5}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
@@ -5339,7 +5342,7 @@ Transform:
   m_GameObject: {fileID: 1531662222}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -3.94, y: -11.859999, z: 0.12334517}
+  m_LocalPosition: {x: 35.4, y: -11.859999, z: 0.12334517}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -6436,6 +6439,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e15457b6ecfd39e4aa56b3f8b446cdc6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  wavePrefabs: []
+  enemiesPerWave: 
+  numWaves: 1
   enemyPrefabs:
   - {fileID: 6233746885102936521, guid: 9c6041d9112fb9a47b8b78c77dd0375b, type: 3}
   spawnPoint: {fileID: 1252649035}
@@ -6454,13 +6460,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c7d7c8fb560b4d548a0a6c9af232a7b0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  wavePrefabs: []
+  enemiesPerWave: 
+  numWaves: 1
   enemyPrefabs:
   - {fileID: 1145835005388068861, guid: 4f30644b394b7c342bb86703249d70d2, type: 3}
   - {fileID: 6233746885102936521, guid: 9c6041d9112fb9a47b8b78c77dd0375b, type: 3}
   - {fileID: 2652397382560283750, guid: 6957123d3000a37419787881cee45416, type: 3}
   - {fileID: 4729488601714868812, guid: 4367c2e5c0fe9c448ab65723e22b2408, type: 3}
   - {fileID: 4069278916236259307, guid: 52e2b457d16b30244aa0326c7fefac22, type: 3}
-  numberToSpawn: 30
   spawnPoints:
   - {fileID: 1252649035}
   - {fileID: 256801811}
@@ -6493,6 +6501,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e15457b6ecfd39e4aa56b3f8b446cdc6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  wavePrefabs: []
+  enemiesPerWave: 
+  numWaves: 1
   enemyPrefabs:
   - {fileID: 1556647154339057300, guid: 762243eb80d6a9048943122d207193e9, type: 3}
   spawnPoint: {fileID: 1314657393}
@@ -7140,7 +7151,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 320004304664866613, guid: c7f344e88bfa21f488058a01a6c6850c, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -4.26
+      value: 15.2
       objectReference: {fileID: 0}
     - target: {fileID: 320004304664866613, guid: c7f344e88bfa21f488058a01a6c6850c, type: 3}
       propertyPath: m_LocalPosition.z
@@ -7177,6 +7188,10 @@ PrefabInstance:
     - target: {fileID: 3539870704890562322, guid: c7f344e88bfa21f488058a01a6c6850c, type: 3}
       propertyPath: m_Name
       value: Dantalion
+      objectReference: {fileID: 0}
+    - target: {fileID: 3539870704890562322, guid: c7f344e88bfa21f488058a01a6c6850c, type: 3}
+      propertyPath: m_TagString
+      value: Enemy
       objectReference: {fileID: 0}
     - target: {fileID: 3829516906552202341, guid: c7f344e88bfa21f488058a01a6c6850c, type: 3}
       propertyPath: player
