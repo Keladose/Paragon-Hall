@@ -99,7 +99,7 @@ public class DandalionController : BaseEnemy
         {
             for (int i = 0; i < spellData.Count; i++)
             {
-                if (Random.Range(0, 400) == 1)
+                if (Random.Range(0, 100) == 1)
                 {
                     GameObject projectile = Instantiate(spellData[i].projectilePrefab, transform.position,
                         Quaternion.identity);
