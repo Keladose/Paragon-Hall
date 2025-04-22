@@ -26,7 +26,7 @@ namespace Spellect
                 {
                     GameManager.Instance.playerObject.transform.position = GetDoorPosition(GameManager.Instance.SpawnDirection);
                     GameManager.Instance.switchingRooms = false;
-                    
+                    GameManager.Instance.currentRoom = this;
                 }
                 if (GameManager.Instance.clearedRooms.Contains(roomId) && !GameManager.Instance.SpawnBoss)
                 {

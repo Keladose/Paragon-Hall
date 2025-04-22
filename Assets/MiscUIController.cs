@@ -23,6 +23,22 @@ public class MiscUIController : MonoBehaviour
             mapInterface.SetActive(false);
         }
         
+        for (int i = 1; i < 9; i++)
+        {
+            mapInterface.transform.GetChild(i).gameObject.SetActive(false);
+        }
+
+        if (GameManager.Instance != null && GameManager.Instance.currentRoom != null)
+        {
+            int currentRoomId = GameManager.Instance.currentRoom.roomId;
+            Debug.Log(currentRoomId);
+            if (currentRoomId >= 0 && currentRoomId < 9)
+            {
+                mapInterface.transform.Find("Room" + currentRoomId).gameObject.SetActive(true);
+            }
+        }
+
+        
     }
 
     void UpdateCollectedBook()
