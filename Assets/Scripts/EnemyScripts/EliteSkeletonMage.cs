@@ -1,4 +1,3 @@
-using System;
 using System.Collections;
 using System.Collections.Generic;
 using Spellect;
@@ -24,7 +23,7 @@ public class EliteSkeletonMage : BaseEnemy
         base.Update();
     }
 
-    protected override void Die(object o, EventArgs e)
+    protected override void Die()
     {
         isDead = true;
 

@@ -28,6 +28,7 @@ public class DandalionController : BaseEnemy
 
         }
     }
+<<<<<<< HEAD
     
     void Awake()
     {
@@ -49,6 +50,8 @@ public class DandalionController : BaseEnemy
         
         
     }
+=======
+>>>>>>> parent of 260206b (Checked dantalion)
 
 
     protected override void Update()
