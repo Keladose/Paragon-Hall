@@ -32,7 +32,8 @@ namespace Spellect
         public float damageRadius = 0.5f;
         private bool initialised = false;
         public bool canMove = true;
-
+        private Color originalColor;
+        
 
         void Awake()
         {
@@ -40,6 +41,7 @@ namespace Spellect
         }
         void Start()
         {
+            
             if (GameManager.Instance != null)
             {
                 if (GameManager.Instance.playerObject != null)
@@ -64,10 +66,10 @@ namespace Spellect
         private void Init()
         {
             initialised = true;
-
+            
             spriteRenderer = GetComponent<SpriteRenderer>();
             attackController = GetComponent<AttackController>();
-
+            originalColor = spriteRenderer.color;
 
             healthController.Init(100);
             healthBarController.Init(healthController.GetMaxHealth());
@@ -243,7 +245,7 @@ namespace Spellect
 
         private IEnumerator FlashPlayerRed()
         {
-            Color originalColor = spriteRenderer.color;
+            
             float flashInterval = 0.1f; // How fast it flashes
             float elapsedTime = 0f;
 

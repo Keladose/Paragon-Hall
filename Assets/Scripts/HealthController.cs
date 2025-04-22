@@ -72,14 +72,15 @@ namespace Spellect
                 OnDamageTaken?.Invoke(this, new HealthChangedEventArgs { oldHealth = oldHealth, newHealth = _health });
                 if (_health == 0 && !_isDead)
                 {
-                    OnDeath?.Invoke(this, new EventArgs());
                     _isDead = true;
+                    OnDeath?.Invoke(this, new EventArgs());
                 }
             }
         }
 
         public void Heal(float healAmount)
         {
+            _isDead = false;
             float oldHealth = _health;
             _health = Mathf.Min(_maxHealth, _health + healAmount);
             OnHealed?.Invoke(this, new HealthChangedEventArgs { oldHealth = oldHealth, newHealth = _health });

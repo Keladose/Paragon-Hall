@@ -1,6 +1,4 @@
-using System;
 using System.Collections;
-using System.Collections.Generic;
 using Spellect;
 using UnityEngine;
 
@@ -44,7 +42,7 @@ public class ProjectileCollide : MonoBehaviour
 
             if (other.CompareTag("Player"))
             {
-                other.GetComponent<HealthController>().TakeDamage(spellData.damage / 2);
+                other.GetComponent<HealthController>().TakeDamage(spellData.damage / 5);
             }
             
 
