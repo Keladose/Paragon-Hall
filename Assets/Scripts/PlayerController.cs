@@ -111,12 +111,12 @@ namespace Spellect
             SetAnimation(_movement);
             if (_movement.magnitude > 0 && !moving)
             {
-                playerSoundController.StartFootsteps();
+                //playerSoundController.StartFootsteps();
                 moving = true;
             }
             else if (_movement.magnitude < 0.1 && moving)
             {
-  
+                //playerSoundController.StopFootsteps();
                 moving = false;
             }
         }

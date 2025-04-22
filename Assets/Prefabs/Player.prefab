@@ -47,11 +47,11 @@ GameObject:
   - component: {fileID: 5746472846929785869}
   - component: {fileID: 3577886805802951218}
   - component: {fileID: 7775545933067550974}
-  - component: {fileID: 5616882074250264890}
   - component: {fileID: 4191300548643391172}
   - component: {fileID: 2827781900149890210}
   - component: {fileID: 4550981470330439378}
   - component: {fileID: 5991497655645276404}
+  - component: {fileID: 2954269605808348893}
   m_Layer: 0
   m_Name: Player
   m_TagString: Player
@@ -165,16 +165,13 @@ MonoBehaviour:
   animator: {fileID: 4392211027878087411}
   healthBarController: {fileID: 0}
   healthController: {fileID: 7775545933067550974}
-  playerSoundController: {fileID: 5616882074250264890}
+  playerSoundController: {fileID: 0}
   spellbookController: {fileID: 5991497655645276404}
   spellCastingController: {fileID: 0}
   effectsController: {fileID: 4550981470330439378}
   drawableSpellController: {fileID: 0}
   damageRadius: 0.5
   canMove: 1
-  footstepClips:
-  - {fileID: 8300000, guid: 4f50890fdb988f844b11cdd7b30b7261, type: 3}
-  stepInterval: 0.5
 --- !u!50 &7633910547283463433
 Rigidbody2D:
   serializedVersion: 4
@@ -276,20 +273,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6ee831eceaa35d340951a31d99aa2bbf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!114 &5616882074250264890
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8520550288926484140}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9d762c7e08a67a64c9a3fd7f8c0e54ad, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  movementAudioSource: {fileID: 2827781900149890210}
-  spellAudioSource: {fileID: 0}
 --- !u!81 &4191300548643391172
 AudioListener:
   m_ObjectHideFlags: 0
@@ -431,3 +414,17 @@ MonoBehaviour:
   currentBook: {fileID: 0}
   bookAnimator: {fileID: 0}
   text: {fileID: 0}
+--- !u!114 &2954269605808348893
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8520550288926484140}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9d762c7e08a67a64c9a3fd7f8c0e54ad, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  movementAudioSource: {fileID: 0}
+  spellAudioSource: {fileID: 0}
