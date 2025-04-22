@@ -479,6 +479,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c9cd840593fbf044eb9e41427de6bdb2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  backgroundHealthBar: {fileID: 697777329596028958}
+  backgroundHealthBar: {fileID: 3191778716744368188}
   healthbarScaler: 150
   healthBar: {fileID: 682899068115280371}

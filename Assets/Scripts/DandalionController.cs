@@ -142,6 +142,18 @@ public class DandalionController : BaseEnemy
     protected override void Die(object o, EventArgs e)
     {
         base.Die(o, e);
+        
+        if (GameManager.Instance != null)
+        {
+            if (GameManager.Instance.playerObject != null)
+                Destroy(GameManager.Instance.playerObject);
+
+            Destroy(GameManager.Instance.gameObject);
+            
+            Destroy(GameObject.Find("Canvas"));
+        }
+        
         SceneManager.LoadScene("GameOverScreen");
+        
     }
 }
