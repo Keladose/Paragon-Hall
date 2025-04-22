@@ -24,4 +24,9 @@ public class MainMenuController : MonoBehaviour
     {
         Application.Quit();
     }
+
+    public void OpenCredits()
+    {
+        SceneManager.LoadScene("Credits");
+    }
 }
