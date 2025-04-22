@@ -19,7 +19,7 @@ public class DandalionController : BaseEnemy
     }
     void Awake()
     {
-        if (GameManager.Instance != null)
+        /*if (GameManager.Instance != null)
         {
             if (!GameManager.Instance.SpawnBoss)
             {
@@ -29,7 +29,7 @@ public class DandalionController : BaseEnemy
         else
         {
             Destroy(gameObject);
-        }
+        }*/
     }
 
 
