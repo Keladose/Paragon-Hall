@@ -25,7 +25,11 @@ public class ProjectileCollide : MonoBehaviour
 
         if (!isPlayerProjectile)
         {
-            GetComponent<AudioSource>().enabled = false;
+            if (gameObject.name != "Lich Blast(Clone)")
+            {
+                GetComponent<AudioSource>().enabled = false;
+            }
+            
         }
 
     }
