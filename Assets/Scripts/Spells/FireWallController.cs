@@ -1,6 +1,3 @@
-using Spellect;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 namespace Spellect
@@ -9,6 +6,16 @@ namespace Spellect
     {
         public float FireDamage;
         public float FireDuration;
+
+
+
+        private void Start()
+        {
+            if (Random.Range(0,10) > 1)
+            {
+                GetComponent<AudioSource>().enabled = false;
+            }
+        }
         private void OnTriggerEnter2D(Collider2D collision)
         {
             if (collision.gameObject.GetComponent<EffectsController>() != null)

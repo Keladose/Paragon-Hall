@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 384775b632805a444a94b14d4a560335, type: 3}
   m_Name: TornadoAttack
   m_EditorClassIdentifier: 
-  spellName: Wind
+  spellName: Tornado
   projectilePrefab: {fileID: 5675730827327611252, guid: ea737cbc8adcec54990938d456b1d72a, type: 3}
   specialPrefab: {fileID: 5675730827327611252, guid: ee96a8050bcc0af41b124884cc0d4a8c, type: 3}
   damage: 40

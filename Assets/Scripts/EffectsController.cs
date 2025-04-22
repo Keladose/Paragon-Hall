@@ -1,6 +1,5 @@
 using Spellect;
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class EffectsController : MonoBehaviour
@@ -8,7 +7,7 @@ public class EffectsController : MonoBehaviour
     public HealthController healthController;
     private float _fireDamage = 0f;
     private float _fireDuration = 0f;
-    public float _fireFrequency = 2f;
+    private float _fireFrequency = 1f;
     bool burning = false;
     public void SetOnFire(float strength, float duration)
     {

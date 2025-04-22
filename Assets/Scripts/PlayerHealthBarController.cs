@@ -1,6 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
 using DG.Tweening;
 using UnityEngine.UI;
 using TMPro;
@@ -40,7 +37,7 @@ namespace Spellect
             damageTween.Complete();
             if (!isCooldownBar)
             {
-                damageTween = DOTween.To(() => healthBar.fillAmount, x => { healthBar.fillAmount = x; text.text = x.ToString("F0"); }, e.newHealth / _maxHealth, 0.5f);
+                damageTween = DOTween.To(() => healthBar.fillAmount, x => { healthBar.fillAmount = x; text.text = (x* _maxHealth).ToString("F0"); }, e.newHealth / _maxHealth, 0.5f);
                 damageTween.SetEase(Ease.OutCubic);
             }
             else
@@ -57,7 +54,7 @@ namespace Spellect
         {
             if (isCooldownBar && text.text.Equals("0.0"))
             {
-                text.text = "ready";
+                text.text = "";
             }
         }
 

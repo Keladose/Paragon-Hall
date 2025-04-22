@@ -1,5 +1,4 @@
 using System;
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
@@ -22,6 +21,10 @@ namespace Spellect
 
         public int NUM_CLEARABLE_ROOMS = 8;
         public bool SpawnBoss = false;
+
+        public AudioClip doorClose;
+        public AudioClip doorOpen;
+        public AudioSource audioSource;
 
         // Start is called before the first frame update
         void Awake()
@@ -48,6 +51,7 @@ namespace Spellect
         }
         public void GoToRoom(string roomName, Door.Direction fromDoorDirection)
         {
+            audioSource.PlayOneShot(doorOpen);
             previousRoom = SceneManager.GetActiveScene().name;
             switchingRooms = true;
             playerObject.GetComponent<PlayerController>().canMove = false;

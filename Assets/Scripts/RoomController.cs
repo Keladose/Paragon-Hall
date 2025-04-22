@@ -1,5 +1,4 @@
 using System;
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -16,7 +15,7 @@ namespace Spellect
         private int _wavesRemaining = 0;
 
 
-        
+
         // Start is called before the first frame update
         void Start()
         {

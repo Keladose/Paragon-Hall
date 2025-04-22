@@ -1,6 +1,7 @@
 using System.Collections;
 using Spellect;
 using UnityEngine;
+using UnityEngine.Rendering.Universal;
 
 public class ProjectileCollide : MonoBehaviour
 {
@@ -10,10 +11,23 @@ public class ProjectileCollide : MonoBehaviour
     private bool healthNotInit;
     private bool _hasHitAnimation = true;
     public bool isPlayerProjectile = false;
+    public bool hasAudio = false;
+    private bool dieOnAudioFinish = false;
     void Start()
     {
         animator = GetComponent<Animator>();
         barController = GetComponentInChildren<EnemyHealthBarController>();
+        if (GetComponent<AudioSource>() != null)
+        {
+            hasAudio = true;
+            GetComponent<AudioSource>().pitch *= Random.Range(0.8f, 1.2f);
+        }
+
+        if (!isPlayerProjectile)
+        {
+            GetComponent<AudioSource>().enabled = false;
+        }
+
     }
     public void Init(bool hasHisAnimation)
     {
@@ -71,6 +85,21 @@ public class ProjectileCollide : MonoBehaviour
     IEnumerator WaitBeforeDestroy()
     {
         yield return new WaitForSeconds(0.4f);
+        if (GetComponent<AudioSource>() != null && !spellData.spellName.Equals("Tornado"))
+        {
+
+            while (GetComponent<AudioSource>().isPlaying)
+            {
+                GetComponent<Collider2D>().enabled = false;
+                GetComponent<SpriteRenderer>().enabled = false;
+                if (GetComponentInChildren<Light2D>() != null)
+                {
+                    GetComponentInChildren<Light2D>().enabled = false;
+                }
+
+                yield return new WaitForSeconds(0.4f);
+            }
+        }
         Destroy(gameObject);
     }
 }

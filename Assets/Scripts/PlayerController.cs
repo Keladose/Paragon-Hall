@@ -1,7 +1,5 @@
-using Spellect;
 using System;
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using static Spellect.AttackController;
 using static Spellect.HealthController;
@@ -97,6 +95,7 @@ namespace Spellect
                 attackController.OnAttackSpell += OnAttackSpell;
                 spellCastingController.OnSpellCast += attackController.OnSpellCast;
                 spellCastingController.OnSpellCast += OnSpellCast;
+                spellCastingController.OnSpellCast += playerSoundController.OnSpellCast;
                 if (spellCastingController != null)
                 {
                     spellbookController.OnBookChanged += spellCastingController.ChangeSpell;
@@ -129,12 +128,12 @@ namespace Spellect
             SetAnimation(_movement);
             if (_movement.magnitude > 0 && !moving)
             {
-                //playerSoundController.StartFootsteps();
+                playerSoundController.StartFootsteps();
                 moving = true;
             }
             else if (_movement.magnitude < 0.1 && moving)
             {
-                //playerSoundController.StopFootsteps();
+                playerSoundController.StopFootsteps();
                 moving = false;
             }
             if (Time.time <= _timeLastCastSpell + CooldownTime)

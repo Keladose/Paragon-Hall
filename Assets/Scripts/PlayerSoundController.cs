@@ -1,6 +1,9 @@
+using Spellect;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using static Spellect.HealthController;
+using static Spellect.SpellcastingController;
 
 public class PlayerSoundController : MonoBehaviour
 {
@@ -8,6 +11,10 @@ public class PlayerSoundController : MonoBehaviour
     [SerializeField] AudioSource spellAudioSource;
     bool playingFootsteps = false;
     bool playingLeftFoot = false;
+
+    public AudioClip spellSuccess;
+    public AudioClip spellFail;
+
     public void StartFootsteps()
     {
         playingFootsteps = true;
@@ -41,8 +48,15 @@ public class PlayerSoundController : MonoBehaviour
 
         
     }
-    public void PlaySound()
+    public void PlaySpellSound()
     {
-
+        spellAudioSource.clip = spellSuccess;
     }
+
+    public void OnSpellCast(object o, SpellCastEventArgs e)
+    {
+        spellAudioSource.PlayOneShot(spellSuccess);
+    }
+
+
 }
