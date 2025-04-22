@@ -3,39 +3,77 @@ using System.Collections.Generic;
 using UnityEngine;
 using DG.Tweening;
 using UnityEngine.UI;
+using TMPro;
 
 namespace Spellect
 { 
     public class PlayerHealthBarController : HealthBarController
     {
         public Image healthBar;
+        public TMP_Text text;
+        public bool isCooldownBar = false;
+        public bool isInitialised = false;
 
 
         private void Awake()
         {
-            healthbarScaler = 150f;
-            if (GameManager.Instance.playerObject != null)
+            if (!isCooldownBar)
             {
-                Destroy(gameObject); 
+                if (GameManager.Instance != null)
+                {
+                    if (GameManager.Instance.playerObject != null)
+                    {
+                        Destroy(gameObject);
+                    }
+                    else
+                    {
+                        DontDestroyOnLoad(this);
+                    }
+                }
+
+            }
+            
+        }
+
+        public override void UpdateHealth(object o, HealthController.HealthChangedEventArgs e)
+        {
+            damageTween.Complete();
+            if (!isCooldownBar)
+            {
+                damageTween = DOTween.To(() => healthBar.fillAmount, x => { healthBar.fillAmount = x; text.text = x.ToString("F0"); }, e.newHealth / _maxHealth, 0.5f);
+                damageTween.SetEase(Ease.OutCubic);
             }
             else
             {
-                DontDestroyOnLoad(this);
+                damageTween = DOTween.To(() => healthBar.fillAmount, x => { healthBar.fillAmount = x;
+                    text.text = ((1 - x) * _maxHealth).ToString("F1");
+                },1- e.newHealth / _maxHealth, 0.05f);
+
+                damageTween.SetEase(Ease.Linear);
             }
-        }
-        public override void UpdateHealth(object o, HealthController.HealthChangedEventArgs e)
-        {
-            Debug.Log("Took" +  (e.oldHealth - e.newHealth).ToString() + " damage");
-            damageTween.Complete();
-            damageTween = DOTween.To(() => healthBar.fillAmount, x => healthBar.fillAmount = x, e.newHealth/_maxHealth, 0.5f);
-            damageTween.SetEase(Ease.OutCubic);
             _oldHealth = e.newHealth ;
+        }
+        private void Update()
+        {
+            if (isCooldownBar && text.text.Equals("0.0"))
+            {
+                text.text = "ready";
+            }
         }
 
         protected override void SizeHealthbar(float oldMaxHealth)
         {
             sizeTween.Complete();
-            sizeTween = DOTween.To(() => backgroundHealthBar.transform.localScale.x, x =>  backgroundHealthBar.transform.localScale = new Vector3(x, backgroundHealthBar.transform.localScale.y, backgroundHealthBar.transform.localScale.z), _maxHealth / healthbarScaler, 0.2f);
+            sizeTween = DOTween.To(() => backgroundHealthBar.GetComponent<LayoutElement>().minWidth, x => backgroundHealthBar.GetComponent<LayoutElement>().minWidth = x,  _maxHealth / healthbarScaler, 0.2f);
+            if (!isCooldownBar)
+            {
+                text.text = _maxHealth.ToString("F0");
+            }
+            else
+            {
+                text.text = _maxHealth.ToString("F1");
+            }
+            backgroundHealthBar.GetComponent<LayoutElement>().minWidth = _maxHealth / healthbarScaler;
             sizeTween.SetEase(Ease.OutCubic);
 
         }

@@ -32,8 +32,11 @@ public class DrawableSpellController : MonoBehaviour
     private float _drawingStartTime = 0f;
 
     private CastedSpell _currentSpell;
+    public Texture2D magicMissileCursor;
+    public Texture2D firewallCursor;
+    public Texture2D tornadoCursor;
 
-    
+
     public void StartDrawing(object o, SpellCastEventArgs e)
     {
         foreach (DrawableSpellData spellData in drawableSpells)
@@ -47,6 +50,7 @@ public class DrawableSpellController : MonoBehaviour
                 _minTimeBetweenPoints = spellData.timeBetween;
                 _drawingPointPrefab = spellData.objectPrefab;
                 _canDraw = true;
+                
             }
         }
     }
@@ -56,10 +60,27 @@ public class DrawableSpellController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if (_canDraw)
+        {
+            if (_currentSpell.type == CastedSpell.Type.FireWall)
+            {
+                Cursor.SetCursor(firewallCursor, Vector2.zero, CursorMode.Auto);
+
+            }
+            else if (_currentSpell.type == CastedSpell.Type.MagicMissile)
+            {
+                Cursor.SetCursor(magicMissileCursor, Vector2.zero, CursorMode.Auto);
+            }
+            else if (_currentSpell.type == CastedSpell.Type.Tornado)
+            {
+                Cursor.SetCursor(tornadoCursor, Vector2.zero, CursorMode.Auto);
+            }
+        }
         if (_canDraw && (Time.time > _drawingTime + _drawingStartTime || (_isDrawing && Input.GetMouseButtonUp(1) && (_currentSpell.type == CastedSpell.Type.MagicMissile || _currentSpell.type == CastedSpell.Type.Tornado))))
         {
             Debug.Log("Stopping spell after " + Time.time + " started at " + _drawingStartTime + " duration was meant to be " + _drawingTime);
             _canDraw = false;
+            Cursor.SetCursor(null, Vector2.zero, CursorMode.Auto);
             if (_currentSpell.type == CastedSpell.Type.MagicMissile || _currentSpell.type  ==  CastedSpell.Type.Tornado)
             {
                 Debug.Log("Finished drawing");

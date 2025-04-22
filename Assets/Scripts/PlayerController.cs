@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using static Spellect.AttackController;
 using static Spellect.HealthController;
+using static Spellect.SpellcastingController;
 
 namespace Spellect
 {
@@ -25,6 +26,7 @@ namespace Spellect
         public SpellcastingController spellCastingController;
         public EffectsController effectsController;
         public DrawableSpellController drawableSpellController;
+        public HealthBarController specialCooldownController;
         bool moving = false;
 
         private bool isInvulnerable = false;
@@ -33,6 +35,10 @@ namespace Spellect
         private bool initialised = false;
         public bool canMove = true;
         private Color originalColor;
+        public float CooldownTime = 5f;
+        private bool isOnCooldown = false;
+        private float _timeLastCastSpell = 0f;
+        private float _lastCooldownUpdate = 0f;
         
 
         void Awake()
@@ -73,6 +79,7 @@ namespace Spellect
 
             healthController.Init(100);
             healthBarController.Init(healthController.GetMaxHealth());
+            specialCooldownController.Init(CooldownTime);
             healthController.OnDamageTaken += healthBarController.UpdateHealth;
             healthController.OnDamageTaken += ShowDamage;
             healthController.OnHealed += healthBarController.UpdateHealth;
@@ -89,6 +96,7 @@ namespace Spellect
                 attackController.OnAttackSpell += spellbookController.AnimateSpell;
                 attackController.OnAttackSpell += OnAttackSpell;
                 spellCastingController.OnSpellCast += attackController.OnSpellCast;
+                spellCastingController.OnSpellCast += OnSpellCast;
                 if (spellCastingController != null)
                 {
                     spellbookController.OnBookChanged += spellCastingController.ChangeSpell;
@@ -103,6 +111,14 @@ namespace Spellect
                 drawableSpellController.OnDrawingFinish += attackController.OnDrawingFinished;
             }
         }
+        public void OnSpellCast(object o, SpellCastEventArgs e)
+        {
+            specialCooldownController.UpdateHealth(this, new HealthChangedEventArgs { oldHealth = CooldownTime, newHealth = 0f });
+            _timeLastCastSpell = Time.time;
+            _lastCooldownUpdate = 0f;
+            spellCastingController.CanCast = false;
+        }
+
 
         // Update is called once per frame
         void Update()
@@ -120,6 +136,15 @@ namespace Spellect
             {
                 //playerSoundController.StopFootsteps();
                 moving = false;
+            }
+            if (Time.time <= _timeLastCastSpell + CooldownTime)
+            {
+                specialCooldownController.UpdateHealth(this, new HealthChangedEventArgs { oldHealth = _lastCooldownUpdate, newHealth = _timeLastCastSpell + CooldownTime - Time.time });
+                _lastCooldownUpdate = _timeLastCastSpell + CooldownTime - Time.time;
+            }
+            else
+            {
+                spellCastingController.CanCast = true;
             }
         }
 

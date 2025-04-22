@@ -14,6 +14,7 @@ namespace Spellect
 
 
         public bool _inSpellMode = true;
+        public bool CanCast = true;
         public List<SpellImage> _spellImages = new();
         private CastedSpell activeSpell;
         private SpellImage _activeSpell = null;
@@ -41,7 +42,7 @@ namespace Spellect
         private float castingTime = 500;
         private float _castingStartTime = 0;
         private bool failedDrawing = false;
-
+        public Texture2D magicCursor;
 
         // Start is called before the first frame update
         void Start()
@@ -120,7 +121,7 @@ namespace Spellect
         // Update is called once per frame
         void Update()
         {
-            if (_activeSpell != null && !_inSpellMode && Input.GetKeyDown(KeyCode.Space) )
+            if (CanCast && _activeSpell != null && !_inSpellMode && Input.GetKeyDown(KeyCode.Space) )
             {
                 _inSpellMode = true;
                 _activeSpell.Show();
@@ -129,6 +130,7 @@ namespace Spellect
                 {
                     SpellScores[i] = 100f;
                 }
+                Cursor.SetCursor(magicCursor,Vector2.zero, CursorMode.Auto);
             }
 
 
@@ -179,7 +181,9 @@ namespace Spellect
                 image.Hide();
             }
             _isCasting = false;
+
             _inSpellMode = false;
+            Cursor.SetCursor(null, Vector2.zero, CursorMode.Auto);
         }
 
         private bool CanDrawNewPoint(Vector2 pos)
