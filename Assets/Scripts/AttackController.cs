@@ -22,7 +22,7 @@ namespace Spellect
 
         private int selectedSpellIndex = 0;
         private float _timeLastFired = 0f;
-
+        private Coroutine homer;
         void Update()
         {
             if (equippedSpell != null && Input.GetMouseButton(0) && Time.time > _timeLastFired + equippedSpell.cooldown)
@@ -62,7 +62,7 @@ namespace Spellect
         private IEnumerator IcicleStorm()
         {
             float angleOffset = 0f;
-            for (int i = 0; i < 9; i++)
+            for (int i = 0; i < 20; i++)
             {
                 for (int j = 0;j < 16; j++)
                 {
@@ -92,7 +92,7 @@ namespace Spellect
 
         private void SpawnMagicHomers(List<Vector2> points)
         {
-            StartCoroutine(SpawnHomerDomers(points));
+            homer = StartCoroutine(SpawnHomerDomers(points));
         }
 
         private IEnumerator SpawnHomerDomers(List<Vector2> points)
@@ -122,6 +122,17 @@ namespace Spellect
         }
         public void ChangeBook(object o, BookChangedEventArgs e)
         {
+
+            if (e.book.castedSpell.type == CastedSpell.Type.FireWall && currentSpell.type == CastedSpell.Type.Icicle)
+            {
+
+            }
+            else
+            {
+                //StopAllCoroutines();
+            }
+
+
             if (e.book.type == Spellbook.Type.Attack)
             {
                 AttackSpellbook book = (AttackSpellbook)e.book;

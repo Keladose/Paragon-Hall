@@ -214,10 +214,10 @@ namespace Spellect
             tempInfo = GetLinePoints(new Vector2(0, 2f), new Vector2(0, -2f), linePoints, linePoints);
             points.AddRange(tempInfo.Points);
             cons.AddRange(tempInfo.Connections);
-            tempInfo = GetLinePoints(new Vector2(-1.5f, -1.5f), new Vector2(1.5f, 1.5f), linePoints, 0);
+            tempInfo = GetLinePoints(new Vector2(-1.5f, -1.5f), new Vector2(1.5f, 1.5f), linePoints, linePoints*2);
             points.AddRange(tempInfo.Points);
             cons.AddRange(tempInfo.Connections);
-            tempInfo = GetLinePoints(new Vector2(-1.5f, 1.5f), new Vector2(1.5f, -1.5f), linePoints, linePoints);
+            tempInfo = GetLinePoints(new Vector2(-1.5f, 1.5f), new Vector2(1.5f, -1.5f), linePoints, linePoints*3);
             points.AddRange(tempInfo.Points);
             cons.AddRange(tempInfo.Connections);
 
