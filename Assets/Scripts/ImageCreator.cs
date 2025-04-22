@@ -90,13 +90,13 @@ namespace Spellect
             int numPointsPerArc = 30;
             float radius = 3f; // 8x larger scale
 
-            // Top arc: center at (0, 4), from 135° to -45°, clockwise
+            // Top arc: center at (0, 4), from 135Â° to -45Â°, clockwise
             var topArc = GetArcPoints(new Vector2(0f, 3f), radius, 0f, 270f, true, numPointsPerArc, index);
             allPoints.AddRange(topArc.Points);
             allConnections.AddRange(topArc.Connections);
             index += topArc.Points.Count;
 
-            // Bottom arc: center at (0, -4), from 135° to -45°, counterclockwise
+            // Bottom arc: center at (0, -4), from 135Â° to -45Â°, counterclockwise
             var bottomArc = GetArcPoints(new Vector2(0f, -3f), radius, -180f, 90f, true, numPointsPerArc, index);
             allPoints.AddRange(bottomArc.Points);
             allConnections.AddRange(bottomArc.Connections);
@@ -157,7 +157,7 @@ namespace Spellect
 
             for (int i = 0; i < points.Count; i++)
             {
-                // points[i] += new Vector2(-1, 3f);
+                points[i] *=2://+= new Vector2(-1, 3f);
             }// 
             return new SpellImage.ImageInfo(points, cons);
         }
@@ -181,10 +181,14 @@ namespace Spellect
             tempInfo = GetLinePoints2(new Vector2(2, 0f), new Vector2(-3f, 2f), linePoints, linePoints*3);
             points.AddRange(tempInfo.Points);
             cons.AddRange(tempInfo.Connections);
+            tempInfo = GetLinePoints2(new Vector2(2, 0f), new Vector2(5f, 5f), linePoints, linePoints*4);
+            points.AddRange(tempInfo.Points);
+            cons.AddRange(tempInfo.Connections);
 
             cons.Add(new int[] { linePoints - 1, linePoints });
             cons.Add(new int[] { 2 * linePoints - 1, 2 * linePoints });
             cons.Add(new int[] { 3 * linePoints - 1, 3 * linePoints });
+            cons.Add(new int[] { 4 * linePoints - 1, 4 * linePoints });
 
             for (int i = 0; i < points.Count; i++)
             {
@@ -204,10 +208,10 @@ namespace Spellect
             List<int[]> cons = new();
             // head
             int linePoints = 7;
-            SpellImage.ImageInfo tempInfo = GetLinePoints(new Vector2(-2, -0), new Vector2(2, 0f), linePoints, 0);
+            SpellImage.ImageInfo tempInfo = GetLinePoints(new Vector2(-4, -0), new Vector2(4, 0f), linePoints, 0);
             points.AddRange(tempInfo.Points);
             cons.AddRange(tempInfo.Connections);
-            tempInfo = GetLinePoints(new Vector2(0, 2f), new Vector2(0, -2f), linePoints, linePoints);
+            tempInfo = GetLinePoints(new Vector2(0, 4f), new Vector2(0, -4f), linePoints, linePoints);
             points.AddRange(tempInfo.Points);
             cons.AddRange(tempInfo.Connections);
 
@@ -225,16 +229,16 @@ namespace Spellect
             List<int[]> cons = new();
             // head
             int linePoints = 5;
-            SpellImage.ImageInfo tempInfo =GetLinePoints(new Vector2(-1, -1.5f), new Vector2(-0.5f, 1.5f), linePoints, 0);
+            SpellImage.ImageInfo tempInfo =GetLinePoints(new Vector2(-2, -1.5f), new Vector2(-1f, 1.5f), linePoints, 0);
             points.AddRange(tempInfo.Points);
             cons.AddRange(tempInfo.Connections);
-            tempInfo = GetLinePoints2(new Vector2(-0.5f, 1.5f), new Vector2(0, 0.75f), linePoints, linePoints);
+            tempInfo = GetLinePoints2(new Vector2(-1f,1.5f ), new Vector2(0, 0.75f), linePoints, linePoints);
             points.AddRange(tempInfo.Points);
             cons.AddRange(tempInfo.Connections);
-            tempInfo = GetLinePoints2(new Vector2(0, 0.75f), new Vector2(0.5f, 1.5f), linePoints, linePoints*2);
+            tempInfo = GetLinePoints2(new Vector2(0, 0.75f), new Vector2(1f, 1.5f), linePoints, linePoints*2);
             points.AddRange(tempInfo.Points);
             cons.AddRange(tempInfo.Connections);
-            tempInfo = GetLinePoints2(new Vector2(0.5f, 1.5f), new Vector2(1, -1.5f), linePoints, linePoints*3);
+            tempInfo = GetLinePoints2(new Vector2(1f, 1.5f), new Vector2(2, -1.5f), linePoints, linePoints*3);
             points.AddRange(tempInfo.Points);
             cons.AddRange(tempInfo.Connections);
             cons.Add(new int[] { linePoints-1, linePoints }); 
