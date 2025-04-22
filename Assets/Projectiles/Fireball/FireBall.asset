@@ -15,7 +15,10 @@ MonoBehaviour:
   spellName: Fireball
   projectilePrefab: {fileID: 5675730827327611252, guid: 2974e12242088bd4680665c8253a4c8a, type: 3}
   specialPrefab: {fileID: 0}
-  damage: 40
+  damage: 20
   range: 5
   speed: 10
   cooldown: 0.75
+  knockBack: 0
+  goesThroughEnemies: 0
+  spawnOffset: {x: 0, y: 0}

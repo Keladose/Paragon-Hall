@@ -1,13 +1,7 @@
 using System;
-using System.Collections;
 using System.Collections.Generic;
-using System.ComponentModel;
-using System.Drawing;
-using System.Reflection;
-using Unity.VisualScripting;
 using UnityEngine;
-using UnityEngine.XR;
-using static UnityEditor.PlayerSettings;
+
 
 namespace Spellect
 {
