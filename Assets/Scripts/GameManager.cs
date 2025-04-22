@@ -11,7 +11,7 @@ namespace Spellect
         public static GameManager Instance;
         public GameObject playerPrefab;
         public GameObject playerObject;
-        private RoomController currentRoom;
+        public RoomController currentRoom;
         public CameraTrack cameraTrack;
         public bool switchingRooms = false; // used to give invuln on room switching?
         public Door.Direction SpawnDirection = Door.Direction.Undefined;
