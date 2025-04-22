@@ -107,6 +107,7 @@ namespace Spellect
 
         public void ChangeSpell(object o, SpellbookController.BookChangedEventArgs e)
         {
+            StopCasting();
             foreach (SpellImage image in _spellImages)
             {
                 if (image.Spell.type == e.book.castedSpell.type)

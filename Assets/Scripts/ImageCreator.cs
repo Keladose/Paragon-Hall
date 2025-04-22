@@ -157,7 +157,7 @@ namespace Spellect
 
             for (int i = 0; i < points.Count; i++)
             {
-                // points[i] += new Vector2(-1, 3f);
+                points[i] *= 2;// new Vector2(-1, 3f);
             }// 
             return new SpellImage.ImageInfo(points, cons);
         }
@@ -181,10 +181,14 @@ namespace Spellect
             tempInfo = GetLinePoints2(new Vector2(2, 0f), new Vector2(-3f, 2f), linePoints, linePoints*3);
             points.AddRange(tempInfo.Points);
             cons.AddRange(tempInfo.Connections);
+            tempInfo = GetLinePoints2(new Vector2(-3f, 2f), new Vector2(5, 5f), linePoints, linePoints * 3);
+            points.AddRange(tempInfo.Points);
+            cons.AddRange(tempInfo.Connections);
 
             cons.Add(new int[] { linePoints - 1, linePoints });
             cons.Add(new int[] { 2 * linePoints - 1, 2 * linePoints });
             cons.Add(new int[] { 3 * linePoints - 1, 3 * linePoints });
+            cons.Add(new int[] { 4 * linePoints - 1, 4 * linePoints });
 
             for (int i = 0; i < points.Count; i++)
             {
@@ -210,11 +214,16 @@ namespace Spellect
             tempInfo = GetLinePoints(new Vector2(0, 2f), new Vector2(0, -2f), linePoints, linePoints);
             points.AddRange(tempInfo.Points);
             cons.AddRange(tempInfo.Connections);
-
+            tempInfo = GetLinePoints(new Vector2(-1.5f, -1.5f), new Vector2(1.5f, 1.5f), linePoints, 0);
+            points.AddRange(tempInfo.Points);
+            cons.AddRange(tempInfo.Connections);
+            tempInfo = GetLinePoints(new Vector2(-1.5f, 1.5f), new Vector2(1.5f, -1.5f), linePoints, linePoints);
+            points.AddRange(tempInfo.Points);
+            cons.AddRange(tempInfo.Connections);
 
             for (int i = 0; i < points.Count; i++)
             {
-                // points[i] += new Vector2(-1, 3f);
+                points[i] *= 2; // new Vector2(-1, 3f);
             }// 
             return new SpellImage.ImageInfo(points, cons);
         }
@@ -271,7 +280,7 @@ namespace Spellect
 
             for (int i = 0; i < points.Count; i++)
             {
-                // points[i] += new Vector2(-1, 3f);
+                points[i] *= 1.3f;// new Vector2(-1, 3f);
             }// 
             return new SpellImage.ImageInfo(points, cons);
         }

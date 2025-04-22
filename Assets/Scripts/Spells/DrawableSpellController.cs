@@ -82,7 +82,11 @@ public class DrawableSpellController : MonoBehaviour
             if (_currentSpell.type == CastedSpell.Type.MagicMissile || _currentSpell.type  ==  CastedSpell.Type.Tornado)
             {
                 Debug.Log("Finished drawing");
-                OnDrawingFinish?.Invoke(this, new DrawingFinishEventArgs { points = _currentDrawing.GetPoints(), type = _currentSpell.type });
+                if (_currentDrawing != null)
+                {
+                    OnDrawingFinish?.Invoke(this, new DrawingFinishEventArgs { points = _currentDrawing.GetPoints(), type = _currentSpell.type });
+
+                }
             }
         }
 

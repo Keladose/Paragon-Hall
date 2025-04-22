@@ -832,7 +832,7 @@ MonoBehaviour:
   - {fileID: 337910291}
   enemiesAlive: 0
   roomId: 5
-  numWaves: 4
+  numWaves: 3
 --- !u!4 &337910290
 Transform:
   m_ObjectHideFlags: 0

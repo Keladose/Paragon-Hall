@@ -184,7 +184,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   LifeTime: 5
-  FireDamage: 3
+  FireDamage: 8
   FireDuration: 4.1
 --- !u!61 &1956977292699797446
 BoxCollider2D:

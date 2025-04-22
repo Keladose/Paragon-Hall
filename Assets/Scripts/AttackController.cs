@@ -64,10 +64,14 @@ namespace Spellect
             float angleOffset = 0f;
             for (int i = 0; i < 9; i++)
             {
-                for (int j = 0;j < 8; j++)
+                for (int j = 0;j < 16; j++)
                 {
-                    float angle = angleOffset+(j / 8f) * 2*Mathf.PI;
-                    FireProjectile(new Vector2(Mathf.Cos(angle), Mathf.Sin(angle)));
+                    float angle = angleOffset+(j / 16f) * 2*Mathf.PI;
+                    GameObject projectile = FireProjectile(new Vector2(Mathf.Cos(angle), Mathf.Sin(angle)));
+                    if (j > 0)
+                    {
+                        projectile.GetComponent<AudioSource>().enabled = false;
+                    }
                 }
                 yield return new WaitForSeconds(0.2f);
                 angleOffset += 360 * Mathf.Sqrt(2);
@@ -88,15 +92,25 @@ namespace Spellect
 
         private void SpawnMagicHomers(List<Vector2> points)
         {
-            for (int i = 0; i < 16; i++)
+            StartCoroutine(SpawnHomerDomers(points));
+        }
+
+        private IEnumerator SpawnHomerDomers(List<Vector2> points)
+        {
+            for (int j = 0; j < 60; j++)
             {
-                float angle =  i/(8f)*360;
-                GameObject projectile = Instantiate(equippedSpell.specialPrefab, transform.position,
-                Quaternion.Euler(0f, 0f, angle));
-                projectile.GetComponent<HomingMissileController>().Init(points, Quaternion.Euler(0f, 0f, angle) * Vector2.right);
-                projectile.GetComponent<ProjectileCollide>().isPlayerProjectile = true;
+                for (int i = 0; i < 4; i++)
+                {
+                    float angle = i / (4f) * 360;
+                    GameObject projectile = Instantiate(equippedSpell.specialPrefab, transform.position,
+                    Quaternion.Euler(0f, 0f, angle));
+                    projectile.GetComponent<HomingMissileController>().Init(points, Quaternion.Euler(0f, 0f, angle) * Vector2.right);
+                    projectile.GetComponent<ProjectileCollide>().isPlayerProjectile = true;
+                }
+                yield return new WaitForSeconds(0.2f);
             }
         }
+
 
         private void SpawnTornado(List<Vector2> points)
         {
@@ -116,7 +130,7 @@ namespace Spellect
             }
         }
 
-        public void FireProjectile(Vector2 direction)
+        public GameObject FireProjectile(Vector2 direction)
         {
             if (currentSpell.type == CastedSpell.Type.Laser && LaserRotator != null)
             {
@@ -124,7 +138,7 @@ namespace Spellect
                                             LaserRotator.rotation, LaserRotator);
                 laser.GetComponent<LaserController>().Charge();
                 OnAttackSpell?.Invoke(this, new AttackSpellEventArgs { value0 = 1f, value1 = 0.5f, type = currentSpell.type });
-                return;
+                return laser;
             }
 
 
@@ -156,7 +170,7 @@ namespace Spellect
             }
             projectile.GetComponent<ProjectileCollide>().isPlayerProjectile = true;
             OnAttackSpell?.Invoke(this, new AttackSpellEventArgs { value0 = 0, value1 = 0, type = currentSpell.type });
-
+            return projectile;
         }
         public Vector2 DirectionToMouse()
         {
