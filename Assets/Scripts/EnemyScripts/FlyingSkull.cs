@@ -17,21 +17,6 @@ public class FlyingSkull : BaseEnemy
         currentRadius = Vector3.Distance(transform.position, player.position);
     }
 
-    protected override void ChasePlayer()
-    {
-        currentAngle += orbitSpeed * Time.deltaTime;
-        currentRadius = Mathf.Max(minRadius, currentRadius - spiralInSpeed * Time.deltaTime);
-
-
-        float rad = currentAngle * Mathf.Deg2Rad;
-        Vector3 offset = new Vector3(Mathf.Cos(rad), Mathf.Sin(rad), 0f) * currentRadius;
-        Vector3 targetPosition = player.position + offset;
-
-        UpdateSpriteDirection(targetPosition);
-        transform.position = Vector3.MoveTowards(transform.position, targetPosition, moveSpeed * Time.deltaTime);
-
-    }
-
     protected override void AttackPlayer()
     {
 
