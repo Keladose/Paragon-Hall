@@ -97,7 +97,7 @@ namespace Spellect
 
         private IEnumerator SpawnHomerDomers(List<Vector2> points)
         {
-            for (int j = 0; j < 60; j++)
+            for (int j = 0; j < 30; j++)
             {
                 for (int i = 0; i < 4; i++)
                 {
