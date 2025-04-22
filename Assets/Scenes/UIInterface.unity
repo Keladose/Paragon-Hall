@@ -1032,7 +1032,7 @@ GameObject:
   - component: {fileID: 227623737}
   - component: {fileID: 227623738}
   m_Layer: 5
-  m_Name: Book4
+  m_Name: Icebook
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1233,7 +1233,7 @@ GameObject:
   - component: {fileID: 307133608}
   - component: {fileID: 307133609}
   m_Layer: 5
-  m_Name: Book2
+  m_Name: FIREBOOK
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1281,7 +1281,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e3ff91e4a1c7cdc40b5f5469b66e176a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  spellName: 
+  spellName: Book of Fire
   spellDescription: 
   fullDescription: 
 --- !u!1 &334689300
@@ -2112,7 +2112,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: 590a005802850ef47a29fa025e54b71f, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 66d205f4345705e43977dc24ac14907d, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -2602,7 +2602,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: 361}
+  m_AnchoredPosition: {x: 0, y: 399}
   m_SizeDelta: {x: 200, y: 50}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &686816477
@@ -2625,7 +2625,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: New Text
+  m_text: 
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -2659,7 +2659,7 @@ MonoBehaviour:
   m_fontSizeMin: 18
   m_fontSizeMax: 72
   m_fontStyle: 0
-  m_HorizontalAlignment: 1
+  m_HorizontalAlignment: 2
   m_VerticalAlignment: 256
   m_textAlignment: 65535
   m_characterSpacing: 0
@@ -3566,7 +3566,7 @@ GameObject:
   - component: {fileID: 953765575}
   - component: {fileID: 953765576}
   m_Layer: 5
-  m_Name: Book3
+  m_Name: Magicbook
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -3614,7 +3614,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e3ff91e4a1c7cdc40b5f5469b66e176a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  spellName: 
+  spellName: Book of ???
   spellDescription: 
   fullDescription: 
 --- !u!1 &994600092
@@ -3934,7 +3934,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: 16477c8582478b04db984765b1e23769, type: 3}
+  m_Sprite: {fileID: 21300000, guid: fd32b34b34cee884fa72fac12c55062c, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -4779,7 +4779,7 @@ GameObject:
   - component: {fileID: 1304866368}
   - component: {fileID: 1304866369}
   m_Layer: 5
-  m_Name: Book1 (12)
+  m_Name: Laserbook
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -4992,7 +4992,7 @@ GameObject:
   - component: {fileID: 1376740440}
   - component: {fileID: 1376740441}
   m_Layer: 5
-  m_Name: Book1 (19)
+  m_Name: Windbook
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -5582,7 +5582,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: 590a005802850ef47a29fa025e54b71f, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 66d205f4345705e43977dc24ac14907d, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -5953,7 +5953,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e3ff91e4a1c7cdc40b5f5469b66e176a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  spellName: 
+  spellName: Book of ???
   spellDescription: 
   fullDescription: 
 --- !u!1 &1718443552
@@ -5993,8 +5993,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 256.64124, y: 13.166992}
-  m_SizeDelta: {x: -1552.6423, y: -245.658}
+  m_AnchoredPosition: {x: 272.7168, y: 16.213196}
+  m_SizeDelta: {x: -1520.4912, y: -175.2316}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1718443554
 MonoBehaviour:
@@ -6024,7 +6024,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: 0.392}
+  m_Color: {r: 0, g: 0, b: 0, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -6317,7 +6317,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: 153}
+  m_AnchoredPosition: {x: 0, y: 219}
   m_SizeDelta: {x: 200, y: 50}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1860091863
@@ -6340,7 +6340,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: New Text
+  m_text: 
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -6374,7 +6374,7 @@ MonoBehaviour:
   m_fontSizeMin: 18
   m_fontSizeMax: 72
   m_fontStyle: 0
-  m_HorizontalAlignment: 1
+  m_HorizontalAlignment: 2
   m_VerticalAlignment: 256
   m_textAlignment: 65535
   m_characterSpacing: 0

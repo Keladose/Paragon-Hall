@@ -15,7 +15,7 @@ MonoBehaviour:
   spellName: BigLaser
   projectilePrefab: {fileID: 5675730827327611252, guid: a49df24217ff04d4f97b1c062bfd0738, type: 3}
   specialPrefab: {fileID: 5675730827327611252, guid: a49df24217ff04d4f97b1c062bfd0738, type: 3}
-  damage: 40
+  damage: 1.5
   range: 5
   speed: 25
   cooldown: 0.1

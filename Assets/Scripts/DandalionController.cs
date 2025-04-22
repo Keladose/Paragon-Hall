@@ -1,8 +1,10 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using Spellect;
 using Unity.Mathematics;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using Random = UnityEngine.Random;
 
 public class DandalionController : BaseEnemy
@@ -15,7 +17,16 @@ public class DandalionController : BaseEnemy
     // Start is called before the first frame update
     void Start()
     {
-
+        if (healthController != null)
+        {
+            Debug.Log("Initialised health controller");
+            healthController.Init(1000);
+            healthBarController.Init(healthController.GetMaxHealth());
+            healthController.OnDamageTaken += healthBarController.UpdateHealth;
+            healthController.OnHealed += healthBarController.UpdateHealth;
+            healthController.OnMaxHealthChanged += healthBarController.UpdateMaxHealth;
+            healthController.OnDeath += Die;
+        }
     }
     void Awake()
     {
@@ -30,6 +41,7 @@ public class DandalionController : BaseEnemy
         {
             Destroy(gameObject);
         }
+        player = GameObject.FindGameObjectWithTag("Player").gameObject.transform;
     }
 
 
@@ -125,5 +137,11 @@ public class DandalionController : BaseEnemy
                 rb.velocity = direction * spellData[randomIndex].speed;
             }
         }
+    }
+
+    protected override void Die(object o, EventArgs e)
+    {
+        base.Die(o, e);
+        SceneManager.LoadScene("GameOverScreen");
     }
 }
