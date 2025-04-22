@@ -658,12 +658,13 @@ RectTransform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
-  - {fileID: 1711092206}
+  - {fileID: 1376740439}
   - {fileID: 307133607}
   - {fileID: 953765574}
   - {fileID: 253001698}
-  - {fileID: 1160367843}
   - {fileID: 1304866367}
+  - {fileID: 1711092206}
+  - {fileID: 1160367843}
   - {fileID: 290978892}
   - {fileID: 334689301}
   - {fileID: 1627217978}
@@ -672,7 +673,6 @@ RectTransform:
   - {fileID: 584775597}
   - {fileID: 1881290566}
   - {fileID: 335996810}
-  - {fileID: 1376740439}
   - {fileID: 1927448783}
   - {fileID: 1841755888}
   m_Father: {fileID: 743045414}
@@ -869,144 +869,6 @@ CanvasRenderer:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 175455919}
-  m_CullTransparentMesh: 1
---- !u!1 &191941387
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 191941388}
-  - component: {fileID: 191941390}
-  - component: {fileID: 191941389}
-  m_Layer: 5
-  m_Name: Text (TMP)
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!224 &191941388
-RectTransform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 191941387}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 1718443553}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.5, y: 0.5}
-  m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -0.000052929, y: -227}
-  m_SizeDelta: {x: 312.5121, y: 354.7117}
-  m_Pivot: {x: 0.5, y: 0.5}
---- !u!114 &191941389
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 191941387}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
-  m_RaycastTarget: 1
-  m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
-  m_Maskable: 1
-  m_OnCullStateChanged:
-    m_PersistentCalls:
-      m_Calls: []
-  m_text: 'Basic Attack: Fire a Magic Missile in the direction of your cursor!
-
-
-    Special
-    Attack: Draw a path for the Homing Magic Missiles to follow!'
-  m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 40234e188cc170b46b8b9cc976024123, type: 2}
-  m_sharedMaterial: {fileID: -43167800609809299, guid: 40234e188cc170b46b8b9cc976024123, type: 2}
-  m_fontSharedMaterials: []
-  m_fontMaterial: {fileID: 0}
-  m_fontMaterials: []
-  m_fontColor32:
-    serializedVersion: 2
-    rgba: 4294967295
-  m_fontColor: {r: 1, g: 1, b: 1, a: 1}
-  m_enableVertexGradient: 0
-  m_colorMode: 3
-  m_fontColorGradient:
-    topLeft: {r: 1, g: 1, b: 1, a: 1}
-    topRight: {r: 1, g: 1, b: 1, a: 1}
-    bottomLeft: {r: 1, g: 1, b: 1, a: 1}
-    bottomRight: {r: 1, g: 1, b: 1, a: 1}
-  m_fontColorGradientPreset: {fileID: 0}
-  m_spriteAsset: {fileID: 0}
-  m_tintAllSprites: 0
-  m_StyleSheet: {fileID: 0}
-  m_TextStyleHashCode: -1183493901
-  m_overrideHtmlColors: 0
-  m_faceColor:
-    serializedVersion: 2
-    rgba: 4294967295
-  m_fontSize: 40.5
-  m_fontSizeBase: 20
-  m_fontWeight: 400
-  m_enableAutoSizing: 1
-  m_fontSizeMin: 18
-  m_fontSizeMax: 72
-  m_fontStyle: 0
-  m_HorizontalAlignment: 1
-  m_VerticalAlignment: 256
-  m_textAlignment: 65535
-  m_characterSpacing: 0
-  m_wordSpacing: 0
-  m_lineSpacing: 0
-  m_lineSpacingMax: 0
-  m_paragraphSpacing: 0
-  m_charWidthMaxAdj: 0
-  m_enableWordWrapping: 1
-  m_wordWrappingRatios: 0.4
-  m_overflowMode: 0
-  m_linkedTextComponent: {fileID: 0}
-  parentLinkedComponent: {fileID: 0}
-  m_enableKerning: 1
-  m_enableExtraPadding: 0
-  checkPaddingRequired: 0
-  m_isRichText: 1
-  m_parseCtrlCharacters: 1
-  m_isOrthographic: 1
-  m_isCullingEnabled: 0
-  m_horizontalMapping: 0
-  m_verticalMapping: 0
-  m_uvLineOffset: 0
-  m_geometrySortingOrder: 0
-  m_IsTextObjectScaleStatic: 0
-  m_VertexBufferAutoSizeReduction: 0
-  m_useMaxVisibleDescender: 1
-  m_pageToDisplay: 1
-  m_margin: {x: 0, y: 0, z: 0, w: 0}
-  m_isUsingLegacyAnimationComponent: 0
-  m_isVolumetricText: 0
-  m_hasFontAssetChanged: 0
-  m_baseMaterial: {fileID: 0}
-  m_maskOffset: {x: 0, y: 0, z: 0, w: 0}
---- !u!222 &191941390
-CanvasRenderer:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 191941387}
   m_CullTransparentMesh: 1
 --- !u!1 &213837137
 GameObject:
@@ -1210,7 +1072,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e3ff91e4a1c7cdc40b5f5469b66e176a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  spellName: 
+  spellName: 'Grants the user total manipulation of the icy domain allowing '
   spellDescription: 
   spellBookIcon: {fileID: 21300000, guid: 1a2b5f4778305dc408998b9bb3bb47df, type: 3}
   fullDescription: 
@@ -1357,10 +1219,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e3ff91e4a1c7cdc40b5f5469b66e176a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  spellName: 
-  spellDescription: 
+  spellName: Book of ???
+  spellDescription: 'This book has yet to be released :)  '
   spellBookIcon: {fileID: 0}
-  fullDescription: 
+  fullDescription: This book may be released with version 2, if there ever is one!
+    :( Stay tuned for more...
 --- !u!1 &307133606
 GameObject:
   m_ObjectHideFlags: 0
@@ -1485,10 +1348,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e3ff91e4a1c7cdc40b5f5469b66e176a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  spellName: 
-  spellDescription: 
+  spellName: Book of ???
+  spellDescription: 'This book has yet to be released :)  '
   spellBookIcon: {fileID: 0}
-  fullDescription: 
+  fullDescription: This book may be released with version 2, if there ever is one!
+    :( Stay tuned for more...
 --- !u!1 &335996809
 GameObject:
   m_ObjectHideFlags: 0
@@ -1549,10 +1413,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e3ff91e4a1c7cdc40b5f5469b66e176a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  spellName: 
-  spellDescription: 
+  spellName: Book of ???
+  spellDescription: 'This book has yet to be released :)  '
   spellBookIcon: {fileID: 0}
-  fullDescription: 
+  fullDescription: This book may be released with version 2, if there ever is one!
+    :( Stay tuned for more...
 --- !u!1 &350424336
 GameObject:
   m_ObjectHideFlags: 0
@@ -2340,10 +2205,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e3ff91e4a1c7cdc40b5f5469b66e176a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  spellName: 
-  spellDescription: 
+  spellName: Book of ???
+  spellDescription: 'This book has yet to be released :)  '
   spellBookIcon: {fileID: 0}
-  fullDescription: 
+  fullDescription: This book may be released with version 2, if there ever is one!
+    :( Stay tuned for more...
 --- !u!1 &551324382
 GameObject:
   m_ObjectHideFlags: 0
@@ -2479,10 +2345,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e3ff91e4a1c7cdc40b5f5469b66e176a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  spellName: 
-  spellDescription: 
+  spellName: Book of ???
+  spellDescription: 'This book has yet to be released :)  '
   spellBookIcon: {fileID: 0}
-  fullDescription: 
+  fullDescription: This book may be released with version 2, if there ever is one!
+    :( Stay tuned for more...
 --- !u!1 &656832130
 GameObject:
   m_ObjectHideFlags: 0
@@ -2563,140 +2430,6 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 3585272617881792247, guid: 59db278032cd4c642b646ac511b89243, type: 3}
   m_PrefabInstance: {fileID: 7536396980677627132}
   m_PrefabAsset: {fileID: 0}
---- !u!1 &686816475
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 686816476}
-  - component: {fileID: 686816478}
-  - component: {fileID: 686816477}
-  m_Layer: 5
-  m_Name: Text (TMP)
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!224 &686816476
-RectTransform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 686816475}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 1718443553}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.5, y: 0.5}
-  m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -0.000023425, y: 403}
-  m_SizeDelta: {x: 352.1371, y: 57.8886}
-  m_Pivot: {x: 0.5, y: 0.5}
---- !u!114 &686816477
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 686816475}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
-  m_RaycastTarget: 1
-  m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
-  m_Maskable: 1
-  m_OnCullStateChanged:
-    m_PersistentCalls:
-      m_Calls: []
-  m_text: Book of ???
-  m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 9129e141b2dfd1e4c898b4174cf3b481, type: 2}
-  m_sharedMaterial: {fileID: -3080057946334606704, guid: 9129e141b2dfd1e4c898b4174cf3b481, type: 2}
-  m_fontSharedMaterials: []
-  m_fontMaterial: {fileID: 0}
-  m_fontMaterials: []
-  m_fontColor32:
-    serializedVersion: 2
-    rgba: 4294967295
-  m_fontColor: {r: 1, g: 1, b: 1, a: 1}
-  m_enableVertexGradient: 0
-  m_colorMode: 3
-  m_fontColorGradient:
-    topLeft: {r: 1, g: 1, b: 1, a: 1}
-    topRight: {r: 1, g: 1, b: 1, a: 1}
-    bottomLeft: {r: 1, g: 1, b: 1, a: 1}
-    bottomRight: {r: 1, g: 1, b: 1, a: 1}
-  m_fontColorGradientPreset: {fileID: 0}
-  m_spriteAsset: {fileID: 0}
-  m_tintAllSprites: 0
-  m_StyleSheet: {fileID: 0}
-  m_TextStyleHashCode: -1183493901
-  m_overrideHtmlColors: 0
-  m_faceColor:
-    serializedVersion: 2
-    rgba: 4294967295
-  m_fontSize: 48.95
-  m_fontSizeBase: 36
-  m_fontWeight: 400
-  m_enableAutoSizing: 1
-  m_fontSizeMin: 18
-  m_fontSizeMax: 72
-  m_fontStyle: 0
-  m_HorizontalAlignment: 2
-  m_VerticalAlignment: 256
-  m_textAlignment: 65535
-  m_characterSpacing: 0
-  m_wordSpacing: 0
-  m_lineSpacing: 0
-  m_lineSpacingMax: 0
-  m_paragraphSpacing: 0
-  m_charWidthMaxAdj: 0
-  m_enableWordWrapping: 1
-  m_wordWrappingRatios: 0.4
-  m_overflowMode: 0
-  m_linkedTextComponent: {fileID: 0}
-  parentLinkedComponent: {fileID: 0}
-  m_enableKerning: 1
-  m_enableExtraPadding: 0
-  checkPaddingRequired: 0
-  m_isRichText: 1
-  m_parseCtrlCharacters: 1
-  m_isOrthographic: 1
-  m_isCullingEnabled: 0
-  m_horizontalMapping: 0
-  m_verticalMapping: 0
-  m_uvLineOffset: 0
-  m_geometrySortingOrder: 0
-  m_IsTextObjectScaleStatic: 0
-  m_VertexBufferAutoSizeReduction: 0
-  m_useMaxVisibleDescender: 1
-  m_pageToDisplay: 1
-  m_margin: {x: 0, y: 0, z: 0, w: 0}
-  m_isUsingLegacyAnimationComponent: 0
-  m_isVolumetricText: 0
-  m_hasFontAssetChanged: 0
-  m_baseMaterial: {fileID: 0}
-  m_maskOffset: {x: 0, y: 0, z: 0, w: 0}
---- !u!222 &686816478
-CanvasRenderer:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 686816475}
-  m_CullTransparentMesh: 1
 --- !u!4 &720960895 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 8030817515975974097, guid: ee257bba2c2df2947bd2d10357e6d97f, type: 3}
@@ -3535,7 +3268,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   spellName: Book of Fundamental Magics
-  spellDescription: Gives the user access to fundamental magical abilities!
+  spellDescription: Grants the user access to the strongest fundamental magic spells!
   spellBookIcon: {fileID: 21300000, guid: 7e1dd16c2cc6acf4ab297deccf3f0b67, type: 3}
   fullDescription: 'Basic Attack: Fire a Magic Missile in the direction of your cursor!
 
@@ -4552,10 +4285,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e3ff91e4a1c7cdc40b5f5469b66e176a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  spellName: 
-  spellDescription: 
+  spellName: Book of ???
+  spellDescription: 'This book has yet to be released :)  '
   spellBookIcon: {fileID: 0}
-  fullDescription: 
+  fullDescription: This book may be released with version 2, if there ever is one!
+    :( Stay tuned for more...
 --- !u!1001 &1178985955
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -4695,81 +4429,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1 &1220460118
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 1220460119}
-  - component: {fileID: 1220460121}
-  - component: {fileID: 1220460120}
-  m_Layer: 5
-  m_Name: Image
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!224 &1220460119
-RectTransform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1220460118}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 1718443553}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.5, y: 0.5}
-  m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: 98}
-  m_SizeDelta: {x: 204.3238, y: 250.8466}
-  m_Pivot: {x: 0.5, y: 0.5}
---- !u!114 &1220460120
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1220460118}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
-  m_RaycastTarget: 1
-  m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
-  m_Maskable: 1
-  m_OnCullStateChanged:
-    m_PersistentCalls:
-      m_Calls: []
-  m_Sprite: {fileID: 0}
-  m_Type: 0
-  m_PreserveAspect: 0
-  m_FillCenter: 1
-  m_FillMethod: 4
-  m_FillAmount: 1
-  m_FillClockwise: 1
-  m_FillOrigin: 0
-  m_UseSpriteMesh: 0
-  m_PixelsPerUnitMultiplier: 1
---- !u!222 &1220460121
-CanvasRenderer:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1220460118}
-  m_CullTransparentMesh: 1
 --- !u!1 &1237328390
 GameObject:
   m_ObjectHideFlags: 0
@@ -4914,10 +4573,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e3ff91e4a1c7cdc40b5f5469b66e176a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  spellName: 
-  spellDescription: 
+  spellName: Book of ???
+  spellDescription: 'This book has yet to be released :)  '
   spellBookIcon: {fileID: 0}
-  fullDescription: 
+  fullDescription: This book may be released with version 2, if there ever is one!
+    :( Stay tuned for more...
 --- !u!1 &1304866366
 GameObject:
   m_ObjectHideFlags: 0
@@ -5192,9 +4852,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e3ff91e4a1c7cdc40b5f5469b66e176a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  spellName: 
+  spellName: Book of Wind
   spellDescription: 
-  spellBookIcon: {fileID: 0}
+  spellBookIcon: {fileID: 21300000, guid: 9dac7f04b0eb5744cb3db1279057c4e1, type: 3}
   fullDescription: 
 --- !u!1 &1387176434 stripped
 GameObject:
@@ -5813,10 +5473,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e3ff91e4a1c7cdc40b5f5469b66e176a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  spellName: 
-  spellDescription: 
+  spellName: Book of ???
+  spellDescription: 'This book has yet to be released :)  '
   spellBookIcon: {fileID: 0}
-  fullDescription: 
+  fullDescription: This book may be released with version 2, if there ever is one!
+    :( Stay tuned for more...
 --- !u!1 &1675469738
 GameObject:
   m_ObjectHideFlags: 0
@@ -6033,106 +5694,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   spellName: Book of ???
-  spellDescription: 
+  spellDescription: 'This book has yet to be released :)  '
   spellBookIcon: {fileID: 21300000, guid: c238029121873904baa14014d5729d47, type: 3}
-  fullDescription: 
---- !u!1 &1718443552
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 1718443553}
-  - component: {fileID: 1718443556}
-  - component: {fileID: 1718443555}
-  - component: {fileID: 1718443554}
-  m_Layer: 5
-  m_Name: Panel
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!224 &1718443553
-RectTransform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1718443552}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children:
-  - {fileID: 686816476}
-  - {fileID: 1860091862}
-  - {fileID: 191941388}
-  - {fileID: 1220460119}
-  m_Father: {fileID: 1927448783}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 272.7168, y: 16.213196}
-  m_SizeDelta: {x: -1520.4912, y: -175.2316}
-  m_Pivot: {x: 0.5, y: 0.5}
---- !u!114 &1718443554
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1718443552}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a3673dbf792bb55408e2cb1e76bb4e6e, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  nameText: {fileID: 686816477}
-  descriptionText: {fileID: 1860091863}
-  largeDescriptionText: {fileID: 191941389}
-  sprite: {fileID: 1220460118}
-  panel: {fileID: 1718443552}
---- !u!114 &1718443555
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1718443552}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_Material: {fileID: 0}
-  m_Color: {r: 0, g: 0, b: 0, a: 1}
-  m_RaycastTarget: 1
-  m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
-  m_Maskable: 1
-  m_OnCullStateChanged:
-    m_PersistentCalls:
-      m_Calls: []
-  m_Sprite: {fileID: 10907, guid: 0000000000000000f000000000000000, type: 0}
-  m_Type: 1
-  m_PreserveAspect: 0
-  m_FillCenter: 1
-  m_FillMethod: 4
-  m_FillAmount: 1
-  m_FillClockwise: 1
-  m_FillOrigin: 0
-  m_UseSpriteMesh: 0
-  m_PixelsPerUnitMultiplier: 1
---- !u!222 &1718443556
-CanvasRenderer:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1718443552}
-  m_CullTransparentMesh: 1
+  fullDescription: This book may be released with version 2, if there ever is one!
+    :( Stay tuned for more...
 --- !u!1001 &1744647402
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -6379,140 +5944,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1841755887}
   m_CullTransparentMesh: 1
---- !u!1 &1860091861
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 1860091862}
-  - component: {fileID: 1860091864}
-  - component: {fileID: 1860091863}
-  m_Layer: 5
-  m_Name: Text (TMP)
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!224 &1860091862
-RectTransform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1860091861}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 1718443553}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.5, y: 0.5}
-  m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0.0014, y: 276}
-  m_SizeDelta: {x: 352.14, y: 123.2513}
-  m_Pivot: {x: 0.5, y: 0.5}
---- !u!114 &1860091863
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1860091861}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
-  m_RaycastTarget: 1
-  m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
-  m_Maskable: 1
-  m_OnCullStateChanged:
-    m_PersistentCalls:
-      m_Calls: []
-  m_text: Gives the user access to fundamental magical abilities!
-  m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 40234e188cc170b46b8b9cc976024123, type: 2}
-  m_sharedMaterial: {fileID: -43167800609809299, guid: 40234e188cc170b46b8b9cc976024123, type: 2}
-  m_fontSharedMaterials: []
-  m_fontMaterial: {fileID: 0}
-  m_fontMaterials: []
-  m_fontColor32:
-    serializedVersion: 2
-    rgba: 4294967295
-  m_fontColor: {r: 1, g: 1, b: 1, a: 1}
-  m_enableVertexGradient: 0
-  m_colorMode: 3
-  m_fontColorGradient:
-    topLeft: {r: 1, g: 1, b: 1, a: 1}
-    topRight: {r: 1, g: 1, b: 1, a: 1}
-    bottomLeft: {r: 1, g: 1, b: 1, a: 1}
-    bottomRight: {r: 1, g: 1, b: 1, a: 1}
-  m_fontColorGradientPreset: {fileID: 0}
-  m_spriteAsset: {fileID: 0}
-  m_tintAllSprites: 0
-  m_StyleSheet: {fileID: 0}
-  m_TextStyleHashCode: -1183493901
-  m_overrideHtmlColors: 0
-  m_faceColor:
-    serializedVersion: 2
-    rgba: 4294967295
-  m_fontSize: 40.2
-  m_fontSizeBase: 36
-  m_fontWeight: 400
-  m_enableAutoSizing: 1
-  m_fontSizeMin: 18
-  m_fontSizeMax: 72
-  m_fontStyle: 0
-  m_HorizontalAlignment: 2
-  m_VerticalAlignment: 256
-  m_textAlignment: 65535
-  m_characterSpacing: 0
-  m_wordSpacing: 0
-  m_lineSpacing: 0
-  m_lineSpacingMax: 0
-  m_paragraphSpacing: 0
-  m_charWidthMaxAdj: 0
-  m_enableWordWrapping: 1
-  m_wordWrappingRatios: 0.4
-  m_overflowMode: 0
-  m_linkedTextComponent: {fileID: 0}
-  parentLinkedComponent: {fileID: 0}
-  m_enableKerning: 1
-  m_enableExtraPadding: 0
-  checkPaddingRequired: 0
-  m_isRichText: 1
-  m_parseCtrlCharacters: 1
-  m_isOrthographic: 1
-  m_isCullingEnabled: 0
-  m_horizontalMapping: 0
-  m_verticalMapping: 0
-  m_uvLineOffset: 0
-  m_geometrySortingOrder: 0
-  m_IsTextObjectScaleStatic: 0
-  m_VertexBufferAutoSizeReduction: 0
-  m_useMaxVisibleDescender: 1
-  m_pageToDisplay: 1
-  m_margin: {x: 0, y: 0, z: 0, w: 0}
-  m_isUsingLegacyAnimationComponent: 0
-  m_isVolumetricText: 0
-  m_hasFontAssetChanged: 0
-  m_baseMaterial: {fileID: 0}
-  m_maskOffset: {x: 0, y: 0, z: 0, w: 0}
---- !u!222 &1860091864
-CanvasRenderer:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1860091861}
-  m_CullTransparentMesh: 1
 --- !u!1 &1881290565
 GameObject:
   m_ObjectHideFlags: 0
@@ -6573,10 +6004,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e3ff91e4a1c7cdc40b5f5469b66e176a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  spellName: 
-  spellDescription: 
+  spellName: Book of ???
+  spellDescription: 'This book has yet to be released :)  '
   spellBookIcon: {fileID: 0}
-  fullDescription: 
+  fullDescription: This book may be released with version 2, if there ever is one!
+    :( Stay tuned for more...
 --- !u!1 &1907344662
 GameObject:
   m_ObjectHideFlags: 0
@@ -6737,8 +6169,7 @@ RectTransform:
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
-  m_Children:
-  - {fileID: 1718443553}
+  m_Children: []
   m_Father: {fileID: 161973603}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
