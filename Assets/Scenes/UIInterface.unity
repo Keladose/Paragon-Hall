@@ -5695,7 +5695,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   spellName: Book of ???
   spellDescription: 'This book has yet to be released :)  '
-  spellBookIcon: {fileID: 21300000, guid: c238029121873904baa14014d5729d47, type: 3}
+  spellBookIcon: {fileID: 21300000, guid: 2a5d96221a6f9e5498cc5d0d139a8bf8, type: 3}
   fullDescription: This book may be released with version 2, if there ever is one!
     :( Stay tuned for more...
 --- !u!1001 &1744647402
