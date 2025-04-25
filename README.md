@@ -32,5 +32,10 @@ The game is set in a library playing as a library assistant who caused a major m
 3. Load the start scene in "Assets/Scenes/StartScene.unity"
 4. Press the play button!
 
+# Game Screenshots
+
+### Start Screen
+![Start Screen Screenshot](assets/FirstSS.png)
+
 License: Creative Commons BY-NC 4.0  
 This project is for educational and showcase use only. Do not use commercially.
